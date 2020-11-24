@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="da" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -18,13 +19,36 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="myIcons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-    <title>Log ind</title>
+    <title>Opret projekt</title>
 </head>
+
 <body>
 
+<div th:replace="fragments/header.html :: header"></div>
 
+<h1>Projekter</h1>
+
+
+<div class="grid-container">
+    <div class="grid-item">
+        <button class="opret_projekt" type="submit">
+            <h2>+</h2>
+        </button>
+    </div>
+
+    <div class="grid-item">
+        <h2>Projektnavn</h2>
+    </div>
+    <div class="grid-item">
+        <h2>Projektnavn</h2>
+    </div>
+
+</div>
 
 
 <div th:replace="fragments/footer.html :: footer"></div>
+
+<script src="script.js"></script>
 </body>
+
 </html>

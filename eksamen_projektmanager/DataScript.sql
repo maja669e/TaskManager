@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS `projektello`.`projectrelations` (
   INDEX `projectid3_idx` (`projectid` ASC) VISIBLE,
   CONSTRAINT `projectid3`
     FOREIGN KEY (`projectid`)
-    REFERENCES `projectello`.`projects` (`projectid`),
+    REFERENCES `projektello`.`projects` (`projectid`),
   CONSTRAINT `userid2`
     FOREIGN KEY (`userid`)
-    REFERENCES `projectello`.`users` (`userid`))
+    REFERENCES `projektello`.`users` (`userid`))
 
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `projektello`.`subprojects` (
   INDEX `projectid_idx` (`projectid` ASC) VISIBLE,
   CONSTRAINT `projectid`
     FOREIGN KEY (`projectid`)
-    REFERENCES `projectello`.`projects` (`projectid`))
+    REFERENCES `projektello`.`projects` (`projectid`))
 
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -91,10 +91,10 @@ CREATE TABLE IF NOT EXISTS `projektello`.`tasks` (
   INDEX `subprojectid_idx` (`subprojectid` ASC) VISIBLE,
   CONSTRAINT `projectid2`
     FOREIGN KEY (`projectid`)
-    REFERENCES `projectello`.`projects` (`projectid`),
+    REFERENCES `projektello`.`projects` (`projectid`),
   CONSTRAINT `subprojectid`
     FOREIGN KEY (`subprojectid`)
-    REFERENCES `projectello`.`subprojects` (`subprojectid`))
+    REFERENCES `projektello`.`subprojects` (`subprojectid`))
 
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -114,10 +114,10 @@ CREATE TABLE IF NOT EXISTS `projektello`.`taskrelations` (
   INDEX `userid3_idx` (`userid` ASC) VISIBLE,
   CONSTRAINT `taskid`
     FOREIGN KEY (`taskid`)
-    REFERENCES `projectello`.`tasks` (`taskid`),
+    REFERENCES `projektello`.`tasks` (`taskid`),
   CONSTRAINT `userid3`
     FOREIGN KEY (`userid`)
-    REFERENCES `projectello`.`users` (`userid`))
+    REFERENCES `projektello`.`users` (`userid`))
 
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -151,10 +151,10 @@ CREATE TABLE IF NOT EXISTS `projektello`.`teamrelations` (
   INDEX `teamid_idx` (`teamid` ASC) VISIBLE,
   CONSTRAINT `teamid`
     FOREIGN KEY (`teamid`)
-    REFERENCES `projectello`.`teams` (`teamid`),
+    REFERENCES `projektello`.`teams` (`teamid`),
   CONSTRAINT `userid`
     FOREIGN KEY (`userid`)
-    REFERENCES `projectello`.`users` (`userid`))
+    REFERENCES `projektello`.`users` (`userid`))
 
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4

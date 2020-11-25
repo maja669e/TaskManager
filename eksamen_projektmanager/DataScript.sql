@@ -1,15 +1,15 @@
 -- -----------------------------------------------------
 -- Schema projectello
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `projectello` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `projectello` ;
+CREATE SCHEMA IF NOT EXISTS `projektello` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `projektello` ;
 
 -- -----------------------------------------------------
 -- Table projects
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projectello`.`projects` (
+CREATE TABLE IF NOT EXISTS `projektello`.`projects` (
   `projectid` INT NOT NULL,
-  `projectsname` VARCHAR(100) NULL DEFAULT NULL,
+  `projectname` VARCHAR(100) NULL DEFAULT NULL,
   PRIMARY KEY (`projectid`),
   UNIQUE INDEX `projectid_UNIQUE` (`projectid` ASC) VISIBLE)
 
@@ -21,7 +21,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table users
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projectello`.`users` (
+CREATE TABLE IF NOT EXISTS `projektello`.`users` (
   `userid` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(100) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
@@ -38,7 +38,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table projectrelations
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projectello`.`projectrelations` (
+CREATE TABLE IF NOT EXISTS `projektello`.`projectrelations` (
   `projectrelationid` INT NOT NULL,
   `userid` INT NOT NULL,
   `projectid` INT NOT NULL,
@@ -61,7 +61,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table subprojects
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projectello`.`subprojects` (
+CREATE TABLE IF NOT EXISTS `projektello`.`subprojects` (
   `subprojectid` INT NOT NULL,
   `projectid` INT NOT NULL,
   `subprojectname` VARCHAR(100) NOT NULL DEFAULT 'nyt delprojekt',
@@ -79,7 +79,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table tasks
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projectello`.`tasks` (
+CREATE TABLE IF NOT EXISTS `projektello`.`tasks` (
   `taskid` INT NOT NULL,
   `projectid` INT NOT NULL,
   `subprojectid` INT NOT NULL,
@@ -102,7 +102,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table taskrelations
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projectello`.`taskrelations` (
+CREATE TABLE IF NOT EXISTS `projektello`.`taskrelations` (
   `taskrelationid` INT NOT NULL,
   `taskid` INT NOT NULL,
   `userid` INT NOT NULL,
@@ -125,7 +125,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table teams
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projectello`.`teams` (
+CREATE TABLE IF NOT EXISTS `projektello`.`teams` (
   `teamid` INT NOT NULL,
   `teamname` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`teamid`),
@@ -139,7 +139,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table teamrelations
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `projectello`.`teamrelations` (
+CREATE TABLE IF NOT EXISTS `projektello`.`teamrelations` (
   `teamrelationid` INT NOT NULL,
   `userid` INT NOT NULL,
   `teamid` INT NOT NULL,

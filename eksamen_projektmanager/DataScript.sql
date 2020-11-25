@@ -77,7 +77,7 @@
         CONSTRAINT `subprojectid`
         FOREIGN KEY (`subprojectid`)
         REFERENCES `projectello`.`subprojects` (`subprojectid`))
-        
+
 
         -- -----------------------------------------------------
         -- Table `projectello`.`taskrelations`

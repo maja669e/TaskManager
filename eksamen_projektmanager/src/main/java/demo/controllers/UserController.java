@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Controller
-public class MyController {
+public class UserController {
 
     @GetMapping("/")
     public String login() {

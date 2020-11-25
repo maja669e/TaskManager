@@ -1,4 +1,4 @@
-package demo.data;
+package demo.model;
 
 public class UserService {
 }

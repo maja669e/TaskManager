@@ -11,6 +11,11 @@ import java.util.List;
 @Controller
 public class MyController {
 
+    @GetMapping("/")
+    public String login() {
+        return "index";
+    }
+
     @GetMapping("/opret_projekt")
     public String createProject() {
      return "opret_projekt";

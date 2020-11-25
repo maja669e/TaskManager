@@ -82,6 +82,73 @@ header {
 /*-------Navigation slut-------*/
 
 
+/*------Log ind------*/
+#frontpage {
+    background-image: url("/images/background.jpg");
+    height: 120vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    filter: blur(3px);
+}
+
+/* Position text in the middle of the page/image */
+#frontpage_content {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 70%;
+    padding: 20px;
+    text-align: center;
+    height: 100%;
+    margin: 2vw;
+}
+
+#frontpage_content h1,
+#frontpage_content h2 {
+    text-shadow: 2px 2px 8px rgba(7, 7, 7, 0.44);
+    color: white;
+    padding-top: 0px;
+}
+
+
+.container_logind input[type=text], .container_logind input[type=password] {
+    width: 30vw;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Set a style for all buttons */
+.btnlogin {
+    text-align: center;
+    background-color: #66b0ce;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 15%;
+    border: none;
+    border-radius: 10px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.container_logind {
+    padding: 16px;
+    display: inline-block;
+    justify-content: space-between;
+}
+
+
 /*------Opret projekt side-----*/
 .grid-container {
     display: grid;
@@ -240,6 +307,10 @@ a.fa-twitter:before {
 
     .topnav a:first-child {
         text-align: left;
+    }
+
+    .container_logind input[type=text], .container_logind input[type=password] {
+        width: 60vw;
     }
 
     footer {

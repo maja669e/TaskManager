@@ -29,9 +29,10 @@
 <h1>Projekter</h1>
 
 
+<!--Lav for each med alle projekter-->
 <div class="grid-container">
     <div class="grid-item">
-        <button class="opret_projekt" type="submit">
+        <button class="opret_projekt" th:action="@{/addProject}" method="post" type="submit">
             <h2>+</h2>
         </button>
     </div>

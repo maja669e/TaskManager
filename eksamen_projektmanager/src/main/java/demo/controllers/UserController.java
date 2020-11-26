@@ -42,7 +42,12 @@ public class UserController {
     @GetMapping("/opret_projekt")
     public String createProject(WebRequest request){
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        return "opret_projekt";
+        //Checks if user is logged in
+        if (user == null) {
+            return "redirect:/";
+        } else {
+            return "opret_projekt";
+        }
     }
 
     @PostMapping("addProject")
@@ -50,6 +55,7 @@ public class UserController {
     //Retrieve values from HTML form via WebRequest
 
         Project project = userService.addProject();
+        System.out.println("test");
         setSessionProject(request, project);
 
         return "redirect:/projekt";
@@ -58,7 +64,12 @@ public class UserController {
     @GetMapping("/projekt")
     public String project(WebRequest request){
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-        return "projekt";
+
+        if (user == null) {
+            return "redirect:/";
+        } else {
+            return "projekt";
+        }
     }
 
 

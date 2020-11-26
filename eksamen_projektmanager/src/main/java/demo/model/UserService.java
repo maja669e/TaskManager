@@ -15,6 +15,7 @@ public class UserService {
     public Project addProject(Project project) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
         List<Task> tasks = new ArrayList<>();
+        String projectName = "temp";
 
         project = new Project(projectName, subProjects, tasks);
 

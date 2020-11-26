@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class UserMapper {
 
-    public Project addProject(Project project) throws ProjectManagerException {
+    public void addProject(Project project) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO projects(name) VALUES (?)";

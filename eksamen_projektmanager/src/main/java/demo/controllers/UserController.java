@@ -55,6 +55,13 @@ public class UserController {
         return "redirect:/projekt";
     }
 
+    @GetMapping("/projekt")
+    public String project(WebRequest request){
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        return "projekt";
+    }
+
+
     private void setSessionProject(WebRequest request, Project project) {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
     }

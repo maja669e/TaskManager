@@ -39,6 +39,11 @@ public class UserController {
         return "redirect:/opret_projekt";
     }
 
+    @GetMapping("/opret_projekt")
+    public String createProject(WebRequest request){
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        return "opret_projekt";
+    }
 
     @PostMapping("addProject")
     public String addProject(WebRequest request) throws ProjectManagerException {

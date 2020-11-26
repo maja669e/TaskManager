@@ -23,4 +23,8 @@ public class UserService {
 
         return project;
     }
+
+    public User Login(String userName, String password) throws ProjectManagerException {
+        return facade.Login(userName, password);
+    }
 }

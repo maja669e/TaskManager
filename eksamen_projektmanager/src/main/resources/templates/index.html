@@ -27,21 +27,22 @@
     <h1>Velkommen til Projektello</h1>
     <h2>Opret nye projekter og gør dit arbejde meget lettere</h2>
 
-<!--    name="login" action="/login" method="POST"-->
-    <form>
+    <div th:if="${message}" class="fejl">
+        <p th:text="${message}"></p>
+    </div>
+
+    <form name="login" action="/login" method="POST">
 
         <div class="container_logind">
             <label><b>Brugernavn</b></label>
             <br>
-            <input type="text" placeholder="Indtast email">
+            <input type="text" placeholder="Indtast brugernavn" name="userName">
             <br>
             <label><b>Kodeord</b></label>
             <br>
-            <input type="password" placeholder="Indtast kodeord">
+            <input type="password" placeholder="Indtast kodeord" name="password">
             <br>
-            <a th:href="@{opret_projekt}">
-                <button th:href="@{opret_projekt}" class="btnlogin" style="width:auto;" type="button">Log ind</button>
-            </a>
+            <button class="btnlogin" style="width:auto;" type="button">Log ind</button>
         </div>
     </form>
 </div>

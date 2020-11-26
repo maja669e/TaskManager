@@ -12,14 +12,14 @@ public class UserService {
         this.facade = facade;
     }
 
-    public Project addProject() throws ProjectManagerException {
+    public Project addProject(int userid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
         List<Task> tasks = new ArrayList<>();
         String projectName = "nyt projekt";
 
         Project project = new Project(projectName, subProjects, tasks);
 
-        facade.addProject(project);
+        facade.addProject(project, userid);
 
         return project;
     }

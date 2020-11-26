@@ -9,8 +9,8 @@ public class DataFacadeImpl implements DataFacade {
 
     private UserMapper userMapper = new UserMapper();
 
-    public Project addProject(Project project) throws ProjectManagerException {
-        userMapper.addProject(project);
+    public Project addProject(Project project, int userid) throws ProjectManagerException {
+        userMapper.addProject(project, userid);
         return project;
     }
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Project {
     private String projectName;
+    private int projectid;
     private List<SubProject> subProjects;
     private List<Task> tasks;
 
@@ -15,10 +16,6 @@ public class Project {
 
     public String getProjectName() {
         return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
     }
 
     public List<SubProject> getSubProjects() {
@@ -35,5 +32,13 @@ public class Project {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public int getProjectid() {
+        return projectid;
+    }
+
+    public void setProjectid(int projectid) {
+        this.projectid = projectid;
     }
 }

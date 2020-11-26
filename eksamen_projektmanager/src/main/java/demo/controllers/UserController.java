@@ -1,6 +1,8 @@
 package demo.controllers;
 
 import demo.data.DataFacadeImpl;
+import demo.model.Project;
+import demo.model.ProjectManagerException;
 import demo.model.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +29,17 @@ public class UserController {
         return "opret_projekt";
     }
 
-    @PostMapping("/addProject")
-    public String addProject() {
+    @PostMapping("addProject")
+    public String addProject(WebRequest request) throws ProjectManagerException {
+    //Retrieve values from HTML form via WebRequest
+
+        Project project = userService.addProject();
+        setSessionProject(request, project);
+
         return "redirect:/projekt";
+    }
+
+    private void setSessionProject(WebRequest request, Project project) {
+        request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
     }
 }

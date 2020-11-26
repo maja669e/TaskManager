@@ -18,7 +18,8 @@ public class UserMapper {
             ps.executeUpdate();
 
         } catch (SQLException ex) {
-            throw new ProjectManagerException("Kunne ikke tilføje projekt");
+            ex.getMessage();
+            //throw new ProjectManagerException("Kunne ikke tilføje projekt");
         }
 
     }

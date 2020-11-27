@@ -27,4 +27,9 @@ public class UserService {
     public User Login(String userName, String password) throws ProjectManagerException {
         return facade.Login(userName, password);
     }
+
+
+    public List<Project> getProjects(Project project){
+        return facade.getProjects(project);
+    }
 }

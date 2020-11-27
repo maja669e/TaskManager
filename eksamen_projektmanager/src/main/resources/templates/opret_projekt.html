@@ -29,7 +29,7 @@
 
 
 <!--Lav for each med alle projekter-->
-<div class="grid-container">
+<div class="grid-container" th:each="project:${projects}">
     <div class="grid-item">
         <form th:action="@{/addProject}" method="post">
             <button class="opret_projekt"  type="submit"><h2>+</h2></button>
@@ -37,10 +37,7 @@
     </div>
 
     <div class="grid-item">
-        <h2>Projektnavn</h2>
-    </div>
-    <div class="grid-item">
-        <h2>Projektnavn</h2>
+        <h2 th:text="${project.projectName}"></h2>
     </div>
 
 </div>

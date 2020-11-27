@@ -4,7 +4,12 @@ import demo.model.Project;
 import demo.model.ProjectManagerException;
 import demo.model.User;
 
+import java.awt.print.PrinterJob;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserMapper {
 
@@ -14,13 +19,13 @@ public class UserMapper {
 
             ///////////////////////////////////////
 
-            String SQL ="SELECT * FROM projects";
+            String SQL = "SELECT * FROM projects";
             PreparedStatement ps = con.prepareStatement(SQL);
 
             ResultSet rs = ps.executeQuery();
             int projectid = 0;
 
-            while(rs.next()){
+            while (rs.next()) {
                 projectid = rs.getInt("projectid"); //gets last row projectid
             }
 
@@ -33,13 +38,13 @@ public class UserMapper {
             ps2.executeUpdate();
             ///////////////////////////////////////
 
-            String SQL4 ="SELECT * FROM projectrelations";
+            String SQL4 = "SELECT * FROM projectrelations";
             PreparedStatement ps4 = con.prepareStatement(SQL4);
 
             ResultSet rs3 = ps4.executeQuery();
             int projectrelationid = 0;
 
-            while(rs3.next()){
+            while (rs3.next()) {
                 projectrelationid = rs3.getInt("projectrelationid"); //gets last row projectrelationid
             }
             ///////////////////////////////////////
@@ -79,5 +84,37 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
+    }
+
+    public List<Project> getProjects(Project project) {
+        List<Project> projects = new ArrayList<>();
+
+        try {
+            Connection con = DBManager.getConnection();
+
+            String SQL = "SELECT * FROM projectrelations";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            String SQL2 = "SELECT * FROM projects";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            rs = ps.executeQuery();
+
+            // Get data from database.
+            while (rs.next()) {
+                int projectid = rs.getInt("projectid");
+                String projectname = rs.getString("projectname");
+
+                project = new Project(projectname, projectid);
+
+                if (!(project.getProjectid() == project.getProjectid())) {
+                    projects.add(project);
+                }
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Kunne ikke finde projekter");
+        }
+        return projects;
     }
 }

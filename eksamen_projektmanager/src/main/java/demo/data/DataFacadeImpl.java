@@ -5,6 +5,8 @@ import demo.model.Project;
 import demo.model.ProjectManagerException;
 import demo.model.User;
 
+import java.util.List;
+
 public class DataFacadeImpl implements DataFacade {
 
     private UserMapper userMapper = new UserMapper();
@@ -17,5 +19,10 @@ public class DataFacadeImpl implements DataFacade {
     public User Login(String userName, String password) throws ProjectManagerException {
         return userMapper.Login(userName, password);
     }
+
+    public List<Project> getProjects(Project project) {
+        return userMapper.getProjects(project);
+    }
+
 
 }

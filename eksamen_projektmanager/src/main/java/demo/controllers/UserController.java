@@ -38,15 +38,21 @@ public class UserController {
     }
 
     @GetMapping("/opret_projekt")
-    public String createProject(WebRequest request) {
+    public String createProject(WebRequest request, Model model) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         //Checks if user is logged in
         if (user == null) {
             return "redirect:/";
         } else {
+            //Get all projects
+            List<Project> projects = userService.getProjects();
+
+            model.addAttribute("projects", projects);
             return "opret_projekt";
         }
     }
+
+
 
     @PostMapping("addProject")
     public String addProject(WebRequest request) throws ProjectManagerException {

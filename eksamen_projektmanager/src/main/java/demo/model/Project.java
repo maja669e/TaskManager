@@ -14,6 +14,11 @@ public class Project {
         this.tasks = tasks;
     }
 
+    public Project(String projectName, int projectid){
+        this.projectName = projectName;
+        this.projectid = projectid;
+    }
+
     public String getProjectName() {
         return projectName;
     }

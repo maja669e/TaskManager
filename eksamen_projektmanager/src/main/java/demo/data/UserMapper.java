@@ -86,25 +86,21 @@ public class UserMapper {
         }
     }
 
-    public List<Project> getProjects(int userid) {
+    public List<Project> getProjects(int userid) throws ProjectManagerException {
         List<Project> projects = new ArrayList<>();
 
         try {
             Connection con = DBManager.getConnection();
 
-            String SQL = "SELECT * FROM projectrelations";
+            String SQL = " SELECT * FROM projectrelations LEFT JOIN projects ON projectrelations.projectid = projects.projectid;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
-
-            String SQL2 = "SELECT * FROM projects";
-            PreparedStatement ps2 = con.prepareStatement(SQL2);
-            ResultSet rs2 = ps2.executeQuery();
-            String projectname = rs2.getString("projectname");
-
             // Get data from database.
             while (rs.next()) {
+
                 int projectid = rs.getInt("projectid");
                 int id = rs.getInt("userid");
+                String projectname = rs.getString("projectname");
 
                 Project project = new Project(projectname, projectid);
                 System.out.println(id);
@@ -116,7 +112,7 @@ public class UserMapper {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Kunne ikke finde projekter");
+            throw new ProjectManagerException(ex.getMessage());
         }
         return projects;
     }

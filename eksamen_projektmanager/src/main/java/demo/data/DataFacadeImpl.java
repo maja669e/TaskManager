@@ -20,7 +20,7 @@ public class DataFacadeImpl implements DataFacade {
         return userMapper.Login(userName, password);
     }
 
-    public List<Project> getProjects(int userid) {
+    public List<Project> getProjects(int userid) throws ProjectManagerException {
         return userMapper.getProjects(userid);
     }
 

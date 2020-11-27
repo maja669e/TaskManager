@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/opret_projekt")
-    public String createProject(WebRequest request, Model model) {
+    public String createProject(WebRequest request, Model model) throws ProjectManagerException  {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         //Checks if user is logged in
         if (user == null) {

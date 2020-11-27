@@ -22,7 +22,6 @@ class DatabaseTest {
     public void testInsert()
     {
         // invoke backend call to interact with database
-        //assert something new PartMapper().insert(product);
         assertTrue(true);
     }
 

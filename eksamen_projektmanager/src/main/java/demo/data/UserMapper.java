@@ -86,7 +86,7 @@ public class UserMapper {
         }
     }
 
-    public List<Project> getProjects(Project project) {
+    public List<Project> getProjects(int userid) {
         List<Project> projects = new ArrayList<>();
 
         try {
@@ -98,17 +98,20 @@ public class UserMapper {
 
             String SQL2 = "SELECT * FROM projects";
             PreparedStatement ps2 = con.prepareStatement(SQL2);
-            rs = ps.executeQuery();
+            ResultSet rs2 = ps2.executeQuery();
+            String projectname = rs2.getString("projectname");
 
             // Get data from database.
             while (rs.next()) {
                 int projectid = rs.getInt("projectid");
-                String projectname = rs.getString("projectname");
+                int id = rs.getInt("userid");
 
-                project = new Project(projectname, projectid);
+                Project project = new Project(projectname, projectid);
+                System.out.println(id);
 
-                if (!(project.getProjectid() == project.getProjectid())) {
+                if (userid == id) {
                     projects.add(project);
+                    System.out.println(projects);
                 }
             }
 

@@ -29,7 +29,7 @@ public class UserService {
     }
 
 
-    public List<Project> getProjects(Project project){
-        return facade.getProjects(project);
+    public List<Project> getProjects(int userid){
+        return facade.getProjects(userid);
     }
 }

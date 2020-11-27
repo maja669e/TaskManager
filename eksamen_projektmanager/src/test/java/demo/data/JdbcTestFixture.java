@@ -9,7 +9,7 @@ public class JdbcTestFixture {
 
     static final String USER = "root";
     static final String PWD = "root";
-    static final String URL = "jdbc:mysql://localhost/projektello?serverTimezone=UTC";
+    static final String URL = "jdbc:mysql://localhost/projektellotest?serverTimezone=UTC";
     Connection connection;
 
     public void setUp() throws SQLException{

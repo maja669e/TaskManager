@@ -45,7 +45,7 @@ public class UserController {
             return "redirect:/";
         } else {
             //Get all projects
-            List<Project> projects = userService.getProjects();
+            List<Project> projects = userService.getProjects(user.getUserid());
 
             model.addAttribute("projects", projects);
             return "opret_projekt";

@@ -25,4 +25,8 @@ class DatabaseTest {
         assertTrue(true);
     }
 
+    @Test
+    public void testAddProject() throws SQLException {
+        fixture.addProject();
+    }
 }

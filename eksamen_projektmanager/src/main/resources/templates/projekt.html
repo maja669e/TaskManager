@@ -23,6 +23,10 @@
 
 <div th:replace="fragments/header.html :: header"></div>
 
+<div th:object="${project}">
+    <h1 th:text="*{projectName}"></h1>
+</div>
+
 
 <div th:replace="fragments/footer.html :: footer"></div>
 

@@ -70,7 +70,6 @@ public class UserController {
         //Retrieve values from HTML form via WebRequest
         int projectid = Integer.parseInt(request.getParameter("projectid"));
         Project project = userService.getSingleProject(projectid);
-        System.out.println(project.getProjectid());
         setSessionProject(request, project);
 
         return "redirect:/projekt";

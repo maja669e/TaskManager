@@ -122,11 +122,14 @@ public class UserMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
 
-            String projectName = rs.getString("projectname");
-            Project project = new Project(projectName, projectid);
+            if(rs.next()){
+                String projectName = rs.getString("projectname");
+                Project project = new Project(projectName, projectid);
 
-            return project;
-
+                return project;
+            } else {
+                throw new ProjectManagerException("Kunne ikke vælge projekt");
+            }
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }

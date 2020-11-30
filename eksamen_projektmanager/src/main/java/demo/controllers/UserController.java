@@ -34,11 +34,11 @@ public class UserController {
         String password = request.getParameter("password");
         User user = userService.Login(userName, password);
         setSessionInfo(request, user);
-        return "redirect:/opret_projekt";
+        return "redirect:/projekt_oversigt";
     }
 
-    @GetMapping("/opret_projekt")
-    public String createProject(WebRequest request, Model model) throws ProjectManagerException  {
+    @GetMapping("/projekt_oversigt")
+    public String displayProjects(WebRequest request, Model model) throws ProjectManagerException  {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         //Checks if user is logged in
         if (user == null) {

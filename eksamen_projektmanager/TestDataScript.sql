@@ -11,7 +11,7 @@ INSERT INTO `projektello`.`users` (`username`, `password`, `name`) VALUES ('test
 -- -----------------------------------------------------
 -- project table data
 -- -----------------------------------------------------
-INSERT INTO `projektello`.`projects` (`projectid`, `projectname`) VALUES ('1', 'projekt værktøj');
+INSERT INTO `projektello`.`projects` (`projectid`, `projectname`) VALUES ('1', 'projekt 1');
 INSERT INTO `projektello`.`projects` (`projectid`, `projectname`) VALUES ('2', 'andet projekt');
 
 -- -----------------------------------------------------

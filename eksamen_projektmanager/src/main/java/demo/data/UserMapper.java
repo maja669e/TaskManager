@@ -103,11 +103,9 @@ public class UserMapper {
                 String projectname = rs.getString("projectname");
 
                 Project project = new Project(projectname, projectid);
-                System.out.println(id);
 
                 if (userid == id) {
                     projects.add(project);
-                    System.out.println(projects);
                 }
             }
 

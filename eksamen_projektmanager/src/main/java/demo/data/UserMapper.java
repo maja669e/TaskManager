@@ -118,8 +118,9 @@ public class UserMapper {
     public Project getSingleProject(int projectid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = " SELECT * FROM projects";
+            String SQL = " SELECT * FROM projects WHERE projectid=?";
             PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, projectid);
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){

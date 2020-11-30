@@ -58,7 +58,6 @@ public class UserController {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
         //Retrieve values from HTML form via WebRequest
-        System.out.println(user.getUserid());
         Project project = userService.addProject(user.getUserid());
         setSessionProject(request, project);
 
@@ -76,12 +75,14 @@ public class UserController {
     }
 
     @GetMapping("/projekt")
-    public String project(WebRequest request) {
+    public String project(WebRequest request,Model model) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
         if (user == null) {
             return "redirect:/";
         } else {
+            model.addAttribute("project", project);
             return "projekt";
         }
     }

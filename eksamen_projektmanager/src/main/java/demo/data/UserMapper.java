@@ -116,4 +116,21 @@ public class UserMapper {
         }
         return projects;
     }
+
+    public Project getSingleProject(int projectid) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = " SELECT * FROM projects";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            String projectName = rs.getString("projectname");
+            Project project = new Project(projectName, projectid);
+
+            return project;
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
 }

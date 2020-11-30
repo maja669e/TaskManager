@@ -46,9 +46,8 @@ public class UserController {
         } else {
             //Get all projects
             List<Project> projects = userService.getProjects(user.getUserid());
-
             model.addAttribute("projects", projects);
-            return "opret_projekt";
+            return "projekt_oversigt";
         }
     }
 
@@ -61,6 +60,17 @@ public class UserController {
         //Retrieve values from HTML form via WebRequest
         System.out.println(user.getUserid());
         Project project = userService.addProject(user.getUserid());
+        setSessionProject(request, project);
+
+        return "redirect:/projekt";
+    }
+
+    @PostMapping("getProject")
+    public String getProject(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
+        int projectid = Integer.parseInt(request.getParameter("projectid"));
+        Project project = userService.getSingleProject(projectid);
+        System.out.println(project.getProjectid());
         setSessionProject(request, project);
 
         return "redirect:/projekt";

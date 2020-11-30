@@ -32,4 +32,8 @@ public class UserService {
     public List<Project> getProjects(int userid) throws ProjectManagerException {
         return facade.getProjects(userid);
     }
+
+    public Project getSingleProject(int projectid) throws ProjectManagerException {
+        return facade.getSingleProject(projectid);
+    }
 }

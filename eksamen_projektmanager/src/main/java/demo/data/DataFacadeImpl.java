@@ -24,5 +24,9 @@ public class DataFacadeImpl implements DataFacade {
         return userMapper.getProjects(userid);
     }
 
+    public Project getSingleProject(int projectid) throws ProjectManagerException{
+        return userMapper.getSingleProject(projectid);
+    }
+
 
 }

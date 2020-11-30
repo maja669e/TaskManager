@@ -154,6 +154,8 @@ button:hover {
     display: grid;
     grid-template-columns: auto auto auto;
     margin: 4vw 8vw 6vw 12vw;
+    grid-gap: 1vw;
+
 }
 
 .grid-item,

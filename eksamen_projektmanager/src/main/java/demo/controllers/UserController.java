@@ -115,7 +115,7 @@ public class UserController {
     }
 
 
-
+    @PostMapping("getProjectTask")
     public String getProjectTask(WebRequest request, Model model, RedirectAttributes redirectAttributes) throws ProjectManagerException {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 

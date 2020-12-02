@@ -1,8 +1,6 @@
 package demo.data;
 
-import demo.model.Project;
-import demo.model.ProjectManagerException;
-import demo.model.User;
+import demo.model.*;
 
 import java.awt.print.PrinterJob;
 import java.sql.*;
@@ -88,6 +86,8 @@ public class UserMapper {
 
     public List<Project> getProjects(int userid) throws ProjectManagerException {
         List<Project> projects = new ArrayList<>();
+        List<SubProject> subProjects = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
 
         try {
             Connection con = DBManager.getConnection();
@@ -102,7 +102,7 @@ public class UserMapper {
                 int id = rs.getInt("userid");
                 String projectname = rs.getString("projectname");
 
-                Project project = new Project(projectname, projectid);
+                Project project = new Project(projectid, projectname, subProjects, tasks);
 
                 if (userid == id) {
                     projects.add(project);
@@ -116,6 +116,9 @@ public class UserMapper {
     }
 
     public Project getSingleProject(int projectid) throws ProjectManagerException {
+        List<SubProject> subProjects = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
+
         try {
             Connection con = DBManager.getConnection();
             String SQL = " SELECT * FROM projects WHERE projectid=?";
@@ -125,12 +128,39 @@ public class UserMapper {
 
             if(rs.next()){
                 String projectName = rs.getString("projectname");
-                Project project = new Project(projectName, projectid);
+                Project project = new Project(projectid, projectName,subProjects,tasks);
 
                 return project;
             } else {
                 throw new ProjectManagerException("Kunne ikke vælge projekt");
             }
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
+    public void addSubProject(Project project, String subProjectName) throws ProjectManagerException{
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM subprojects";
+            PreparedStatement ps = con.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+            int temp = 0;
+
+            while (rs.next()) {
+                temp = rs.getInt("subprojectid"); //gets last row subprojectid
+            }
+            int subprojectid = temp + 1;
+            //--------------------------------------------------//
+
+            String SQL2 = "INSERT INTO subprojects (subprojectid, projectid, subprojectname) VALUES (?,?,?)";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ps2.setInt(1, subprojectid);
+            ps2.setInt(2, project.getProjectid());
+            ps2.setString(3, subProjectName);
+            ps2.executeUpdate();
+
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }

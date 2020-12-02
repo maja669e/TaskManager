@@ -1,10 +1,7 @@
 package demo.controllers;
 
 import demo.data.DataFacadeImpl;
-import demo.model.Project;
-import demo.model.ProjectManagerException;
-import demo.model.User;
-import demo.model.UserService;
+import demo.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -91,10 +88,17 @@ public class UserController {
     }
 
     @PostMapping("addSubProject")
-    public String addSubProject(){
+    public String addSubProject(WebRequest request) throws ProjectManagerException {
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+
+        //Retrieve values from HTML form via WebRequest
+        String subprojectName = request.getParameter("subprojectname");
+
+        userService.addSubProject(project, subprojectName);
+
         return "redirect:/project";
     }
-    
+
     @PostMapping("addTask")
     public String addTask(){
         return "redirect:/project";

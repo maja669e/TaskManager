@@ -36,4 +36,10 @@ public class UserService {
     public Project getSingleProject(int projectid) throws ProjectManagerException {
         return facade.getSingleProject(projectid);
     }
+
+    public void addSubProject(Project project, String subProjectName) throws ProjectManagerException{
+        SubProject subProject = new SubProject(subProjectName);
+        project.getSubProjects().add(subProject);
+        facade.addSubProject(project, subProjectName);
+    }
 }

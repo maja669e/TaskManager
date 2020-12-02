@@ -1,9 +1,6 @@
 package demo.data;
 
-import demo.model.DataFacade;
-import demo.model.Project;
-import demo.model.ProjectManagerException;
-import demo.model.User;
+import demo.model.*;
 
 import java.util.List;
 
@@ -11,9 +8,8 @@ public class DataFacadeImpl implements DataFacade {
 
     private UserMapper userMapper = new UserMapper();
 
-    public Project addProject(Project project, int userid) throws ProjectManagerException {
+    public void addProject(Project project, int userid) throws ProjectManagerException {
         userMapper.addProject(project, userid);
-        return project;
     }
 
     public User Login(String userName, String password) throws ProjectManagerException {
@@ -26,6 +22,10 @@ public class DataFacadeImpl implements DataFacade {
 
     public Project getSingleProject(int projectid) throws ProjectManagerException{
         return userMapper.getSingleProject(projectid);
+    }
+
+    public void addSubProject(Project project, String subProjectName) throws ProjectManagerException {
+        userMapper.addSubProject(project,subProjectName);
     }
 
 

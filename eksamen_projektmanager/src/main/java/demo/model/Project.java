@@ -14,9 +14,11 @@ public class Project {
         this.tasks = tasks;
     }
 
-    public Project(String projectName, int projectid){
-        this.projectName = projectName;
+    public Project(int projectid, String projectName, List<SubProject> subProjects, List<Task> tasks) {
         this.projectid = projectid;
+        this.projectName = projectName;
+        this.subProjects = subProjects;
+        this.tasks = tasks;
     }
 
     public String getProjectName() {

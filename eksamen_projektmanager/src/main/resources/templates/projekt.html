@@ -27,7 +27,7 @@
     <div>
         <h1 th:text="*{projectName}"></h1>
         <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><img
-                src="/images/edit_button_picture" alt="rediger" width="19px" height="20px"></button>
+                src="/images/edit_button_picture.png" alt="rediger" width="19px" height="20px"></button>
         <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
               title="Close Modal">&times;</span>
@@ -63,6 +63,10 @@
     </div>
 </form>
 <form>
+    <div class="empty" th:if="${subProjects.empty}">
+        <p>Du har ikke oprettet nogen delprojekter endnu.</p>
+    </div>
+
     <tr th:each="subProject:${subProjects}">
         <h2 th:text="${subProject.getSubProjectName()}"></h2>
         <form th:action="@{/changeSubProjectName}" method="post">
@@ -96,6 +100,11 @@
                     </tr>
                 </form>
             </table>
+            <!--<div class="empty" th:if="${tasks.empty}">
+                            <p>Der er ikke oprettet nogen opgaver endnu.</p>
+                        </div>-->
+
+
             <br>
             <form th:action="@{/addTask}" method="post">
                 <div>
@@ -112,6 +121,6 @@
 
 <div th:replace="fragments/footer.html :: footer"></div>
 
-
+<script src="script.js"></script>
 </body>
 </html>

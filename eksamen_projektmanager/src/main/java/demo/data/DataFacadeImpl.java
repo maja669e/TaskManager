@@ -36,8 +36,14 @@ public class DataFacadeImpl implements DataFacade {
         userMapper.changeProjectName(projectid, newProjectName);
     }
 
-    public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException{
-        userMapper.changeSubProjectName(subProjectid,newSubProjectName);
+
+    public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
+        userMapper.changeSubProjectName(subProjectid, newSubProjectName);
+    }
+
+    public List<Task> getTasks(int subprojectid) throws ProjectManagerException{
+        return userMapper.getTasks(subprojectid);
+
     }
 
 }

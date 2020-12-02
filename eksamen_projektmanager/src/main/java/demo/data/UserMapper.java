@@ -215,9 +215,43 @@ public class UserMapper {
             ps.setString(1, newSubProjectName);
             ps.setInt(2, subProjectid);
             ps.executeUpdate();
-
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
     }
+
+    public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
+        List<Task> tasks = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+
+            String SQL = "SELECT * FROM tasks";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            // Get data from database.
+            while (rs.next()) {
+
+                int id = rs.getInt("subprojectid");
+
+                String temp = rs.getString("deadline");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate deadline = LocalDate.parse(temp, formatter);
+
+                String taskname = rs.getString("taskname");
+                int timeEstimation = rs.getInt("timeestimate");
+
+                Task task = new Task(deadline, timeEstimation, taskname);
+
+                if (subprojectid == id) {
+                    tasks.add(task);
+                }
+            }
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+
+        return tasks;
+    }
+
 }

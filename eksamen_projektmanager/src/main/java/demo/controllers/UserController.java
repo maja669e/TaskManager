@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/projekt_oversigt")
-    public String displayProjects(WebRequest request, Model model) throws ProjectManagerException  {
+    public String displayProjects(WebRequest request, Model model) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         //Checks if user is logged in
         if (user == null) {
@@ -71,7 +71,7 @@ public class UserController {
     }
 
     @GetMapping("/projekt")
-    public String project(WebRequest request,Model model) throws ProjectManagerException {
+    public String project(WebRequest request, Model model) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
@@ -87,21 +87,35 @@ public class UserController {
     }
 
     @PostMapping("changeProjectName")
-        public String changeProjectName(WebRequest request) throws ProjectManagerException {
-            Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+    public String changeProjectName(WebRequest request) throws ProjectManagerException {
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
-            //Retrieve values from HTML form via WebRequest
-            String newProjectName = request.getParameter("projectName");
+        //Retrieve values from HTML form via WebRequest
+        String newProjectName = request.getParameter("projectName");
 
-            project.setProjectName(newProjectName);
+        project.setProjectName(newProjectName);
 
-            userService.changeProjectName(project.getProjectid(),newProjectName);
+        userService.changeProjectName(project.getProjectid(), newProjectName);
 
-            return "redirect:/projekt";
-        }
+        return "redirect:/projekt";
+    }
+
+    @PostMapping("changeSubProjectName")
+    public String changeSubProjectName(WebRequest request) throws ProjectManagerException{
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+
+        //Retrieve values from HTML form via WebRequest
+        String newSubProjectName = request.getParameter("subProjectName");
+
+        //userService.changeSubProjectName();
+        System.out.println(newSubProjectName);
+
+        return "redirect:/projekt";
+    }
+
 
     @PostMapping("getProjectTask")
-    public String getProjectTask(){
+    public String getProjectTask() {
         return "redirect:/projekt";
     }
 
@@ -118,7 +132,7 @@ public class UserController {
     }
 
     @PostMapping("addTask")
-    public String addTask(){
+    public String addTask() {
         return "redirect:/projekt";
     }
 

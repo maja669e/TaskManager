@@ -193,7 +193,6 @@ public class UserMapper {
         }
     }
 
-
     public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -201,6 +200,20 @@ public class UserMapper {
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, newProjectName);
             ps.setInt(2, projectid);
+            ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
+    public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE subProjects set subprojectname = ? WHERE subprojectid = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, newSubProjectName);
+            ps.setInt(2, subProjectid);
             ps.executeUpdate();
 
         } catch (SQLException ex) {

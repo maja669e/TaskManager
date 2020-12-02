@@ -65,6 +65,15 @@
 <form>
     <tr th:each="subProject:${subProjects}">
         <h2 th:text="${subProject.getSubProjectName()}"></h2>
+        <form th:action="@{/changeSubProjectName}" method="post">
+            <div>
+                <input type="text" name="subProjectName" placeholder="del opgave">
+            </div>
+            <br>
+            <div>
+                <button type="submit">Skrift del project navn</button>
+            </div>
+        </form>
         <hr>
         <td>
             <table style="width: 80%">

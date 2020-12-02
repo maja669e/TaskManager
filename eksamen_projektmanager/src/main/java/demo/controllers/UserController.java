@@ -86,6 +86,20 @@ public class UserController {
         }
     }
 
+    @PostMapping("changeProjectName")
+        public String changeProjectName(WebRequest request) throws ProjectManagerException {
+            Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+
+            //Retrieve values from HTML form via WebRequest
+            String newProjectName = request.getParameter("projectName");
+
+            project.setProjectName(newProjectName);
+
+            userService.changeProjectName(project.getProjectid(),newProjectName);
+
+            return "redirect:/projekt";
+        }
+
     @PostMapping("getProjectTask")
     public String getProjectTask(){
         return "redirect:/projekt";

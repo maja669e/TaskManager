@@ -81,6 +81,43 @@ header {
 
 /*-------Navigation slut-------*/
 
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+}
+
+/* Add padding to container elements */
+.container_edit_project_name {
+    padding: 16px;
+    text-align: left;
+}
+
+.container_edit_project_name label {
+    color: #525050;
+}
+
+.container_edit_project_name p {
+    color: #525050;
+    text-align: center;
+    font-style: italic;
+}
+
+.clearfix {
+    text-align: center;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #b75851;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .editbtn {
+    width: 20%;
+}
 
 /*------Log ind------*/
 #frontpage {

@@ -21,6 +21,10 @@ public class Project {
         this.tasks = tasks;
     }
 
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
     public String getProjectName() {
         return projectName;
     }

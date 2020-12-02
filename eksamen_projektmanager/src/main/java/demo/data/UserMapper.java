@@ -153,9 +153,9 @@ public class UserMapper {
             ps.setInt(1, projectid);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 String projectName = rs.getString("projectname");
-                Project project = new Project(projectid, projectName,subProjects,tasks);
+                Project project = new Project(projectid, projectName, subProjects, tasks);
 
                 return project;
             } else {
@@ -166,7 +166,7 @@ public class UserMapper {
         }
     }
 
-    public void addSubProject(Project project, String subProjectName) throws ProjectManagerException{
+    public void addSubProject(Project project, String subProjectName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM subprojects";
@@ -187,6 +187,21 @@ public class UserMapper {
             ps2.setInt(2, project.getProjectid());
             ps2.setString(3, subProjectName);
             ps2.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
+
+    public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE projects set projectname = ? WHERE projectid = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, newProjectName);
+            ps.setInt(2, projectid);
+            ps.executeUpdate();
 
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());

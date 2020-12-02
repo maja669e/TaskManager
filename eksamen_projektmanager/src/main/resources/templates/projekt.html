@@ -24,15 +24,42 @@
 <div th:replace="fragments/header.html :: header"></div>
 
 <div th:object="${project}">
-    <h1 th:text="*{projectName}"></h1>
+    <div>
+        <h1 th:text="*{projectName}"></h1>
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><img
+                src="/images/edit_button_picture" alt="rediger" width="19px" height="20px"></button>
+        <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close"
+              title="Close Modal">&times;</span>
+            <div class="modal-content">
+
+                <form name="changeProjectName" action="/changeProjectName" method="POST">
+
+                    <div class="container_edit_project_name">
+                        <h1>Skift projekt navn</h1>
+
+                        <label><b>Projekt navn</b></label>
+                        <input type="text" placeholder="Indtast nyt projekt navn" name="projectName" required>
+
+                        <div class="clearfix">
+                            <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                                    class="cancelbtn">Fortryd
+                            </button>
+                            <button class="editbtn" type="submit">Skift projekt navn</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <form th:action="@{/addSubProject}" method="post">
     <div>
-    <input name="subprojectname" type="text" placeholder="Delprojekt navn">
+        <input name="subprojectname" type="text" placeholder="Delprojekt navn">
     </div>
     <br>
     <div>
-    <button type="submit">Tilføj delprojekt</button>
+        <button type="submit">Tilføj delprojekt</button>
     </div>
 </form>
 <form>

@@ -50,4 +50,8 @@ public class UserService {
     public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException{
         facade.changeProjectName(projectid, newProjectName);
     }
+
+    public List<Task> getTasks(int subprojectid) throws ProjectManagerException{
+        return facade.getTasks(subprojectid);
+    }
 }

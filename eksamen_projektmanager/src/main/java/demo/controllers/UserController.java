@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +102,18 @@ public class UserController {
         }
 
     @PostMapping("getProjectTask")
-    public String getProjectTask(){
+    public String getProjectTask(WebRequest request, Model model, RedirectAttributes redirectAttributes) throws ProjectManagerException {
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+
+        List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
+
+        for (int i = 0; i < subProjects.size(); i++) {
+            List<Task> tasks = userService.getTasks(subProjects.get(i).getSubprojectid());
+            model.addAttribute("tasks", tasks);
+        }
+
+        redirectAttributes.addFlashAttribute("message", "Der er ingen opgaver endnu");
+
         return "redirect:/projekt";
     }
 

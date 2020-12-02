@@ -7,6 +7,12 @@ public class Task {
     private int timeEstimation;
     private String taskName;
 
+    public Task(LocalDate deadLine, int timeEstimation, String taskName) {
+        this.deadLine = deadLine;
+        this.timeEstimation = timeEstimation;
+        this.taskName = taskName;
+    }
+
     public int getTimeEstimation() {
         return timeEstimation;
     }

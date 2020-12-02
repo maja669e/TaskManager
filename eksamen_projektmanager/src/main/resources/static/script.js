@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", burgerMenu);
 var burger = document.getElementById("myTopnav");
+// Get the modal
+var modal = document.getElementById('id01');
 
 
 function burgerMenu() {
@@ -7,6 +9,13 @@ function burgerMenu() {
         burger.className += " responsive";
     } else {
         burger.className = "topnav";
+    }
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function close(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
     }
 }
 

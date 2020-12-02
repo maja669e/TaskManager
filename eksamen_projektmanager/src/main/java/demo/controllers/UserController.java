@@ -84,7 +84,7 @@ public class UserController {
 
     @PostMapping("getProjectTask")
     public String getProjectTask(){
-        return "redirect:/project";
+        return "redirect:/projekt";
     }
 
     @PostMapping("addSubProject")
@@ -96,12 +96,12 @@ public class UserController {
 
         userService.addSubProject(project, subprojectName);
 
-        return "redirect:/project";
+        return "redirect:/projekt";
     }
 
     @PostMapping("addTask")
     public String addTask(){
-        return "redirect:/project";
+        return "redirect:/projekt";
     }
 
 

@@ -42,4 +42,8 @@ public class UserService {
         project.getSubProjects().add(subProject);
         facade.addSubProject(project, subProjectName);
     }
+
+    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException{
+        return facade.getSubProjects(projectid);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -70,13 +71,16 @@ public class UserController {
     }
 
     @GetMapping("/projekt")
-    public String project(WebRequest request,Model model) {
+    public String project(WebRequest request,Model model) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
         if (user == null) {
             return "redirect:/";
         } else {
+            List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
+
+            model.addAttribute("subProjects", subProjects);
             model.addAttribute("project", project);
             return "projekt";
         }

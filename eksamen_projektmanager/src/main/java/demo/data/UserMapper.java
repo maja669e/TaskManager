@@ -115,6 +115,33 @@ public class UserMapper {
         return projects;
     }
 
+    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
+        List<SubProject> subProjects = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+
+            String SQL = " SELECT * FROM subprojects;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            // Get data from database.
+            while (rs.next()) {
+
+                int id = rs.getInt("projectid");
+                String subprojectname = rs.getString("subprojectname");
+
+                SubProject subProject = new SubProject(subprojectname);
+
+                if (projectid == id) {
+                    subProjects.add(subProject);
+                }
+            }
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+        return subProjects;
+    }
+
     public Project getSingleProject(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
         List<Task> tasks = new ArrayList<>();

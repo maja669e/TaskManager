@@ -28,5 +28,8 @@ public class DataFacadeImpl implements DataFacade {
         userMapper.addSubProject(project,subProjectName);
     }
 
+    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException{
+        return userMapper.getSubProjects(projectid);
+    }
 
 }

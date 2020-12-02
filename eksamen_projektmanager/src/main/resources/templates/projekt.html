@@ -26,7 +26,37 @@
 <div th:object="${project}">
     <h1 th:text="*{projectName}"></h1>
 </div>
+<hr>
+<form th:action="@{/addSubProject}" method="post">
+    <div>
+    <input type="text" name="Delprojekt_navn" placeholder="Delprojekt navn">
+    </div>
+    <br>
+    <div>
+    <button type="submit">Tilføj delprojekt</button>
+    </div>
+</form>
+<table style="width: 80%">
 
+    <tr>
+        <th>Opgave navn</th>
+        <th>Tidsestimering</th>
+        <th>Deadline</th>
+        <th>Deltager/Ansvaring</th>
+    </tr>
+
+    <form th:action="@{/getProjectTask}" method="post">
+        <tr th:each="task:${tasks}">
+            <td th:text="${task.tastName}"></td>
+            <td th:text="${task.timeEstimation}"></td>
+            <td th:text="${task.deadline}"></td>
+            <td>
+                <!--<button th:name="userid" th:value="${datingUser.ID}" type="submit" class="button1"> <img src="/images/trashcan.png" alt="trash" width="19px" height="20px"></button>-->
+            </td>
+        </tr>
+    </form>
+
+</table>
 
 <div th:replace="fragments/footer.html :: footer"></div>
 

@@ -51,8 +51,6 @@ public class UserController {
         }
     }
 
-
-
     @PostMapping("addProject")
     public String addProject(WebRequest request) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
@@ -85,6 +83,16 @@ public class UserController {
             model.addAttribute("project", project);
             return "projekt";
         }
+    }
+
+    @PostMapping("getProjectTask")
+    public String getProjectTask(){
+        return "redirect:/project";
+    }
+
+    @PostMapping("addSubProject")
+    public String addSubProject(){
+        return "redirect:/project";
     }
 
 

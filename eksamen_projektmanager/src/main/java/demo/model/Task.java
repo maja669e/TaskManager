@@ -4,8 +4,16 @@ import java.time.LocalDate;
 
 public class Task {
     private LocalDate deadLine;
-    private LocalDate startDate;
+    private int timeEstimation;
     private String taskName;
+
+    public int getTimeEstimation() {
+        return timeEstimation;
+    }
+
+    public void setTimeEstimation(int timeEstimation) {
+        this.timeEstimation = timeEstimation;
+    }
 
     public LocalDate getDeadLine() {
         return deadLine;
@@ -13,14 +21,6 @@ public class Task {
 
     public void setDeadLine(LocalDate deadLine) {
         this.deadLine = deadLine;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
     }
 
     public String getTaskName() {

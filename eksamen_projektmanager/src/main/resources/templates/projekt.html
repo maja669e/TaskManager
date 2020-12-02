@@ -56,6 +56,15 @@
         </tr>
     </form>
 
+    <form th:action="@{/addTask}" method="post">
+        <div>
+            <input type="text" name="opgave" placeholder="opgave navn">
+        </div>
+        <br>
+        <div>
+            <button type="submit">Tilføj opgave</button>
+        </div>
+    </form>
 </table>
 
 <div th:replace="fragments/footer.html :: footer"></div>

@@ -94,6 +94,11 @@ public class UserController {
     public String addSubProject(){
         return "redirect:/project";
     }
+    
+    @PostMapping("addTask")
+    public String addTask(){
+        return "redirect:/project";
+    }
 
 
     private void setSessionProject(WebRequest request, Project project) {

@@ -84,11 +84,11 @@
                     <th>Deadline</th>
                     <th>Deltager/Ansvaring</th>
                 </tr>
-
-                <div class="center" th:if="${subProject.tasks.empty}">
+                <div class="center">
+                <div th:if="${subProject.tasks.empty}">
                     <p>Der er ikke oprettet nogen opgaver endnu.</p>
                 </div>
-
+                </div>
                 <form th:action="@{/projekt}" method="get">
                     <tr th:each="task:${subProject.tasks}">
                         <th th:text="${task.taskName}"></th>

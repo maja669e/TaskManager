@@ -26,8 +26,12 @@
 <div th:object="${project}">
 
     <div class="overskrift">
+        <div id="element1">
         <h1 th:text="*{projectName}"></h1>
-        <button class="btnopret" onclick="document.getElementById('id01').style.display='block'"></button>
+        </div>
+        <div id="element2">
+            <button class="btnopret" onclick="document.getElementById('id01').style.display='block'"></button>
+        </div>
     </div>
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
@@ -80,7 +84,7 @@
 
                 <tr>
                     <th>Opgave navn</th>
-                    <th>Tidsestimering</th>
+                    <th>Tidsestimering (I antal timer)</th>
                     <th>Deadline</th>
                     <th>Deltager/Ansvaring</th>
                 </tr>

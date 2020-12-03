@@ -108,6 +108,14 @@ tr:nth-child(even) {
     background-color: #626060;
 }
 
+#element1 {
+    display:inline-block;margin-right:10px;
+}
+
+#element2 {
+    display:inline-block;
+}
+
 /*------Log ind------*/
 #frontpage {
     background-image: url("/images/background.jpg");

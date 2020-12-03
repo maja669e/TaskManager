@@ -224,10 +224,11 @@ button:hover {
     padding: 14px 20px;
     margin: 20px;
     cursor: pointer;
-    width: 22%;
+    width: 18%;
     border: none;
     border-radius: 10px;
     color: white;
+    font-weight: bold;
 }
 
 /* The Modal (background) */

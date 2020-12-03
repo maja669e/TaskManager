@@ -24,35 +24,37 @@
 <div th:replace="fragments/header.html :: header"></div>
 
 <div th:object="${project}">
-    <div>
+
+    <div class="overskrift">
         <h1 th:text="*{projectName}"></h1>
-        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><img
-                src="/images/edit_button_picture.png" alt="rediger" width="19px" height="20px"></button>
-        <div id="id01" class="modal">
+        <button class="btnopret" onclick="document.getElementById('id01').style.display='block'"></button>
+    </div>
+    <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
               title="Close Modal">&times;</span>
-            <div class="modal-content">
+        <div class="modal-content">
 
-                <form name="changeProjectName" action="/changeProjectName" method="POST">
+            <form name="changeProjectName" action="/changeProjectName" method="POST">
 
-                    <div class="container_edit_project_name">
-                        <h1>Skift projekt navn</h1>
+                <div class="container_edit_project_name">
+                    <h2>Skift projektnavn</h2>
 
-                        <label><b>Projekt navn</b></label>
-                        <input type="text" placeholder="Indtast nyt projekt navn" name="projectName" required>
+                    <label><b>Projektnavn</b></label>
+                    <input type="text" placeholder="Indtast nyt projektnavn" name="projectName" required>
 
-                        <div class="clearfix">
-                            <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                                    class="cancelbtn">Fortryd
-                            </button>
-                            <button class="editbtn" type="submit">Skift projekt navn</button>
-                        </div>
+                    <div class="clearfix">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                                class="cancelbtn">Tilbage
+                        </button>
+                        <button class="editbtn" type="submit">Skift projektnavn</button>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+
 <form th:action="@{/addSubProject}" method="post">
     <div>
         <input name="subprojectname" type="text" placeholder="Delprojekt navn">

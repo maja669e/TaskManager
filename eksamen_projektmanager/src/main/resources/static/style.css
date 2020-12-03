@@ -81,43 +81,7 @@ header {
 
 /*-------Navigation slut-------*/
 
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-}
 
-/* Add padding to container elements */
-.container_edit_project_name {
-    padding: 16px;
-    text-align: left;
-}
-
-.container_edit_project_name label {
-    color: #525050;
-}
-
-.container_edit_project_name p {
-    color: #525050;
-    text-align: center;
-    font-style: italic;
-}
-
-.clearfix {
-    text-align: center;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-    padding: 14px 20px;
-    background-color: #b75851;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .editbtn {
-    width: 20%;
-}
 
 /*------Log ind------*/
 #frontpage {
@@ -153,7 +117,8 @@ header {
 }
 
 
-.container_logind input[type=text], .container_logind input[type=password] {
+.container_logind input[type=text],
+.container_logind input[type=password] {
     width: 30vw;
     padding: 12px 20px;
     margin: 8px 0;
@@ -224,7 +189,117 @@ button:hover {
     transition: 0.4s ease-in-out;
 }
 
+/*-------Rediger knap-------*/
 
+.overskrift{
+    display: block;
+    text-align: center;
+}
+
+.btnopret {
+    background-image: url("/images/edit_button_picture.png");
+    background-size: cover;
+    height: 25px;
+    width: 25px;
+    border: none;
+    background-color: inherit;
+    z-index: 2;
+    cursor: pointer;
+    filter: contrast(40%);
+}
+/* Full-width input fields */
+.container_edit_project_name input[type=text] {
+    width: 40%;
+    padding: 12px;
+    margin: 1vw;
+    display: inline-block;
+    border: none;
+    border-radius: 5%;
+    background: #f1f1f1;
+}
+.editbtn,
+.cancelbtn {
+    text-align: center;
+    background-color: transparent;
+    padding: 14px 20px;
+    margin: 20px;
+    cursor: pointer;
+    width: 22%;
+    border: none;
+    border-radius: 10px;
+    color: white;
+}
+
+/* The Modal (background) */
+.modal {
+    color: #525050;
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 4;
+    /* Sit on top */
+    left: 20%;
+    right: 10%;
+    top: 20%;
+    width: 60%;
+    /* Full width */
+    overflow: auto;
+    /* Full height */
+    background-color: white;
+    box-shadow: 1px 4px 9px 0 rgba(0, 0, 0, 0.07);
+
+}
+
+/* Add padding to container elements */
+.container_edit_project_name {
+    color: #525050;
+    padding: 16px;
+    text-align: center;
+}
+
+.container_edit_project_name label {
+    color: #525050;
+}
+
+.container_edit_project_name p {
+    color: #525050;
+    text-align: center;
+    font-style: italic;
+}
+
+.clearfix {
+    text-align: center;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #b75851;
+}
+
+/* Extra styles for the edit button */
+.editbtn {
+    padding: 14px 20px;
+    background-color: #477d92;
+}
+
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 35px;
+    top: 10px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #525050;
+}
+
+.close:hover,
+.close:focus {
+    opacity: 0.7;
+    cursor: pointer;
+}
 
 /*-------Footer-------*/
 hr {
@@ -348,7 +423,8 @@ a.fa-twitter:before {
         text-align: left;
     }
 
-    .container_logind input[type=text], .container_logind input[type=password] {
+    .container_logind input[type=text],
+    .container_logind input[type=password] {
         width: 60vw;
     }
 
@@ -423,6 +499,4 @@ a.fa-twitter:before {
     footer p {
         font-size: 12px;
     }
-
-
 }

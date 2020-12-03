@@ -58,9 +58,6 @@
 <form th:action="@{/addSubProject}" method="post">
     <div>
         <input name="subprojectname" type="text" placeholder="Delprojekt navn">
-    </div>
-    <br>
-    <div>
         <button type="submit">Tilføj delprojekt</button>
     </div>
 </form>
@@ -70,13 +67,10 @@
     </div>
 
     <tr th:each="subProject:${subProjects}">
-        <h2 th:text="${subProject.getSubProjectName()}"></h2>
+        <h2 th:text="${subProject.subProjectName}"></h2>
         <form th:action="@{/changeSubProjectName}" method="post">
             <div>
                 <input type="text" name="subProjectName" placeholder="del opgave">
-            </div>
-            <br>
-            <div>
                 <button type="submit">Skrift del project navn</button>
             </div>
         </form>
@@ -91,11 +85,15 @@
                     <th>Deltager/Ansvaring</th>
                 </tr>
 
+                <div class="center" th:if="${subProject.tasks.empty}">
+                    <p>Der er ikke oprettet nogen opgaver endnu.</p>
+                </div>
+
                 <form th:action="@{/projekt}" method="get">
                     <tr th:each="task:${subProject.tasks}">
-                        <td th:text="${task.taskName}"></td>
-                        <td th:text="${task.timeEstimation}"></td>
-                        <td th:text="${task.deadLine}"></td>
+                        <th th:text="${task.taskName}"></th>
+                        <th th:text="${task.timeEstimation}"></th>
+                        <th th:text="${task.deadLine}"></th>
                         <td>
                             <!--<button th:name="userid" th:value="${datingUser.ID}" type="submit" class="button1"> <img src="/images/trashcan.png" alt="trash" width="19px" height="20px"></button>-->
                         </td>
@@ -111,9 +109,6 @@
             <form th:action="@{/addTask}" method="post">
                 <div>
                     <input type="text" name="opgave" placeholder="opgave navn">
-                </div>
-                <br>
-                <div>
                     <button type="submit">Tilføj opgave</button>
                 </div>
             </form>

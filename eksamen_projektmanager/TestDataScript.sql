@@ -20,7 +20,7 @@ INSERT INTO `projektello`.`projects` (`projectid`, `projectname`) VALUES ('2', '
 INSERT INTO `projektello`.`subprojects` (`subprojectid`, `projectid`, `subprojectname`) VALUES ('1', '1', 'mini projekt 1');
 INSERT INTO `projektello`.`subprojects` (`subprojectid`, `projectid`, `subprojectname`) VALUES ('2', '1', 'mini projekt 2');
 INSERT INTO `projektello`.`subprojects` (`subprojectid`, `projectid`, `subprojectname`) VALUES ('3', '1', 'mini projekt 3');
-INSERT INTO `projektello`.`subprojects` (`subprojectid`, `projectid`, `subprojectname`) VALUES ('1', '2', 'mini projekt 4');
+INSERT INTO `projektello`.`subprojects` (`subprojectid`, `projectid`, `subprojectname`) VALUES ('4', '2', 'mini projekt 4');
 
 -- -----------------------------------------------------
 -- tasks data

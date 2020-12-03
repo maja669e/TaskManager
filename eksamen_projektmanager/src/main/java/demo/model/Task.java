@@ -36,4 +36,13 @@ public class Task {
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "deadLine=" + deadLine +
+                ", timeEstimation=" + timeEstimation +
+                ", taskName='" + taskName + '\'' +
+                '}';
+    }
 }

@@ -117,6 +117,7 @@ public class UserMapper {
 
     public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
 
@@ -126,10 +127,12 @@ public class UserMapper {
             // Get data from database.
             while (rs.next()) {
 
+                int subprojectid = rs.getInt("subprojectid");
                 int id = rs.getInt("projectid");
                 String subprojectname = rs.getString("subprojectname");
 
-                SubProject subProject = new SubProject(subprojectname);
+                SubProject subProject = new SubProject(subprojectname,tasks);
+                subProject.setSubProjectID(subprojectid);
 
                 if (projectid == id) {
                     subProjects.add(subProject);

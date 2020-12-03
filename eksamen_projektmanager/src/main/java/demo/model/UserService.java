@@ -37,10 +37,10 @@ public class UserService {
         return facade.getSingleProject(projectid);
     }
 
-    public void addSubProject(Project project, String subProjectName) throws ProjectManagerException{
-        SubProject subProject = new SubProject(subProjectName);
+    public void addSubProject(Project project, String subProjectName, List<Task> tasks) throws ProjectManagerException{
+        SubProject subProject = new SubProject(subProjectName,tasks);
         project.getSubProjects().add(subProject);
-        facade.addSubProject(project, subProjectName);
+        facade.addSubProject(project, subProjectName, tasks);
     }
 
     public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException{

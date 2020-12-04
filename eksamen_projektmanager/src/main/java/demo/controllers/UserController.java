@@ -18,6 +18,7 @@ import java.util.List;
 public class UserController {
 
     private UserService userService = new UserService(new DataFacadeImpl());
+    private TimeConsumtionCalculator timeConsumtionCalculator = new TimeConsumtionCalculator();
 
     @ExceptionHandler(ProjectManagerException.class)
     @GetMapping("/")
@@ -92,6 +93,9 @@ public class UserController {
             }
 
 
+            int projectTotalTimeConsumtion = timeConsumtionCalculator.calProjectTotalTime(project);
+
+            model.addAttribute("projectTime", projectTotalTimeConsumtion);
             model.addAttribute("subProjects", subProjects);
             model.addAttribute("project", project);
             return "projekt";

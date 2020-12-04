@@ -87,7 +87,6 @@ public class UserMapper {
     public List<Project> getProjects(int userid) throws ProjectManagerException {
         List<Project> projects = new ArrayList<>();
         List<SubProject> subProjects = new ArrayList<>();
-        List<Task> tasks = new ArrayList<>();
 
         try {
             Connection con = DBManager.getConnection();
@@ -102,7 +101,7 @@ public class UserMapper {
                 int id = rs.getInt("userid");
                 String projectname = rs.getString("projectname");
 
-                Project project = new Project(projectid, projectname, subProjects, tasks);
+                Project project = new Project(projectid, projectname, subProjects);
 
                 if (userid == id) {
                     projects.add(project);
@@ -147,7 +146,6 @@ public class UserMapper {
 
     public Project getSingleProject(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
-        List<Task> tasks = new ArrayList<>();
 
         try {
             Connection con = DBManager.getConnection();
@@ -158,7 +156,7 @@ public class UserMapper {
 
             if (rs.next()) {
                 String projectName = rs.getString("projectname");
-                Project project = new Project(projectid, projectName, subProjects, tasks);
+                Project project = new Project(projectid, projectName, subProjects);
 
                 return project;
             } else {
@@ -256,5 +254,34 @@ public class UserMapper {
 
         return tasks;
     }
+
+
+    public void addTask(SubProject subProject, String taskName) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM tasks";
+            PreparedStatement ps = con.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+            int temp = 0;
+
+            while (rs.next()) {
+                temp = rs.getInt("taskid"); //gets last row subprojectid
+            }
+            int taskid = temp + 1;
+            //--------------------------------------------------//
+
+            String SQL2 = "INSERT INTO tasks (taskid, subprojectid, taskname) VALUES (?,?,?)";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ps2.setInt(1, taskid);
+            ps2.setInt(2, subProject.getSubProjectID());
+            ps2.setString(3, taskName);
+            ps2.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
 
 }

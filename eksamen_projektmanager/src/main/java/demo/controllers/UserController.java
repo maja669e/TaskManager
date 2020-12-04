@@ -81,16 +81,14 @@ public class UserController {
         } else {
             List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
 
-
             //TODO dette skulle måske være et andet sted
             int temp = 1;
             for (int i = 0; i < subProjects.size(); i++) {
-                if(subProjects.get(i).getSubProjectID() == temp){
+                if (subProjects.get(i).getSubProjectID() == temp) {
                     subProjects.get(i).setTasks(userService.getTasks(temp));
                 }
                 temp++;
             }
-
 
             model.addAttribute("subProjects", subProjects);
             model.addAttribute("project", project);
@@ -155,7 +153,27 @@ public class UserController {
     }
 
     @PostMapping("addTask")
-    public String addTask() {
+    public String addTask(WebRequest request, Model model) throws ProjectManagerException {
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+
+        List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
+
+        String taskName = request.getParameter("taskname");
+        SubProject subProject = null;
+        int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
+        System.out.println(subprojectid);
+
+        for (int i = 0; i < subProjects.size(); i++) {
+            System.out.println("Test" + project.getSubProjects());
+           if (subProjects.get(i).getSubProjectID() == subprojectid){
+               System.out.println(subProject.getSubProjectID());
+               subProject = subProjects.get(i);
+           }
+        }
+        System.out.println(subProject);
+
+        userService.addTask(subProject, taskName);
+
         return "redirect:/projekt";
     }
 

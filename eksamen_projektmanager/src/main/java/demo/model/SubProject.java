@@ -40,6 +40,16 @@ public class SubProject {
         this.subProjectName = subProjectName;
     }
 
+    //TODO: ved ikke om denne metode er det rigtige
+    public int calSubProjectTotalTime() {
+        int totalTime = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            totalTime += tasks.get(i).getTimeEstimation();
+        }
+
+        return totalTime;
+    }
+
     @Override
     public String toString() {
         return "SubProject{" +

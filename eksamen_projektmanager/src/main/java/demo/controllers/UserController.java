@@ -18,6 +18,7 @@ import java.util.List;
 public class UserController {
 
     private UserService userService = new UserService(new DataFacadeImpl());
+    //TODO: ved ikke om dette er rigtig
     private TimeConsumtionCalculator timeConsumtionCalculator = new TimeConsumtionCalculator();
 
     @ExceptionHandler(ProjectManagerException.class)
@@ -91,6 +92,7 @@ public class UserController {
                 temp++;
             }
 
+            project.setSubProjects(subProjects);
 
             int projectTotalTimeConsumtion = timeConsumtionCalculator.calProjectTotalTime(project);
 
@@ -169,10 +171,11 @@ public class UserController {
         System.out.println(subprojectid);
 
         for (int i = 0; i < subProjects.size(); i++) {
-            System.out.println("Test" + project.getSubProjects());
+            System.out.println("Test");
            if (subProjects.get(i).getSubProjectID() == subprojectid){
-               System.out.println(subProject.getSubProjectID());
+               System.out.println(subProjects.get(i).getSubProjectID());
                subProject = subProjects.get(i);
+               System.out.println(subProject.getSubProjectID());
            }
         }
         System.out.println(subProject);

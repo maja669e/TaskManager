@@ -50,4 +50,13 @@ public class Project {
     public void setProjectid(int projectid) {
         this.projectid = projectid;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectName='" + projectName + '\'' +
+                ", projectid=" + projectid +
+                ", subProjects=" + subProjects +
+                '}';
+    }
 }

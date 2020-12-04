@@ -57,10 +57,10 @@ public class UserService {
         return facade.getTasks(subprojectid);
     }
 
-    public void addTask(SubProject subProject, String taskName) throws ProjectManagerException{
+    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException{
         Task task = new Task(taskName);
         subProject.getTasks().add(task);
-        facade.addTask(subProject, taskName);
+        facade.addTask(project, subProject, taskName);
     }
 
 }

@@ -162,22 +162,18 @@ public class UserController {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
         List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
-
-        String taskName = request.getParameter("taskname");
         SubProject subProject = null;
+        String taskName = request.getParameter("taskname");
         int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
-        System.out.println(subprojectid);
+
 
         for (int i = 0; i < subProjects.size(); i++) {
-            System.out.println("Test" + project.getSubProjects());
-           if (subProjects.get(i).getSubProjectID() == subprojectid){
-               System.out.println(subProject.getSubProjectID());
-               subProject = subProjects.get(i);
-           }
+            System.out.println(project.getProjectid());
+                if (subProjects.get(i).getSubProjectID() == subprojectid) {
+                    subProject = subProjects.get(i);
+                    userService.addTask(project, subProject, taskName);
+                }
         }
-        System.out.println(subProject);
-
-        userService.addTask(subProject, taskName);
 
         return "redirect:/projekt";
     }

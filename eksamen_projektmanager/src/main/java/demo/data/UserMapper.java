@@ -130,7 +130,7 @@ public class UserMapper {
                 int id = rs.getInt("projectid");
                 String subprojectname = rs.getString("subprojectname");
 
-                SubProject subProject = new SubProject(subprojectname,tasks);
+                SubProject subProject = new SubProject(subprojectname, tasks);
                 subProject.setSubProjectID(subprojectid);
 
                 if (projectid == id) {
@@ -246,6 +246,7 @@ public class UserMapper {
                 if (subprojectid == id) {
                     tasks.add(task);
                 }
+
             }
 
         } catch (SQLException ex) {
@@ -256,7 +257,7 @@ public class UserMapper {
     }
 
 
-    public void addTask(SubProject subProject, String taskName) throws ProjectManagerException {
+    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM tasks";
@@ -271,11 +272,12 @@ public class UserMapper {
             int taskid = temp + 1;
             //--------------------------------------------------//
 
-            String SQL2 = "INSERT INTO tasks (taskid, subprojectid, taskname) VALUES (?,?,?)";
+            String SQL2 = "INSERT INTO tasks (taskid, projectid, subprojectid, taskname) VALUES (?,?,?,?)";
             PreparedStatement ps2 = con.prepareStatement(SQL2);
             ps2.setInt(1, taskid);
             ps2.setInt(2, subProject.getSubProjectID());
-            ps2.setString(3, taskName);
+            ps2.setInt(3, project.getProjectid());
+            ps2.setString(4, taskName);
             ps2.executeUpdate();
 
         } catch (SQLException ex) {

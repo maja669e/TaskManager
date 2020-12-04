@@ -116,7 +116,7 @@
             <form th:action="@{/addTask}" method="post">
                 <div>
                     <input name="taskname" type="text" placeholder="Opgavenavn">
-                    <button th:name="subprojectid" th:value="${subProject.getSubProjectID()}"  type="submit">Tilføj opgave</button>
+                    <button name="subprojectid" th:value="${subProject.getSubProjectID()}" type="submit">Tilføj opgave</button>
                 </div>
             </form>
             <br>

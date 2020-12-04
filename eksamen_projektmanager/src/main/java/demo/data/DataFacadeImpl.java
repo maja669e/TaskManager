@@ -45,8 +45,8 @@ public class DataFacadeImpl implements DataFacade {
         return userMapper.getTasks(subprojectid);
     }
 
-    public void addTask(SubProject subProject, String taskName) throws ProjectManagerException {
-        userMapper.addTask(subProject, taskName);
+    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
+        userMapper.addTask(project, subProject, taskName);
     }
 
 

@@ -13,5 +13,5 @@ public interface DataFacade {
     public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException;
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException;
     public List<Task> getTasks(int subprojectid) throws ProjectManagerException;
-    public void addTask(SubProject subProject, String taskName) throws ProjectManagerException;
+    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException;
 }

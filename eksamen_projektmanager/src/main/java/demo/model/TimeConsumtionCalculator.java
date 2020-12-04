@@ -14,7 +14,6 @@ public class TimeConsumtionCalculator {
         return totalTime;
     }
 
-
     public int calProjectTotalTime(Project project) {
 
         int totalTime = 0;

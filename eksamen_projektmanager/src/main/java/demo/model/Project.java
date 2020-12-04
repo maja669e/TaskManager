@@ -51,6 +51,17 @@ public class Project {
         this.projectid = projectid;
     }
 
+<<<<<<< HEAD
 
 
+=======
+    @Override
+    public String toString() {
+        return "Project{" +
+                "projectName='" + projectName + '\'' +
+                ", projectid=" + projectid +
+                ", subProjects=" + subProjects +
+                '}';
+    }
+>>>>>>> 6457e9fcb0e62be30c5455294386bef7fbe5eec9
 }

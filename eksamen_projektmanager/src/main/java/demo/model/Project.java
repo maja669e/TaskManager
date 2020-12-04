@@ -8,17 +8,15 @@ public class Project {
     private List<SubProject> subProjects;
     private List<Task> tasks;
 
-    public Project(String projectName, List<SubProject> subProjects, List<Task> tasks) {
+    public Project(String projectName, List<SubProject> subProjects) {
         this.projectName = projectName;
         this.subProjects = subProjects;
-        this.tasks = tasks;
     }
 
-    public Project(int projectid, String projectName, List<SubProject> subProjects, List<Task> tasks) {
+    public Project(int projectid, String projectName, List<SubProject> subProjects) {
         this.projectid = projectid;
         this.projectName = projectName;
         this.subProjects = subProjects;
-        this.tasks = tasks;
     }
 
     public void setProjectName(String projectName) {

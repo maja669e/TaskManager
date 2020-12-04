@@ -12,6 +12,9 @@ public class Task {
         this.timeEstimation = timeEstimation;
         this.taskName = taskName;
     }
+    public Task(String taskName) {
+        this.taskName = taskName;
+    }
 
     public int getTimeEstimation() {
         return timeEstimation;

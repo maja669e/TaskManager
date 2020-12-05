@@ -82,17 +82,16 @@ public class UserController {
             return "redirect:/";
         } else {
             List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
+            project.setSubProjects(subProjects);
 
             //TODO dette skulle måske være et andet sted
-            int temp = 1;
+            int subprojectid;
             for (int i = 0; i < subProjects.size(); i++) {
-                if (subProjects.get(i).getSubProjectID() == temp) {
-                    subProjects.get(i).setTasks(userService.getTasks(temp));
+                subprojectid = subProjects.get(i).getSubProjectID();
+                if (subProjects.get(i).getSubProjectID() == subprojectid) {
+                    subProjects.get(i).setTasks(userService.getTasks(subprojectid));
                 }
-                temp++;
             }
-
-            project.setSubProjects(subProjects);
 
             int projectTotalTimeConsumtion = timeConsumtionCalculator.calProjectTotalTime(project);
 

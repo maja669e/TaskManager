@@ -1,6 +1,7 @@
 package demo.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SubProject {
     private String subProjectName;

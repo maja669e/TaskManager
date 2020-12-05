@@ -18,6 +18,8 @@ import java.util.List;
 public class UserController {
 
     private UserService userService = new UserService(new DataFacadeImpl());
+    //TODO: ved ikke om dette er rigtig
+    private TimeConsumtionCalculator timeConsumtionCalculator = new TimeConsumtionCalculator();
 
     @ExceptionHandler(ProjectManagerException.class)
     @GetMapping("/")
@@ -81,17 +83,20 @@ public class UserController {
         } else {
             List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
 
-
             //TODO dette skulle måske være et andet sted
             int temp = 1;
             for (int i = 0; i < subProjects.size(); i++) {
-                if(subProjects.get(i).getSubProjectID() == temp){
+                if (subProjects.get(i).getSubProjectID() == temp) {
                     subProjects.get(i).setTasks(userService.getTasks(temp));
                 }
                 temp++;
             }
 
+            project.setSubProjects(subProjects);
 
+            int projectTotalTimeConsumtion = timeConsumtionCalculator.calProjectTotalTime(project);
+
+            model.addAttribute("projectTime", projectTotalTimeConsumtion);
             model.addAttribute("subProjects", subProjects);
             model.addAttribute("project", project);
             return "projekt";
@@ -158,14 +163,29 @@ public class UserController {
     public String deleteSubProject(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
         int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
-        System.out.println(subprojectid);
         userService.deleteSubproject(subprojectid);
 
         return "redirect:/projekt";
     }
 
     @PostMapping("addTask")
-    public String addTask() {
+    public String addTask(WebRequest request, Model model) throws ProjectManagerException {
+        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+
+        List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
+        SubProject subProject = null;
+        String taskName = request.getParameter("taskname");
+        int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
+        System.out.println(subprojectid);
+
+        for (int i = 0; i < subProjects.size(); i++) {
+           if (subProjects.get(i).getSubProjectID() == subprojectid){
+               subProject = subProjects.get(i);
+           }
+        }
+
+        userService.addTask(project,subProject,taskName);
+
         return "redirect:/projekt";
     }
 

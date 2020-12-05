@@ -14,10 +14,9 @@ public class UserService {
 
     public Project addProject(int userid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
-        List<Task> tasks = new ArrayList<>();
         String projectName = "nyt projekt";
 
-        Project project = new Project(projectName, subProjects, tasks);
+        Project project = new Project(projectName, subProjects);
 
         facade.addProject(project, userid);
 
@@ -56,8 +55,14 @@ public class UserService {
 }
     public List<Task> getTasks(int subprojectid) throws ProjectManagerException{
         return facade.getTasks(subprojectid);
-
     }
+
+    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException{
+        Task task = new Task(taskName);
+        subProject.getTasks().add(task);
+        facade.addTask(project, subProject, taskName);
+    }
+
     public void deleteSubproject(int subprojectid)throws ProjectManagerException {
         facade.deleteSubproject(subprojectid);
     }

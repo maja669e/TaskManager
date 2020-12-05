@@ -32,6 +32,10 @@
         <div id="element2">
             <button class="btnopret" onclick="document.getElementById('id01').style.display='block'"></button>
         </div>
+        <div>
+            <div>
+            <h3>Total tidsforbrug for projekt: </h3><h3 th:text="${projectTime}"></h3>
+        </div>
     </div>
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
@@ -104,21 +108,17 @@
                         <th th:text="${task.timeEstimation}"></th>
                         <th th:text="${task.deadLine}"></th>
                         <td>
-                            <!--<button th:name="userid" th:value="${datingUser.ID}" type="submit" class="button1"> <img src="/images/trashcan.png" alt="trash" width="19px" height="20px"></button>-->
                         </td>
                     </tr>
                 </form>
             </table>
-            <!--<div class="empty" th:if="${tasks.empty}">
-                            <p>Der er ikke oprettet nogen opgaver endnu.</p>
-                        </div>-->
-
-
+            <h3>Total tidsforbrug for delprojekt</h3>
+            <h3 th:text="${subProject.calSubProjectTotalTime()}"></h3>
             <br>
             <form th:action="@{/addTask}" method="post">
                 <div>
-                    <input type="text" name="opgave" placeholder="opgave navn">
-                    <button type="submit">Tilføj opgave</button>
+                    <input name="taskname" type="text" placeholder="Opgavenavn">
+                    <button name="subprojectid" th:value="${subProject.subProjectID}" type="submit">Tilføj opgave</button>
                 </div>
             </form>
             <br>

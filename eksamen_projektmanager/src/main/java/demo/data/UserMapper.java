@@ -257,4 +257,28 @@ public class UserMapper {
         return tasks;
     }
 
+    public void deleteSubproject(int subprojectid)throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+
+            String SQL1 = "DELETE taskrelations FROM taskrelations INNER JOIN tasks ON taskrelations.taskid = tasks.taskid WHERE subprojectid = ?";
+            PreparedStatement ps1 = con.prepareStatement(SQL1);
+            ps1.setInt(1, subprojectid);
+            ps1.executeUpdate();
+
+            String SQL2 = "DELETE FROM tasks WHERE subprojectid = ?";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ps2.setInt(1, subprojectid);
+            ps2.executeUpdate();
+
+            String SQL3 = "DELETE FROM subprojects WHERE subprojectid = ?";
+            PreparedStatement ps3 = con.prepareStatement(SQL3);
+            ps3.setInt(1, subprojectid);
+            ps3.executeUpdate();
+
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
 }

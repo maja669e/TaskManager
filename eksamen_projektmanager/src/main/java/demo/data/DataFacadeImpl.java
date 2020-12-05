@@ -46,4 +46,8 @@ public class DataFacadeImpl implements DataFacade {
 
     }
 
+    public void deleteSubproject(int subprojectid)throws ProjectManagerException {
+        userMapper.deleteSubproject(subprojectid);
+    }
+
 }

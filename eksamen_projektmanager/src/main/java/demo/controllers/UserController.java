@@ -154,6 +154,16 @@ public class UserController {
         return "redirect:/projekt";
     }
 
+    @PostMapping("deleteSubProject")
+    public String deleteSubProject(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
+        int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
+        System.out.println(subprojectid);
+        userService.deleteSubproject(subprojectid);
+
+        return "redirect:/projekt";
+    }
+
     @PostMapping("addTask")
     public String addTask() {
         return "redirect:/projekt";

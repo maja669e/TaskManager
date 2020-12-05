@@ -80,6 +80,11 @@
         </form>
         <hr>
         <td>
+            <div>
+                <form th:action="@{/deleteSubProject}" method="post">
+                    <button th:name="subprojectid" th:value="${subProject.subProjectID}" type="submit">X</button>
+                </form>
+            </div>
             <table style="width: 80%">
 
                 <tr>

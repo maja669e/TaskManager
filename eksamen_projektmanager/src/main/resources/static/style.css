@@ -206,10 +206,8 @@ button:hover {
     cursor: pointer;
 }
 
-
-
 .grid-item h2,
-.grid-item button {
+.grid-item .opret_projekt {
     margin: 0;
     position: absolute;
     top: 50%;
@@ -220,6 +218,20 @@ button:hover {
 .grid-item:hover {
     transform: scale(1.05);
     transition: 0.4s ease-in-out;
+}
+
+#delete_project button{
+    position: absolute;
+    text-align: right;
+    z-index: 5;
+    right: 0;
+    top: 0;
+    border: none;
+    background-color: transparent;
+    font-size: 25px;
+    color: #525050;
+    cursor: pointer;
+    margin: 0.2vw;
 }
 
 /*-------Rediger knap-------*/
@@ -297,6 +309,22 @@ button:hover {
 }
 
 .container_edit_project_name p {
+    color: #525050;
+    text-align: center;
+    font-style: italic;
+}
+
+.container_edit_task {
+    color: #525050;
+    padding: 16px;
+    text-align: center;
+}
+
+.container_edit_task label {
+    color: #525050;
+}
+
+.container_edit_task p {
     color: #525050;
     text-align: center;
     font-style: italic;

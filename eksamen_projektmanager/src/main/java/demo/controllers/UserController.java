@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +65,15 @@ public class UserController {
         return "redirect:/projekt";
     }
 
+    @PostMapping("deleteProject")
+    public String deleteProject(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
+        int projectid = Integer.parseInt(request.getParameter("projectid_del"));
+        userService.deleteProject(projectid);
+
+        return "redirect:/projekt_oversigt";
+    }
+
     @PostMapping("getProject")
     public String getProject(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -95,6 +106,7 @@ public class UserController {
 
             int projectTotalTimeConsumtion = timeConsumtionCalculator.calProjectTotalTime(project);
 
+            model.addAttribute("currentDate", LocalDate.now());
             model.addAttribute("projectTime", projectTotalTimeConsumtion);
             model.addAttribute("subProjects", subProjects);
             model.addAttribute("project", project);
@@ -129,8 +141,26 @@ public class UserController {
         return "redirect:/projekt";
     }
 
+    @PostMapping("editProject")
+    public String editProject(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
+        String taskName = request.getParameter("taskName");
+        System.out.println("new taskname= "+taskName);
+        int timeEstimate = Integer.parseInt(request.getParameter("timeEstimate"));
+        System.out.println("new time estimering= "+timeEstimate);
+        String deadline = request.getParameter("deadline");
+        System.out.println("current deadline= "+deadline);
 
-    @PostMapping("getProjectTask")
+        int taskid = Integer.parseInt(request.getParameter("taskid"));
+        System.out.println(taskid);
+
+        userService.editTask(taskid, taskName,timeEstimate,deadline);
+
+        return "redirect:/projekt";
+    }
+
+
+    /*@PostMapping("getProjectTask")
     public String getProjectTask(WebRequest request, Model model, RedirectAttributes redirectAttributes) throws ProjectManagerException {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
@@ -144,7 +174,7 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message", "Der er ingen opgaver endnu");
 
         return "redirect:/projekt";
-    }
+    }*/
 
     @PostMapping("addSubProject")
     public String addSubProject(WebRequest request) throws ProjectManagerException {
@@ -178,12 +208,12 @@ public class UserController {
         System.out.println(subprojectid);
 
         for (int i = 0; i < subProjects.size(); i++) {
-           if (subProjects.get(i).getSubProjectID() == subprojectid){
-               subProject = subProjects.get(i);
-           }
+            if (subProjects.get(i).getSubProjectID() == subprojectid) {
+                subProject = subProjects.get(i);
+            }
         }
 
-        userService.addTask(project,subProject,taskName);
+        userService.addTask(project, subProject, taskName);
 
         return "redirect:/projekt";
     }

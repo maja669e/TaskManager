@@ -314,6 +314,22 @@ button:hover {
     font-style: italic;
 }
 
+.container_edit_task {
+    color: #525050;
+    padding: 16px;
+    text-align: center;
+}
+
+.container_edit_task label {
+    color: #525050;
+}
+
+.container_edit_task p {
+    color: #525050;
+    text-align: center;
+    font-style: italic;
+}
+
 .clearfix {
     text-align: center;
 }

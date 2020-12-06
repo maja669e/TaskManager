@@ -240,8 +240,10 @@ public class UserMapper {
 
                 String taskname = rs.getString("taskname");
                 int timeEstimation = rs.getInt("timeestimate");
+                int taskid = rs.getInt("taskid");
 
                 Task task = new Task(deadline, timeEstimation, taskname);
+                task.setTaskId(taskid);
 
                 if (subprojectid == id) {
                     tasks.add(task);
@@ -280,6 +282,7 @@ public class UserMapper {
         }
     }
 
+
     public void deleteProject(int projectid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -308,6 +311,22 @@ public class UserMapper {
             PreparedStatement ps5 = con.prepareStatement(SQL5);
             ps5.setInt(1, projectid);
             ps5.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
+    public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE tasks set taskname = ?, timeestimate = ?, deadline= ? WHERE taskid = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, taskName);
+            ps.setInt(2, timeEstimate);
+            ps.setString(3, deadline);
+            ps.setInt(4, taskid);
+            ps.executeUpdate();
 
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());

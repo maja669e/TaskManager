@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,6 +106,7 @@ public class UserController {
 
             int projectTotalTimeConsumtion = timeConsumtionCalculator.calProjectTotalTime(project);
 
+            model.addAttribute("currentDate", LocalDate.now());
             model.addAttribute("projectTime", projectTotalTimeConsumtion);
             model.addAttribute("subProjects", subProjects);
             model.addAttribute("project", project);
@@ -134,6 +137,24 @@ public class UserController {
 
         //userService.changeSubProjectName();
         System.out.println(newSubProjectName);
+
+        return "redirect:/projekt";
+    }
+
+    @PostMapping("editProject")
+    public String editProject(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
+        String taskName = request.getParameter("taskName");
+        System.out.println("new taskname= "+taskName);
+        int timeEstimate = Integer.parseInt(request.getParameter("timeEstimate"));
+        System.out.println("new time estimering= "+timeEstimate);
+        String deadline = request.getParameter("deadline");
+        System.out.println("current deadline= "+deadline);
+
+        int taskid = Integer.parseInt(request.getParameter("taskid"));
+        System.out.println(taskid);
+
+        userService.editTask(taskid, taskName,timeEstimate,deadline);
 
         return "redirect:/projekt";
     }
@@ -187,12 +208,12 @@ public class UserController {
         System.out.println(subprojectid);
 
         for (int i = 0; i < subProjects.size(); i++) {
-           if (subProjects.get(i).getSubProjectID() == subprojectid){
-               subProject = subProjects.get(i);
-           }
+            if (subProjects.get(i).getSubProjectID() == subprojectid) {
+                subProject = subProjects.get(i);
+            }
         }
 
-        userService.addTask(project,subProject,taskName);
+        userService.addTask(project, subProject, taskName);
 
         return "redirect:/projekt";
     }

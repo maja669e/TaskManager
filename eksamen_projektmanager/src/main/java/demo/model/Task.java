@@ -6,6 +6,7 @@ public class Task {
     private LocalDate deadLine;
     private int timeEstimation;
     private String taskName;
+    private int taskId;
 
     public Task(LocalDate deadLine, int timeEstimation, String taskName) {
         this.deadLine = deadLine;
@@ -38,6 +39,14 @@ public class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+    }
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
     @Override

@@ -36,35 +36,39 @@ public class UserService {
         return facade.getSingleProject(projectid);
     }
 
-    public void addSubProject(Project project, String subProjectName, List<Task> tasks) throws ProjectManagerException{
-        SubProject subProject = new SubProject(subProjectName,tasks);
+    public void addSubProject(Project project, String subProjectName, List<Task> tasks) throws ProjectManagerException {
+        SubProject subProject = new SubProject(subProjectName, tasks);
         project.getSubProjects().add(subProject);
         facade.addSubProject(project, subProjectName, tasks);
     }
 
-    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException{
+    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
         return facade.getSubProjects(projectid);
     }
 
-    public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException{
+    public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException {
         facade.changeProjectName(projectid, newProjectName);
     }
 
-    public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException{
-        facade.changeSubProjectName(subProjectid,newSubProjectName);
-}
-    public List<Task> getTasks(int subprojectid) throws ProjectManagerException{
+    public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
+        facade.changeSubProjectName(subProjectid, newSubProjectName);
+    }
+
+    public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
         return facade.getTasks(subprojectid);
     }
 
-    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException{
+    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
         Task task = new Task(taskName);
         subProject.getTasks().add(task);
         facade.addTask(project, subProject, taskName);
     }
 
-    public void deleteSubproject(int subprojectid)throws ProjectManagerException {
+    public void deleteSubproject(int subprojectid) throws ProjectManagerException {
         facade.deleteSubproject(subprojectid);
     }
 
+    public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
+        facade.editTask(taskid, taskName, timeEstimate, deadline);
+    }
 }

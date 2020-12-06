@@ -24,7 +24,6 @@
 <div th:replace="fragments/header.html :: header"></div>
 
 <div th:object="${project}">
-
     <div class="overskrift">
         <div id="element1">
             <h1 th:text="*{projectName}"></h1>
@@ -32,6 +31,7 @@
         <div id="element2">
             <button class="btnopret" onclick="document.getElementById('id01').style.display='block'"></button>
         </div>
+    </div>
         <div>
             <div>
                 <h3>Total tidsforbrug for projekt: </h3>
@@ -84,93 +84,82 @@
                 </div>
             </form>
             <hr>
-            <td>
                 <div>
                     <form th:action="@{/deleteSubProject}" method="post">
                         <button th:name="subprojectid" th:value="${subProject.subProjectID}" type="submit">X</button>
                     </form>
                 </div>
-<<<<<<< HEAD
+            <table style="width: 80%">
+                <tr>
+                    <th>Opgave navn</th>
+                    <th>Tidsestimering (I antal timer)</th>
+                    <th>Deadline</th>
+                    <th>Deltager/Ansvaring</th>
+                    <th></th>
+                </tr>
+                <div class="center">
+                    <div th:if="${subProject.tasks.empty}">
+                        <p>Der er ikke oprettet nogen opgaver endnu.</p>
+                    </div>
+                </div>
                 <form th:action="@{/projekt}" method="get">
                     <tr th:each="task:${subProject.tasks}">
                         <th th:text="${task.taskName}"></th>
                         <th th:text="${task.timeEstimation}"></th>
                         <th th:text="${task.deadLine}"></th>
-                        <td>
-                        </td>
-                        <form th:action="@{/deleteTask}" method="post">
-                            <button th:name="taskid" th:value="${task.taskId}" type="submit">XO</button>
-                        </form>
-=======
-                <table style="width: 80%">
-
-                    <tr>
-                        <th>Opgave navn</th>
-                        <th>Tidsestimering (I antal timer)</th>
-                        <th>Deadline</th>
-                        <th>Deltager/Ansvaring</th>
                         <th></th>
->>>>>>> 3ca7d554a2179ba6b0ed5f91ec183019432a02e2
-                    </tr>
-                    <div class="center">
-                        <div th:if="${subProject.tasks.empty}">
-                            <p>Der er ikke oprettet nogen opgaver endnu.</p>
-                        </div>
-                    </div>
-                    <form th:action="@{/projekt}" method="get">
-                        <tr th:each="task:${subProject.tasks}">
-                            <th th:text="${task.taskName}"></th>
-                            <th th:text="${task.timeEstimation}"></th>
-                            <th th:text="${task.deadLine}"></th>
-                            <th></th>
-                            <th>
-                                <button class="btnopret"
-                                        onclick="document.getElementById('id02').style.display='block'"></button>
-                            </th>
-                            <div id="id02" class="modal">
+                        <th>
+                            <button class="btnopret"
+                                    onclick="document.getElementById('id02').style.display='block'"></button>
+                            <form th:action="@{/deleteTask}" method="post">
+                                <button th:name="taskid" th:value="${task.taskId}" type="submit">Fjern opgave</button>
+                            </form>
+                        </th>
+                        <div id="id02" class="modal">
                             <span onclick="document.getElementById('id02').style.display='none'" class="close"
                                   title="Close Modal">&times;</span>
-                                <div class="modal-content">
-                                    <form name="editProject" action="/editProject" method="POST">
+                            <div class="modal-content">
+                                <form name="editProject" action="/editProject" method="POST">
 
-                                        <div class="container_edit_task">
-                                            <h2>Rediger opgave</h2>
+                                    <div class="container_edit_task">
+                                        <h2>Rediger opgave</h2>
 
-                                            <label><b>Opgave navn</b></label>
-                                            <input type="text" placeholder="Indtast nyt opgave navn" name="taskName"
-                                                   required>
-                                            <br>
-                                            <label><b>Tidsestimering (i antal timer)</b></label>
-                                            <input type="number" placeholder="Indtast tidsestimering" name="timeEstimate"
-                                                   required>
-                                            <br>
-                                            <label><b>Deadline</b></label>
-                                            <input id="deadline" type="date" th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" max="2100-01-01" name="deadline"  required>
-                                            <div class="clearfix">
-                                                <button type="button"
-                                                        onclick="document.getElementById('id02').style.display='none'"
-                                                        class="cancelbtn">Tilbage
-                                                </button>
-                                                <button class="editbtn" type="submit">Gem</button>
-                                            </div>
+                                        <label><b>Opgave navn</b></label>
+                                        <input type="text" placeholder="Indtast nyt opgave navn" name="taskName"
+                                               required>
+                                        <br>
+                                        <label><b>Tidsestimering (i antal timer)</b></label>
+                                        <input type="number" placeholder="Indtast tidsestimering" name="timeEstimate"
+                                               required>
+                                        <br>
+                                        <label><b>Deadline</b></label>
+                                        <input id="deadline" type="date"
+                                               th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" max="2100-01-01"
+                                               name="deadline" required>
+                                        <div class="clearfix">
+                                            <button type="button"
+                                                    onclick="document.getElementById('id02').style.display='none'"
+                                                    class="cancelbtn">Tilbage
+                                            </button>
+                                            <button class="editbtn" type="submit">Gem</button>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
-                        </tr>
-                    </form>
-                </table>
-                <h3>Total tidsforbrug for delprojekt</h3>
-                <h3 th:text="${subProject.calSubProjectTotalTime()}"></h3>
-                <br>
-                <form th:action="@{/addTask}" method="post">
-                    <div>
-                        <input name="taskname" type="text" placeholder="Opgavenavn">
-                        <button name="subprojectid" th:value="${subProject.subProjectID}" type="submit">Tilføj opgave
-                        </button>
-                    </div>
+                        </div>
+                    </tr>
                 </form>
-<<<<<<< HEAD
+            </table>
+            <h3>Total tidsforbrug for delprojekt</h3>
+            <h3 th:text="${subProject.calSubProjectTotalTime()}"></h3>
+            <br>
+            <form th:action="@{/addTask}" method="post">
+                <div>
+                    <input name="taskname" type="text" placeholder="Opgavenavn">
+                    <button name="subprojectid" th:value="${subProject.subProjectID}" type="submit">Tilføj opgave
+                    </button>
+                </div>
+            </form>
             </table>
             <div>
             </div>
@@ -180,18 +169,16 @@
             <form th:action="@{/addTask}" method="post">
                 <div>
                     <input name="taskname" type="text" placeholder="Opgavenavn">
-                    <button name="subprojectid" th:value="${subProject.subProjectID}" type="submit">Tilføj opgave</button>
+                    <button name="subprojectid" th:value="${subProject.subProjectID}" type="submit">Tilføj opgave
+                    </button>
                 </div>
             </form>
             <br>
-    </tr>
-</form>
-=======
-                <br>
         </tr>
     </form>
->>>>>>> 3ca7d554a2179ba6b0ed5f91ec183019432a02e2
-
+    <br>
+    </tr>
+    </form>
     <div th:replace="fragments/footer.html :: footer"></div>
 
     <script src="script.js"></script>

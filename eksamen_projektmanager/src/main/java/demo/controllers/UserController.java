@@ -63,6 +63,15 @@ public class UserController {
         return "redirect:/projekt";
     }
 
+    @PostMapping("deleteProject")
+    public String deleteProject(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
+        int projectid = Integer.parseInt(request.getParameter("projectid_del"));
+        userService.deleteProject(projectid);
+
+        return "redirect:/projekt_oversigt";
+    }
+
     @PostMapping("getProject")
     public String getProject(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -130,7 +139,7 @@ public class UserController {
     }
 
 
-    @PostMapping("getProjectTask")
+    /*@PostMapping("getProjectTask")
     public String getProjectTask(WebRequest request, Model model, RedirectAttributes redirectAttributes) throws ProjectManagerException {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
@@ -144,7 +153,7 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message", "Der er ingen opgaver endnu");
 
         return "redirect:/projekt";
-    }
+    }*/
 
     @PostMapping("addSubProject")
     public String addSubProject(WebRequest request) throws ProjectManagerException {

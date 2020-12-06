@@ -35,7 +35,13 @@
             <button class="opret_projekt"  type="submit"><h2>+</h2></button>
         </form>
     </div>
+
     <div class="grid-item" th:each="project:${projects}">
+        <div id="delete_project">
+            <form th:action="@{/deleteProject}" method="post">
+                <button th:name="projectid_del" th:value="${project.projectid}" type="submit">&times;</button>
+            </form>
+        </div>
         <form th:action="@{/getProject}" method="post">
               <button class="opret_projekt" th:name="projectid" th:value="${project.projectid}" type="submit"><h2 th:text="${project.projectName}"></h2></button>
         </form>

@@ -91,7 +91,7 @@ public class UserMapper {
         try {
             Connection con = DBManager.getConnection();
 
-            String SQL = " SELECT * FROM projectrelations LEFT JOIN projects ON projectrelations.projectid = projects.projectid;";
+            String SQL = "SELECT * FROM projectrelations LEFT JOIN projects ON projectrelations.projectid = projects.projectid";
             PreparedStatement ps = con.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             // Get data from database.
@@ -274,6 +274,40 @@ public class UserMapper {
             PreparedStatement ps3 = con.prepareStatement(SQL3);
             ps3.setInt(1, subprojectid);
             ps3.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
+    public void deleteProject(int projectid) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+
+            String SQL1 = "DELETE taskrelations FROM taskrelations INNER JOIN tasks ON taskrelations.taskid = tasks.taskid WHERE projectid = ?";
+            PreparedStatement ps1 = con.prepareStatement(SQL1);
+            ps1.setInt(1, projectid);
+            ps1.executeUpdate();
+
+            String SQL2 = "DELETE FROM tasks WHERE projectid = ?";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ps2.setInt(1, projectid);
+            ps2.executeUpdate();
+
+            String SQL3 = "DELETE FROM subprojects WHERE projectid = ?";
+            PreparedStatement ps3 = con.prepareStatement(SQL3);
+            ps3.setInt(1, projectid);
+            ps3.executeUpdate();
+
+            String SQL4 = "DELETE FROM projectrelations WHERE projectid = ?";
+            PreparedStatement ps4 = con.prepareStatement(SQL4);
+            ps4.setInt(1, projectid);
+            ps4.executeUpdate();
+
+            String SQL5 = "DELETE FROM projects WHERE projectid = ?";
+            PreparedStatement ps5 = con.prepareStatement(SQL5);
+            ps5.setInt(1, projectid);
+            ps5.executeUpdate();
 
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());

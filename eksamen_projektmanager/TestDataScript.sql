@@ -30,7 +30,7 @@ INSERT INTO `projektello`.`tasks` (`taskid`, `projectid`, `subprojectid`, `taskn
 INSERT INTO `projektello`.`tasks` (`taskid`, `projectid`, `subprojectid`, `taskname`, `timeestimate`, `deadline`) VALUES ('3', '1', '3', 'opgave 3', '12', '2021-02-02');
 INSERT INTO `projektello`.`tasks` (`taskid`, `projectid`, `subprojectid`, `taskname`, `timeestimate`, `deadline`) VALUES ('4', '1', '1', 'opgave 4', '2', '2021-02-02');
 INSERT INTO `projektello`.`tasks` (`taskid`, `projectid`, `subprojectid`, `taskname`, `timeestimate`, `deadline`) VALUES ('5', '1', '1', 'opgave 5', '25', '2021-02-02');
-INSERT INTO `projektello`.`tasks` (`taskid`, `projectid`, `subprojectid`, `taskname`, `timeestimate`, `deadline`) VALUES ('6', '2', '1', 'opgave 1', '30', '2021-09-05');
+INSERT INTO `projektello`.`tasks` (`taskid`, `projectid`, `subprojectid`, `taskname`, `timeestimate`, `deadline`) VALUES ('6', '2', '4', 'opgave 1', '30', '2021-09-05');
 
 -- -----------------------------------------------------
 -- teams data

@@ -366,7 +366,7 @@ public class UserMapper {
         try {
             Connection con = DBManager.getConnection();
 
-            String SQL = "DELETE taskrelations FROM taskrelations INNER JOIN tasks ON taskrelations.taskid = tasks.taskid WHERE taskid = ?";
+            String SQL = "DELETE FROM taskrelations WHERE taskid = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, taskid);
             ps.executeUpdate();

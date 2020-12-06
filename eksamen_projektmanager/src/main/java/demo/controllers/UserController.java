@@ -224,7 +224,7 @@ public class UserController {
         System.out.println(taskid);
         userService.deleteTask(taskid);
 
-        return "redirect:/project";
+        return "redirect:/projekt";
     }
 
 

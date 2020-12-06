@@ -240,8 +240,10 @@ public class UserMapper {
 
                 String taskname = rs.getString("taskname");
                 int timeEstimation = rs.getInt("timeestimate");
+                int taskId = rs.getInt("taskid");
 
                 Task task = new Task(deadline, timeEstimation, taskname);
+                task.setTaskId(taskId);
 
                 if (subprojectid == id) {
                     tasks.add(task);
@@ -301,6 +303,25 @@ public class UserMapper {
             ps2.setInt(2, project.getProjectid());
             ps2.setInt(3, subProject.getSubProjectID());
             ps2.setString(4, taskName);
+            ps2.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
+    public void deleteTask(int taskid) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+
+            String SQL = "DELETE taskrelations FROM taskrelations INNER JOIN tasks ON taskrelations.taskid = tasks.taskid WHERE taskid = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, taskid);
+            ps.executeUpdate();
+
+            String SQL2 = "DELETE FROM tasks WHERE taskid = ?";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ps2.setInt(1, taskid);
             ps2.executeUpdate();
 
         } catch (SQLException ex) {

@@ -15,4 +15,5 @@ public interface DataFacade {
     public List<Task> getTasks(int subprojectid) throws ProjectManagerException;
     public void deleteSubproject(int subprojectid)throws ProjectManagerException;
     public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException;
+    public void deleteTask(int taskid) throws ProjectManagerException;
 }

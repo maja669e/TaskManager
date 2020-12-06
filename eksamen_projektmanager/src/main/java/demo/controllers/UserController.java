@@ -188,6 +188,15 @@ public class UserController {
         return "redirect:/projekt";
     }
 
+    @PostMapping("deleteTask")
+    public String deleteTask(WebRequest request) throws ProjectManagerException {
+        int taskid = Integer.parseInt(request.getParameter("taskid"));
+        System.out.println(taskid);
+        userService.deleteTask(taskid);
+
+        return "redirect:/project";
+    }
+
 
     private void setSessionProject(WebRequest request, Project project) {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);

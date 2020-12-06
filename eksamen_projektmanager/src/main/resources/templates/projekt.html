@@ -109,9 +109,14 @@
                         <th th:text="${task.deadLine}"></th>
                         <td>
                         </td>
+                        <form th:action="@{/deleteTask}" method="post">
+                            <button th:name="taskid" th:value="${task.taskId}" type="submit">XO</button>
+                        </form>
                     </tr>
                 </form>
             </table>
+            <div>
+            </div>
             <h3>Total tidsforbrug for delprojekt</h3>
             <h3 th:text="${subProject.calSubProjectTotalTime()}"></h3>
             <br>

@@ -67,4 +67,8 @@ public class UserService {
         facade.deleteSubproject(subprojectid);
     }
 
+    public void deleteTask(int taskid) throws ProjectManagerException {
+        facade.deleteTask(taskid);
+    }
+
 }

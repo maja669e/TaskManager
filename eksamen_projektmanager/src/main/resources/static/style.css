@@ -109,11 +109,12 @@ tr:nth-child(even) {
 }
 
 .element1 {
-    display:inline-block;margin-right:10px;
+    display: inline-block;
+    margin-right: 10px;
 }
 
 .element2 {
-    display:inline-block;
+    display: inline-block;
 }
 
 /*------Log ind------*/
@@ -219,7 +220,7 @@ button:hover {
     transition: 0.4s ease-in-out;
 }
 
-#delete_project button{
+#delete_project button {
     position: absolute;
     text-align: right;
     z-index: 5;
@@ -235,7 +236,7 @@ button:hover {
 
 /*-------Rediger knap-------*/
 
-.overskrift{
+.overskrift {
     display: block;
     text-align: center;
 }
@@ -251,6 +252,7 @@ button:hover {
     cursor: pointer;
     filter: contrast(40%);
 }
+
 /* Full-width input fields */
 .container_edit_project_name input[type=text] {
     width: 40%;
@@ -261,6 +263,7 @@ button:hover {
     border-radius: 5%;
     background: #f1f1f1;
 }
+
 .editbtn,
 .cancelbtn {
     text-align: center;
@@ -361,6 +364,11 @@ button:hover {
     background-color: #477d92;
 }
 
+#delete_subproject .delete_subproject {
+    text-align: center;
+    padding: 8px 15px;
+}
+
 
 /* The Close Button (x) */
 .close {
@@ -378,10 +386,11 @@ button:hover {
     cursor: pointer;
 }
 
-#knapper{
+#knapper {
     display: flex;
     justify-content: space-around;
 }
+
 .btn_delete {
     background-image: url("/images/trashcan.png");
     background-size: cover;
@@ -473,7 +482,6 @@ a.fa-twitter:before {
 }
 
 /*-------Footer slut-----*/
-
 
 
 /*-------Media queries-------*/

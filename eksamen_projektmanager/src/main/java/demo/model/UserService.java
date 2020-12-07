@@ -85,4 +85,7 @@ public class UserService {
         facade.setTaskstatus(taskid, taskstatus);
     }
 
+    public Task getTask(int taskid) throws ProjectManagerException {
+        return facade.getTask(taskid);
+    }
 }

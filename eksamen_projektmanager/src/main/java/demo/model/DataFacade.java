@@ -19,4 +19,5 @@ public interface DataFacade {
     public void deleteTask(int taskid) throws ProjectManagerException;
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException;
     public void setTaskstatus(int taskid, int taskstatus) throws ProjectManagerException;
+    public Task getTask(int taskid) throws ProjectManagerException;
 }

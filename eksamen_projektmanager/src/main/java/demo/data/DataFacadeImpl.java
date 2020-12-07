@@ -69,4 +69,8 @@ public class DataFacadeImpl implements DataFacade {
     public void setTaskstatus(int taskid, int taskstatus) throws ProjectManagerException {
         userMapper.setTaskstatus(taskid, taskstatus);
     }
+
+    public Task getTask(int taskid) throws ProjectManagerException {
+        return userMapper.getTask(taskid);
+    }
 }

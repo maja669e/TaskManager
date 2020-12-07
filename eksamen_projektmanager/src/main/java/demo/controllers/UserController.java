@@ -155,11 +155,18 @@ public class UserController {
     public String setTaskstatus(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
         int taskid = Integer.parseInt(request.getParameter("taskid"));
-        System.out.println("taskid=" + taskid);
-        int taskstatus = Integer.parseInt(request.getParameter("taskstatus"));
-        System.out.println("taskstatus=" + taskstatus);
 
-        userService.setTaskstatus(taskid,taskstatus);
+        Task task = userService.getTask(taskid);
+
+        if(task.getTaskStatus() == 2){
+            task.setTaskStatus(1);
+        } else if(task.getTaskStatus() == 1){
+            task.setTaskStatus(0);
+        } else {
+            task.setTaskStatus(2);
+        }
+
+        userService.setTaskstatus(taskid, task.getTaskStatus());
         return "redirect:/projekt";
     }
 

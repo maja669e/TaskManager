@@ -279,6 +279,39 @@ public class UserMapper {
         return tasks;
     }
 
+    public Task getTask(int taskid) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = " SELECT * FROM tasks WHERE taskid=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, taskid);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("subprojectid");
+
+                String temp = rs.getString("deadline");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate deadline = LocalDate.parse(temp, formatter);
+
+                String taskname = rs.getString("taskname");
+                int timeEstimation = rs.getInt("timeestimate");
+                int taskId = rs.getInt("taskid");
+                int taskstatus = rs.getInt("taskstatus");
+
+                Task task = new Task(deadline, timeEstimation, taskname);
+                task.setTaskId(taskId);
+                task.setTaskStatus(taskstatus);
+
+                return task;
+            } else {
+                throw new ProjectManagerException("Kunne ikke vælge projekt");
+            }
+        } catch (SQLException | ProjectManagerException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
     public void deleteSubproject(int subprojectid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();

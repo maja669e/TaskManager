@@ -80,10 +80,11 @@
         <button type="submit">Tilføj delprojekt</button>
     </div>
 </form>
-    <div class="empty" th:if="${subProjects.empty}">
-        <p>Du har ikke oprettet nogen delprojekter endnu.</p>
+    <div class="center" >
+        <div th:if="${subProjects.empty}">
+            <p>Du har ikke oprettet nogen delprojekter endnu.</p>
+        </div>
     </div>
-
     <tr th:each="subProject:${subProjects}">
     <div class="overskrift">
         <div class="element1">
@@ -203,11 +204,16 @@
                     </div>
                 </form>
             </th>
+            <th>
+                <div class="element1">
+                <p>Total: </p>
+                </div>
+                <div class="element2">
+                <p th:text="${subProject.calSubProjectTotalTime()}"></p>
+                </div>
+                <br>
+            </th>
         </table>
-        <h3>Total tidsforbrug for delprojekt</h3>
-        <h3 th:text="${subProject.calSubProjectTotalTime()}"></h3>
-
-        <br>
     </tr>
 <br>
 

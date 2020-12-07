@@ -138,69 +138,70 @@
             <th>Deadline</th>
             <th>Deltager/Ansvarlig</th>
             <th></th>
+            <th></th>
         </tr>
         <div class="center">
             <div th:if="${subProject.tasks.empty}">
                 <p>Der er ikke oprettet nogen opgaver endnu.</p>
             </div>
         </div>
-        <form th:action="@{/projekt}" method="get">
-            <tr th:each="task:${subProject.tasks}">
-                <th th:text="${task.taskName}"></th>
-                <th th:text="${task.timeEstimation}"></th>
-                <th th:text="${task.deadLine}"></th>
-                <th></th>
-                <th>
-                    <span th:if="${task.taskStatus == 1}"><button class="button1">I gang</button></span>
-                    <span th:unless="${task.taskStatus == 0}"><button class="button2">Færdig</button></span>
-                </th>
-                <th>
-                    <div id="knapper">
-                        <button class="btnopret"
-                                onclick="document.getElementById('id02').style.display='block'">
-                        </button>
-                        <div id="id02" class="modal">
+
+        <tr th:each="task:${subProject.tasks}">
+            <td th:text="${task.taskName}"></td>
+            <td th:text="${task.timeEstimation}"></td>
+            <td th:text="${task.deadLine}"></td>
+            <td></td>
+            <td>
+                <span th:if="${task.taskStatus == 1}"><button class="button1">I gang</button></span>
+                <span th:unless="${task.taskStatus == 0}"><button class="button2">Færdig</button></span>
+            </td>
+            <td>
+                <div id="knapper">
+                    <button class="btnopret"
+                            onclick="document.getElementById('id02').style.display='block'">
+                    </button>
+                    <div id="id02" class="modal">
                             <span onclick="document.getElementById('id02').style.display='none'" class="close"
                                   title="Close Modal">&times;</span>
-                            <div class="modal-content">
-                                <form name="editProject" action="/editProject" method="POST">
+                        <div class="modal-content">
+                            <form name="editProject" action="/editProject" method="POST">
 
-                                    <div class="container_edit_task">
-                                        <h2>Rediger opgave</h2>
+                                <div class="container_edit_task">
+                                    <h2>Rediger opgave</h2>
 
-                                        <label><b>Opgavenavn</b></label>
-                                        <input type="text" placeholder="Indtast nyt opgave navn" name="taskName"
-                                               required>
-                                        <br>
-                                        <label><b>Tidsestimering (i antal timer)</b></label>
-                                        <input type="number" placeholder="Indtast tidsestimering" name="timeEstimate"
-                                               required>
-                                        <br>
-                                        <label><b>Deadline</b></label>
-                                        <input id="deadline" type="date"
-                                               th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" max="2100-01-01"
-                                               name="deadline" required>
-                                        <div class="clearfix">
-                                            <button type="button"
-                                                    onclick="document.getElementById('id02').style.display='none'"
-                                                    class="cancelbtn">Tilbage
-                                            </button>
-                                            <button th:name="taskid" th:value="${task.taskId}" class="editbtn"
-                                                    type="submit">Gem
-                                            </button>
-                                        </div>
+                                    <label><b>Opgavenavn</b></label>
+                                    <input type="text" placeholder="Indtast nyt opgave navn" name="taskName"
+                                           required>
+                                    <br>
+                                    <label><b>Tidsestimering (i antal timer)</b></label>
+                                    <input type="number" placeholder="Indtast tidsestimering" name="timeEstimate"
+                                           required>
+                                    <br>
+                                    <label><b>Deadline</b></label>
+                                    <input id="deadline" type="date"
+                                           th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" max="2100-01-01"
+                                           name="deadline" required>
+                                    <div class="clearfix">
+                                        <button type="button"
+                                                onclick="document.getElementById('id02').style.display='none'"
+                                                class="cancelbtn">Tilbage
+                                        </button>
+                                        <button th:name="taskid" th:value="${task.taskId}" class="editbtn"
+                                                type="submit">Gem
+                                        </button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
-                        <form th:action="@{/deleteTask}" method="post">
-                            <button class="btn_delete" th:name="taskid" th:value="${task.taskId}"
-                                    type="submit"></button>
-                        </form>
                     </div>
-                </td>
-            </tr>
-        </form>
+                    <form th:action="@{/deleteTask}" method="post">
+                        <button class="btn_delete" th:name="taskid" th:value="${task.taskId}"
+                                type="submit"></button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+
         <th>
             <form th:action="@{/addTask}" method="post">
                 <div>

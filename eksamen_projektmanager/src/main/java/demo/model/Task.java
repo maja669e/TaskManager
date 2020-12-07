@@ -7,7 +7,7 @@ public class Task {
     private int timeEstimation;
     private String taskName;
     private int taskId;
-    private int taskStatus = 1; //equals true
+    private int taskStatus = 2; //Default set to task not started
 
     public Task(LocalDate deadLine, int timeEstimation, String taskName) {
         this.deadLine = deadLine;

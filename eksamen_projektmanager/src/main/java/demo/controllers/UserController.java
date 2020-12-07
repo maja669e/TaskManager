@@ -151,22 +151,17 @@ public class UserController {
         return "redirect:/projekt";
     }
 
+    @PostMapping("setTaskstatus")
+    public String setTaskstatus(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
+        int taskid = Integer.parseInt(request.getParameter("taskid"));
+        System.out.println("taskid=" + taskid);
+        int taskstatus = Integer.parseInt(request.getParameter("taskstatus"));
+        System.out.println("taskstatus=" + taskstatus);
 
-    /*@PostMapping("getProjectTask")
-    public String getProjectTask(WebRequest request, Model model, RedirectAttributes redirectAttributes) throws ProjectManagerException {
-        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-
-        List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
-
-        for (int i = 0; i < subProjects.size(); i++) {
-            List<Task> tasks = userService.getTasks(subProjects.get(i).getSubProjectID());
-            model.addAttribute("tasks", tasks);
-        }
-
-        redirectAttributes.addFlashAttribute("message", "Der er ingen opgaver endnu");
-
+        userService.setTaskstatus(taskid,taskstatus);
         return "redirect:/projekt";
-    }*/
+    }
 
     @PostMapping("addSubProject")
     public String addSubProject(WebRequest request) throws ProjectManagerException {

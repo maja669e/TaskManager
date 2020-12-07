@@ -9,7 +9,6 @@ public class Project {
     private LocalDate expStartDate;
     private LocalDate expEndDate;
     private List<SubProject> subProjects;
-    private List<Task> tasks;
 
     public Project(String projectName, LocalDate expStartDate, LocalDate expEndDate, List<SubProject> subProjects) {
         this.projectName = projectName;
@@ -32,14 +31,6 @@ public class Project {
 
     public void setSubProjects(List<SubProject> subProjects) {
         this.subProjects = subProjects;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
 
     public int getProjectid() {

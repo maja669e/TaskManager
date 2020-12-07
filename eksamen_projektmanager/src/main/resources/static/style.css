@@ -185,6 +185,7 @@ tr:nth-child(even) {
     display: inline-block;
     font-size: 12px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .button2 {
@@ -197,6 +198,20 @@ tr:nth-child(even) {
     display: inline-block;
     font-size: 12px;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.button0 {
+    background-color: #525050;
+    border: none;
+    color: white;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .btnlogin {
@@ -213,6 +228,24 @@ tr:nth-child(even) {
 
 button:hover {
     opacity: 0.8;
+}
+
+.line {
+    text-decoration: line-through;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
 .container_logind {

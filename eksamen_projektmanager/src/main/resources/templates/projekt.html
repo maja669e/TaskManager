@@ -17,6 +17,8 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="msapplication-config" content="myIcons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Projekt</title>
 </head>
 <body>
@@ -146,13 +148,55 @@
         </div>
         <form th:action="@{/projekt}" method="get">
             <tr th:each="task:${subProject.tasks}">
-                <th th:text="${task.taskName}"></th>
-                <th th:text="${task.timeEstimation}"></th>
-                <th th:text="${task.deadLine}"></th>
+                <th>
+                    <span class="line" th:if="${task.taskStatus == 0}" th:text="${task.taskName}"></span>
+                    <span th:unless="${task.taskStatus == 0}" th:text="${task.taskName}"></span>
+                </th>
+                <th>
+                    <span class="line" th:if="${task.taskStatus == 0}" th:text="${task.timeEstimation}"></span>
+                    <span th:unless="${task.taskStatus == 0}" th:text="${task.timeEstimation}"></span>
+                </th>
+                <th>
+                    <span class="line" th:if="${task.taskStatus == 0}" th:text="${task.deadLine}"></span>
+                    <span th:unless="${task.taskStatus == 0}" th:text="${task.deadLine}"></span>
+                </th>
                 <th></th>
                 <th>
-                    <span th:if="${task.taskStatus == 1}"><button class="button1">I gang</button></span>
-                    <span th:unless="${task.taskStatus == 0}"><button class="button2">Færdig</button></span>
+                <div>
+                    <div th:switch="${task.taskStatus}">
+                        <button class="button2" th:case="0"
+                                onclick="document.getElementById('id04').style.display='block'">færdig
+                        </button>
+                        <button class="button1" th:case="1"
+                                onclick="document.getElementById('id04').style.display='block'">igang
+                        </button>
+                        <button class="button0" th:case="2"
+                                onclick="document.getElementById('id04').style.display='block'">Ikke igang
+                        </button>
+                    </div>
+                    <div id="id04" class="modal">
+                            <span onclick="document.getElementById('id04').style.display='none'" class="close"
+                                  title="Close Modal">&times;</span>
+                        <div class="modal-content">
+                            <form name="setTaskstatus" action="/setTaskstatus" method="POST">
+                                <div>
+                                    <h2>Sæt opgave status</h2>
+                                    <div class="clearfix">
+                                    <button  th:name="taskid" th:value="${task.taskId}" name="taskstatus" value="2"  class="editbtn" type="submit">Ikke igang</button>
+                                    <button  th:name="taskid" th:value="${task.taskId}" name="taskstatus" value="1"  class="editbtn" type="submit">Igang</button>
+                                    <button  th:name="taskid" th:value="${task.taskId}" name="taskstatus" value="0"  class="editbtn" type="submit">Færdig</button>
+                                    </div>
+                                    <div class="clearfix">
+                                        <button type="button"
+                                                onclick="document.getElementById('id04').style.display='none'"
+                                                class="cancelbtn">Tilbage
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 </th>
                 <th>
                     <div id="knapper">

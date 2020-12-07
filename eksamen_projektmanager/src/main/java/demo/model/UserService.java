@@ -17,7 +17,7 @@ public class UserService {
         List<SubProject> subProjects = new ArrayList<>();
         String projectName = "nyt projekt";
 
-        Project project = new Project(projectName, null,null, subProjects);
+        Project project = new Project(projectName, null, null, subProjects);
 
         facade.addProject(project, userid);
 
@@ -79,6 +79,10 @@ public class UserService {
 
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
         facade.editTask(taskid, taskName, timeEstimate, deadline);
+    }
+
+    public void setTaskstatus(int taskid, int taskstatus) throws ProjectManagerException {
+        facade.setTaskstatus(taskid, taskstatus);
     }
 
 }

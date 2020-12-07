@@ -20,19 +20,19 @@ public class DataFacadeImpl implements DataFacade {
         return userMapper.getProjects(userid);
     }
 
-    public Project getSingleProject(int projectid) throws ProjectManagerException{
+    public Project getSingleProject(int projectid) throws ProjectManagerException {
         return userMapper.getSingleProject(projectid);
     }
 
     public void addSubProject(Project project, String subProjectName, List<Task> tasks) throws ProjectManagerException {
-        userMapper.addSubProject(project,subProjectName);
+        userMapper.addSubProject(project, subProjectName);
     }
 
-    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException{
+    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
         return userMapper.getSubProjects(projectid);
     }
 
-    public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException{
+    public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException {
         userMapper.changeProjectName(projectid, newProjectName);
     }
 
@@ -41,7 +41,7 @@ public class DataFacadeImpl implements DataFacade {
         userMapper.changeSubProjectName(subProjectid, newSubProjectName);
     }
 
-    public List<Task> getTasks(int subprojectid) throws ProjectManagerException{
+    public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
         return userMapper.getTasks(subprojectid);
     }
 
@@ -49,7 +49,7 @@ public class DataFacadeImpl implements DataFacade {
         userMapper.addTask(project, subProject, taskName);
     }
 
-    public void deleteSubproject(int subprojectid)throws ProjectManagerException {
+    public void deleteSubproject(int subprojectid) throws ProjectManagerException {
         userMapper.deleteSubproject(subprojectid);
     }
 
@@ -57,11 +57,16 @@ public class DataFacadeImpl implements DataFacade {
     public void deleteTask(int taskid) throws ProjectManagerException {
         userMapper.deleteTask(taskid);
     }
+
     public void deleteProject(int projectid) throws ProjectManagerException {
         userMapper.deleteProject(projectid);
     }
 
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
         userMapper.editTask(taskid, taskName, timeEstimate, deadline);
+    }
+
+    public void setTaskstatus(int taskid, int taskstatus) throws ProjectManagerException {
+        userMapper.setTaskstatus(taskid, taskstatus);
     }
 }

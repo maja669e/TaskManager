@@ -145,6 +145,14 @@
                 <th th:text="${task.deadLine}"></th>
                 <th></th>
                 <th>
+                    <div class="button1">
+                    <button th:if="${task.taskStatus == 1}">I gang</button>
+                    </div>
+                    <div class="button2">
+                    <button th:unless="${task.taskStatus == 0}">Færdig</button>
+                    </div>
+                </th>
+                <th>
                     <div id="knapper">
                         <button class="btnopret"
                                 onclick="document.getElementById('id02').style.display='block'">

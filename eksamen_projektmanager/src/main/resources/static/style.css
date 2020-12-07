@@ -165,6 +165,31 @@ tr:nth-child(even) {
     border-radius: 10px;
 }
 
+/*-------Button-----*/
+.button1 {
+    background-color: rgb(71, 188, 117);
+    border: none;
+    color: white;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.button2 {
+    background-color: #a94242;
+    border: none;
+    color: white;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
 .btnlogin {
     text-align: center;
     background-color: #66b0ce;

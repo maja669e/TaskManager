@@ -7,6 +7,7 @@ public class Task {
     private int timeEstimation;
     private String taskName;
     private int taskId;
+    private int taskStatus = 1; //equals true
 
     public Task(LocalDate deadLine, int timeEstimation, String taskName) {
         this.deadLine = deadLine;
@@ -47,6 +48,14 @@ public class Task {
 
     public void setTaskId(int taskId) {
         this.taskId = taskId;
+    }
+
+    public int getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(int taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     @Override

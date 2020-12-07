@@ -160,7 +160,6 @@ tr:nth-child(even) {
     border-radius: 10px;
 }
 
-/* Set a style for all buttons */
 .btnlogin {
     text-align: center;
     background-color: #66b0ce;
@@ -377,6 +376,26 @@ button:hover {
 .close:focus {
     opacity: 0.7;
     cursor: pointer;
+}
+
+#knapper{
+    display: flex;
+    justify-content: space-around;
+}
+.btn_delete {
+    background-image: url("/images/trashcan.png");
+    background-size: cover;
+    height: 25px;
+    width: 25px;
+    border: none;
+    background-color: inherit;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.btn_delete:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 /*-------Footer-------*/

@@ -76,7 +76,7 @@
 
 <form th:action="@{/addSubProject}" method="post">
     <div>
-        <input name="subprojectname" type="text" placeholder="Delprojekt navn">
+        <input name="subprojectname" type="text" placeholder="Delprojektnavn">
         <button type="submit">Tilføj delprojekt</button>
     </div>
 </form>
@@ -89,8 +89,8 @@
         <h2 th:text="${subProject.subProjectName}"></h2>
         <form th:action="@{/changeSubProjectName}" method="post">
             <div>
-                <input type="text" name="subProjectName" placeholder="del opgave">
-                <button type="submit">Skrift del project navn</button>
+                <input type="text" name="subProjectName" placeholder="Nyt delopgavenavn">
+                <button type="submit">Skift delprojektnavn</button>
             </div>
         </form>
         <hr>
@@ -101,10 +101,10 @@
         </div>
         <table style="width: 80%">
             <tr>
-                <th>Opgave navn</th>
+                <th>Opgavenavn</th>
                 <th>Tidsestimering (I antal timer)</th>
                 <th>Deadline</th>
-                <th>Deltager/Ansvaring</th>
+                <th>Deltager/Ansvarlig</th>
                 <th></th>
             </tr>
             <div class="center">
@@ -119,6 +119,7 @@
                     <th th:text="${task.deadLine}"></th>
                     <th></th>
                     <th>
+                        <div id="knapper">
                         <button class="btnopret"
                                 onclick="document.getElementById('id02').style.display='block'">
                         </button>
@@ -131,7 +132,7 @@
                                     <div class="container_edit_task">
                                         <h2>Rediger opgave</h2>
 
-                                        <label><b>Opgave navn</b></label>
+                                        <label><b>Opgavenavn</b></label>
                                         <input type="text" placeholder="Indtast nyt opgave navn" name="taskName"
                                                required>
                                         <br>
@@ -157,8 +158,9 @@
                             </div>
                         </div>
                         <form th:action="@{/deleteTask}" method="post">
-                            <button th:name="taskid" th:value="${task.taskId}" type="submit">Fjern opgave</button>
+                            <button class="btn_delete" th:name="taskid" th:value="${task.taskId}" type="submit"></button>
                         </form>
+                        </div>
                     </th>
                 </tr>
             </form>

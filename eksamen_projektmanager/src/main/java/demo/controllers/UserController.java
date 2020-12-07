@@ -145,14 +145,9 @@ public class UserController {
     public String editProject(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
         String taskName = request.getParameter("taskName");
-        System.out.println("new taskname= "+taskName);
         int timeEstimate = Integer.parseInt(request.getParameter("timeEstimate"));
-        System.out.println("new time estimering= "+timeEstimate);
         String deadline = request.getParameter("deadline");
-        System.out.println("current deadline= "+deadline);
-
         int taskid = Integer.parseInt(request.getParameter("taskid"));
-        System.out.println(taskid);
 
         userService.editTask(taskid, taskName,timeEstimate,deadline);
 

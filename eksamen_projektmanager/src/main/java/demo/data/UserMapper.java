@@ -29,10 +29,11 @@ public class UserMapper {
 
             ///////////////////////////////////////
 
-            String SQL2 = "INSERT INTO projects (projectid) VALUES (?)";
+            String SQL2 = "INSERT INTO projects (projectid, startdate) VALUES (?, ?)";
             PreparedStatement ps2 = con.prepareStatement(SQL2);
             project.setProjectid(projectid + 1);
             ps2.setInt(1, project.getProjectid());
+            ps2.setString(2, String.valueOf(LocalDate.now()));
             ps2.executeUpdate();
             ///////////////////////////////////////
 
@@ -101,7 +102,15 @@ public class UserMapper {
                 int id = rs.getInt("userid");
                 String projectname = rs.getString("projectname");
 
-                Project project = new Project(projectid, projectname, subProjects);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String startDateTemp = rs.getString("startdate");
+                LocalDate startDate = LocalDate.parse(startDateTemp, formatter);
+
+                String endDateTemp = rs.getString("startdate");
+                LocalDate endDate = LocalDate.parse(endDateTemp, formatter);
+
+                Project project = new Project(projectname,startDate, endDate, subProjects);
+                project.setProjectid(projectid);
 
                 if (userid == id) {
                     projects.add(project);
@@ -156,7 +165,16 @@ public class UserMapper {
 
             if (rs.next()) {
                 String projectName = rs.getString("projectname");
-                Project project = new Project(projectid, projectName, subProjects);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String startDateTemp = rs.getString("startdate");
+                LocalDate startDate = LocalDate.parse(startDateTemp, formatter);
+
+                String endDateTemp = rs.getString("startdate");
+                LocalDate endDate = LocalDate.parse(endDateTemp, formatter);
+
+                Project project = new Project(projectName,startDate, endDate, subProjects);
+                project.setProjectid(projectid);
 
                 return project;
             } else {

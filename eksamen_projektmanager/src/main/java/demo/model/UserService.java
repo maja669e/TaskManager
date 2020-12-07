@@ -1,5 +1,6 @@
 package demo.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class UserService {
         List<SubProject> subProjects = new ArrayList<>();
         String projectName = "nyt projekt";
 
-        Project project = new Project(projectName, subProjects);
+        Project project = new Project(projectName, null,null, subProjects);
 
         facade.addProject(project, userid);
 

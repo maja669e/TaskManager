@@ -1,21 +1,20 @@
 package demo.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Project {
     private String projectName;
     private int projectid;
+    private LocalDate expStartDate;
+    private LocalDate expEndDate;
     private List<SubProject> subProjects;
     private List<Task> tasks;
 
-    public Project(String projectName, List<SubProject> subProjects) {
+    public Project(String projectName, LocalDate expStartDate, LocalDate expEndDate, List<SubProject> subProjects) {
         this.projectName = projectName;
-        this.subProjects = subProjects;
-    }
-
-    public Project(int projectid, String projectName, List<SubProject> subProjects) {
-        this.projectid = projectid;
-        this.projectName = projectName;
+        this.expStartDate = expStartDate;
+        this.expEndDate = expEndDate;
         this.subProjects = subProjects;
     }
 
@@ -49,6 +48,22 @@ public class Project {
 
     public void setProjectid(int projectid) {
         this.projectid = projectid;
+    }
+
+    public LocalDate getExpStartDate() {
+        return expStartDate;
+    }
+
+    public void setExpStartDate(LocalDate expStartDate) {
+        this.expStartDate = expStartDate;
+    }
+
+    public LocalDate getExpEndDate() {
+        return expEndDate;
+    }
+
+    public void setExpEndDate(LocalDate expEndDate) {
+        this.expEndDate = expEndDate;
     }
 
     @Override

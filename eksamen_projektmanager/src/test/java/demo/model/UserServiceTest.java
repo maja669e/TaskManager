@@ -17,7 +17,7 @@ class UserServiceTest {
         String projectName = "nyt projekt";
 
         //act
-        Project project = new Project(projectName, subProjects);
+        Project project = new Project(projectName,null, null, subProjects);
         String exp = "nyt projekt";
         String act = project.getProjectName();
 

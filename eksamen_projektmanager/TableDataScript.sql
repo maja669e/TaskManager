@@ -10,6 +10,8 @@ USE `projektello` ;
 CREATE TABLE IF NOT EXISTS `projektello`.`projects` (
   `projectid` INT NOT NULL,
   `projectname` VARCHAR(100) NULL DEFAULT 'nyt projekt',
+  `startdate` DATE NULL DEFAULT,
+  `enddate` DATE NULL DEFAULT,
   PRIMARY KEY (`projectid`),
   UNIQUE INDEX `projectid_UNIQUE` (`projectid` ASC) VISIBLE)
 

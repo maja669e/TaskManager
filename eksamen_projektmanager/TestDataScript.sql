@@ -11,8 +11,8 @@ INSERT INTO `projektello`.`users` (`username`, `password`, `name`) VALUES ('test
 -- -----------------------------------------------------
 -- project table data
 -- -----------------------------------------------------
-INSERT INTO `projektello`.`projects` (`projectid`, `projectname`) VALUES ('1', 'projekt 1');
-INSERT INTO `projektello`.`projects` (`projectid`, `projectname`) VALUES ('2', 'andet projekt');
+INSERT INTO `projektello`.`projects` (`projectid`, `projectname`,`startdate`,`enddate`) VALUES ('1', 'projekt 1','2020-12-07','2021-02-02');
+INSERT INTO `projektello`.`projects` (`projectid`, `projectname`,`startdate`,`enddate`) VALUES ('2', 'andet projekt','2021-12-07','2021-02-02');
 
 -- -----------------------------------------------------
 -- sub project data

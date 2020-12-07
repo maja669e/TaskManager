@@ -140,7 +140,7 @@
                                                     onclick="document.getElementById('id02').style.display='none'"
                                                     class="cancelbtn">Tilbage
                                             </button>
-                                            <button class="editbtn" type="submit">Gem</button>
+                                            <button th:name="taskid" th:value="${task.taskId}" class="editbtn" type="submit">Gem</button>
                                         </div>
                                     </div>
                                 </form>

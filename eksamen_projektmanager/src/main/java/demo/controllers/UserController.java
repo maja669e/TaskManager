@@ -103,7 +103,9 @@ public class UserController {
             }
 
             int projectTotalTimeConsumtion = timeCalculator.calProjectTotalTime(project);
+            int workHoursPerDay = timeCalculator.calWorkHoursPerDay(project);
 
+            model.addAttribute("workHoursPerDay", workHoursPerDay);
             model.addAttribute("currentDate", LocalDate.now());
             model.addAttribute("projectTime", projectTotalTimeConsumtion);
             model.addAttribute("subProjects", subProjects);

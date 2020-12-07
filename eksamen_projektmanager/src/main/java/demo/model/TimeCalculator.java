@@ -26,7 +26,7 @@ public class TimeCalculator {
         return totalTime;
     }
 
-    public int calWorkHoursPerProject (Project project){
+    public int calWorkHoursPerDay (Project project){
 
         int totalProjectHours = calProjectTotalTime(project);
 

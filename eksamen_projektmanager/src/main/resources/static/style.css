@@ -92,24 +92,30 @@ header {
 /*-------Table-----*/
 table {
     width: 90%;
-    border: 1px solid rgb(0, 0, 0);
     text-align: left;
     padding: 8px;
-    margin-left: 5vw;
+    margin-left: 8vw;
     border-collapse: collapse;
     height: auto;
     margin-bottom: 1vw;
+    color: #525050;
 }
 
-td, th {
-    border: 1px solid rgb(0, 0, 0);
+td,
+th {
+    border-bottom: 1px solid #525050;
     text-align: left;
     padding: 8px;
     width: 8px;
 }
 
+tr {
+    font-weight: normal;
+}
+
 tr:nth-child(even) {
-    background-color: #626060;
+    background-color: #d8e6ec;
+;
 }
 
 .element1 {
@@ -368,10 +374,11 @@ button:hover {
     background-color: #477d92;
 }
 
-#delete_subproject  {
+#delete_subproject {
     text-align: center;
 
 }
+
 .delete_subproject {
     padding: 8px 15px;
     background-color: #b75851;

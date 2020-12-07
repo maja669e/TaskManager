@@ -140,11 +140,11 @@
         </div>
         <form th:action="@{/projekt}" method="get">
             <tr th:each="task:${subProject.tasks}">
-                <th th:text="${task.taskName}"></th>
-                <th th:text="${task.timeEstimation}"></th>
-                <th th:text="${task.deadLine}"></th>
-                <th></th>
-                <th>
+                <td th:text="${task.taskName}"></td>
+                <td th:text="${task.timeEstimation}"></td>
+                <td th:text="${task.deadLine}"></td>
+                <td></td>
+                <td>
                     <div id="knapper">
                         <button class="btnopret"
                                 onclick="document.getElementById('id02').style.display='block'">
@@ -188,7 +188,7 @@
                                     type="submit"></button>
                         </form>
                     </div>
-                </th>
+                </td>
             </tr>
         </form>
         <th>

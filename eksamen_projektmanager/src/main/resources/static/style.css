@@ -41,6 +41,10 @@ p .center {
     text-align: center;
 }
 
+#subproject {
+    margin-top: 5vw;
+}
+
 /*-------Navigation-------*/
 header {
     width: 100%;
@@ -364,11 +368,21 @@ button:hover {
     background-color: #477d92;
 }
 
-#delete_subproject .delete_subproject {
+#delete_subproject  {
     text-align: center;
-    padding: 8px 15px;
-}
 
+}
+.delete_subproject {
+    padding: 8px 15px;
+    background-color: #b75851;
+    margin: 2vw;
+    cursor: pointer;
+    width: 6%;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
 
 /* The Close Button (x) */
 .close {

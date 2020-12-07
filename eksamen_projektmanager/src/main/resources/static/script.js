@@ -3,6 +3,7 @@ var burger = document.getElementById("myTopnav");
 // Get the modal
 var modal = document.getElementById('id01');
 var modal = document.getElementById('id02');
+var modal = document.getElementById('id03');
 
 
 function burgerMenu() {

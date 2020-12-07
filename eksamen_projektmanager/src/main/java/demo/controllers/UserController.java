@@ -130,13 +130,10 @@ public class UserController {
 
     @PostMapping("changeSubProjectName")
     public String changeSubProjectName(WebRequest request) throws ProjectManagerException {
-        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-
         //Retrieve values from HTML form via WebRequest
         String newSubProjectName = request.getParameter("subProjectName");
-
-        //userService.changeSubProjectName();
-        System.out.println(newSubProjectName);
+        int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
+        userService.changeSubProjectName(subprojectid,newSubProjectName);
 
         return "redirect:/projekt";
     }

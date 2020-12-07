@@ -25,10 +25,10 @@
 
 <div th:object="${project}">
     <div class="overskrift">
-        <div id="element1">
+        <div class="element1">
             <h1 th:text="*{projectName}"></h1>
         </div>
-        <div id="element2">
+        <div class="element2">
             <button class="btnopret" onclick="document.getElementById('id01').style.display='block'"></button>
         </div>
     </div>
@@ -81,19 +81,47 @@
         <button type="submit">Tilføj delprojekt</button>
     </div>
 </form>
-<form>
     <div class="empty" th:if="${subProjects.empty}">
         <p>Du har ikke oprettet nogen delprojekter endnu.</p>
     </div>
 
     <tr th:each="subProject:${subProjects}">
+    <div class="overskrift">
+        <div class="element1">
+        <h2>Delprojekt: </h2>
+        </div>
+        <div class="element2">
         <h2 th:text="${subProject.subProjectName}"></h2>
-        <form th:action="@{/changeSubProjectName}" method="post">
-            <div>
-                <input type="text" name="subProjectName" placeholder="del opgave">
-                <button type="submit">Skrift del project navn</button>
+        </div>
+        <div class="element2">
+            <button class="btnopret" onclick="document.getElementById('id03').style.display='block'"></button>
+        </div>
+    </div>
+
+        <div id="id03" class="modal">
+        <span onclick="document.getElementById('id03').style.display='none'" class="close"
+              title="Close Modal">&times;</span>
+            <div class="modal-content">
+
+                <form name="changeSubProjectName" action="/changeSubProjectName" method="POST">
+
+                    <div class="container_edit_subproject_name">
+                        <h2>Skift delprojekt navn</h2>
+
+                        <label><b>Delprojekt</b></label>
+                        <input type="text" placeholder="Indtast nyt delprojekt navn" name="subProjectName" required>
+
+                        <div class="clearfix">
+                            <button type="button" onclick="document.getElementById('id03').style.display='none'"
+                                    class="cancelbtn">Tilbage
+                            </button>
+                            <button th:name="subprojectid" th:value="${subProject.subProjectID}" class="editbtn" type="submit">Gem</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+
         <hr>
         <div>
             <form th:action="@{/deleteSubProject}" method="post">
@@ -174,7 +202,6 @@
         </form>
         <br>
     </tr>
-</form>
 <br>
 
 <div th:replace="fragments/footer.html :: footer"></div>

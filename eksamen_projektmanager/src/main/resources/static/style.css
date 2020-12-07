@@ -108,11 +108,11 @@ tr:nth-child(even) {
     background-color: #626060;
 }
 
-#element1 {
+.element1 {
     display:inline-block;margin-right:10px;
 }
 
-#element2 {
+.element2 {
     display:inline-block;
 }
 
@@ -309,6 +309,22 @@ button:hover {
 }
 
 .container_edit_project_name p {
+    color: #525050;
+    text-align: center;
+    font-style: italic;
+}
+
+.container_edit_subproject_name {
+    color: #525050;
+    padding: 16px;
+    text-align: center;
+}
+
+.container_edit_subproject_name label {
+    color: #525050;
+}
+
+.container_edit_subproject_name p {
     color: #525050;
     text-align: center;
     font-style: italic;

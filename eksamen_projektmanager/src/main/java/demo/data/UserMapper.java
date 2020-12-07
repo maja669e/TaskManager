@@ -229,7 +229,7 @@ public class UserMapper {
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "UPDATE subProjects set subprojectname = ? WHERE subprojectid = ?";
+            String SQL = "UPDATE subprojects set subprojectname = ? WHERE subprojectid = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, newSubProjectName);
             ps.setInt(2, subProjectid);

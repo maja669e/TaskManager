@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class UserController {
 
     private UserService userService = new UserService(new DataFacadeImpl());
     //TODO: ved ikke om dette er rigtig
-    private TimeConsumtionCalculator timeConsumtionCalculator = new TimeConsumtionCalculator();
+    private TimeCalculator timeCalculator = new TimeCalculator();
 
     @ExceptionHandler(ProjectManagerException.class)
     @GetMapping("/")
@@ -104,7 +102,7 @@ public class UserController {
                 }
             }
 
-            int projectTotalTimeConsumtion = timeConsumtionCalculator.calProjectTotalTime(project);
+            int projectTotalTimeConsumtion = timeCalculator.calProjectTotalTime(project);
 
             model.addAttribute("currentDate", LocalDate.now());
             model.addAttribute("projectTime", projectTotalTimeConsumtion);

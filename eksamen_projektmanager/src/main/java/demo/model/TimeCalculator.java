@@ -1,8 +1,9 @@
 package demo.model;
 
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-public class TimeConsumtionCalculator {
+public class TimeCalculator {
 
     public int calSubProjectTotalTime(SubProject subProject) { //all subprojects for a single project
 
@@ -23,6 +24,18 @@ public class TimeConsumtionCalculator {
         }
 
         return totalTime;
+    }
+
+    public int calWorkHoursPerProject (Project project){
+
+        int totalProjectHours = calProjectTotalTime(project);
+
+        int dif = (int) ChronoUnit.DAYS.between(project.getExpStartDate(),project.getExpEndDate());
+        dif = Math.abs(dif);
+
+        int workHoursPerDay = totalProjectHours / dif;
+
+        return workHoursPerDay;
     }
 
 }

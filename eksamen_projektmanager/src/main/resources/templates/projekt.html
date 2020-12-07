@@ -32,13 +32,6 @@
             <button class="btnopret" onclick="document.getElementById('id01').style.display='block'"></button>
         </div>
     </div>
-    <div>
-        <div>
-            <h3>Total tidsforbrug for projekt: </h3>
-            <h3 th:text="${projectTime}"></h3>
-        </div>
-    </div>
-
 
     <div id="id01" class="modal">
         <span onclick="document.getElementById('id01').style.display='none'" class="close"
@@ -63,7 +56,23 @@
             </form>
         </div>
     </div>
+
+    <table style="width:80%">
+        <tr>
+            <th>Startdato</th>
+            <th>Slutdato</th>
+            <th>Forventet antal arbejdstimer pr. dag</th>
+            <th>Total tidsforbrug for projekt</th>
+        </tr>
+        <tr>
+            <td th:text="${project.expStartDate}"></td>
+            <td th:text="${project.expEndDate}"></td>
+            <td>5</td>
+            <td th:text="${projectTime}"></td>
+        </tr>
+    </table>
 </div>
+
 
 
 <form th:action="@{/addSubProject}" method="post">

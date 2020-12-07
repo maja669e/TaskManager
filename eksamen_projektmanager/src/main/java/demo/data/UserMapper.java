@@ -170,7 +170,7 @@ public class UserMapper {
                 String startDateTemp = rs.getString("startdate");
                 LocalDate startDate = LocalDate.parse(startDateTemp, formatter);
 
-                String endDateTemp = rs.getString("startdate");
+                String endDateTemp = rs.getString("enddate");
                 LocalDate endDate = LocalDate.parse(endDateTemp, formatter);
 
                 Project project = new Project(projectName,startDate, endDate, subProjects);

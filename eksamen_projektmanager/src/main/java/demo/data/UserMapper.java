@@ -481,11 +481,12 @@ public class UserMapper {
             String teamName ="";
 
             while (rs.next()) {
+                String username = rs.getString("username");
                 String name = rs.getString("name");
                 int id = rs.getInt("teamid");
                 teamName = rs.getString("teamname");
 
-                User user = new User(name);
+                User user = new User(username, name);
 
                 if(teamid == id){
                     teamUsers.add(user);

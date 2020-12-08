@@ -36,11 +36,15 @@
 
 <table style="width:80%">
     <tr>
-        <th>Bruger navn</th>
+        <th>Brugernavn</th>
+        <th>Navn</th>
     </tr>
-    <tr th:each="teamUser:${team.getTeam()}">
+    <tr th:each="teamUser:${team.team}">
         <td>
             <p th:text="${teamUser.userName}"></p>
+        </td>
+        <td>
+            <p th:text="${teamUser.name}"></p>
         </td>
     </tr>
 </table>

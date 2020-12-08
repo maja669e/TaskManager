@@ -77,11 +77,8 @@
 
 
 <form th:action="@{/addSubProject}" method="post">
-    <div>
-        <input name="subprojectname" type="text" placeholder="Delprojektnavn">
-        <div>
+    <div class="clearfix">
         <button class="editbtn" type="submit">Tilføj delprojekt</button>
-        </div>
     </div>
 </form>
 <div class="center">
@@ -103,6 +100,12 @@
                 </div>
                 <div class="element2">
                     <button class="btnopret" onclick="document.getElementById('id03').style.display='block'"></button>
+                </div>
+            </div>
+
+            <div class="center">
+                <div th:if="${subProject.tasks.empty}">
+                    <p>Der er ikke oprettet nogen opgaver endnu.</p>
                 </div>
             </div>
 
@@ -144,11 +147,7 @@
             <th></th>
             <th></th>
         </tr>
-        <div class="center">
-            <div th:if="${subProject.tasks.empty}">
-                <p>Der er ikke oprettet nogen opgaver endnu.</p>
-            </div>
-        </div>
+
         <tr th:each="task:${subProject.tasks}">
             <td>
                 <span class="line" th:if="${task.taskStatus == 0}" th:text="${task.taskName}"></span>

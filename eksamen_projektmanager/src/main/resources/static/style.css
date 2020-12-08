@@ -37,7 +37,9 @@ h4 {
     color: #3b3838;
 }
 
-p .center {
+.center p{
+    font-style: italic;
+    color: #525050;
     text-align: center;
 }
 
@@ -336,7 +338,7 @@ button:hover {
 }
 
 .editbtn,
-.cancelbtn {
+.cancelbtn{
     text-align: center;
     background-color: transparent;
     padding: 14px 20px;

@@ -105,7 +105,11 @@ public class UserController {
 
             int projectTotalTimeConsumtion = timeCalculator.calProjectTotalTime(project);
             int workHoursPerDay = timeCalculator.calWorkHoursPerDay(project);
+            int userTeamId = userService.getUserTeamId(user.getUserid());
 
+            Team team = userService.getTeam(userTeamId);
+
+            model.addAttribute("team", team);
             model.addAttribute("workHoursPerDay", workHoursPerDay);
             model.addAttribute("currentDate", LocalDate.now());
             model.addAttribute("projectTime", projectTotalTimeConsumtion);
@@ -243,6 +247,23 @@ public class UserController {
             model.addAttribute("team", team);
 
             return "hold";
+        }
+    }
+
+    @PostMapping("addMemberToTask")
+    public String addMemberToTask(WebRequest request, Model model) throws ProjectManagerException {
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+
+        if (user == null) {
+            return "redirect:/";
+        } else {
+            int userTeamId = userService.getUserTeamId(user.getUserid());
+
+            Team team = userService.getTeam(userTeamId);
+
+            model.addAttribute("team", team);
+
+            return "redirect:/projekt";
         }
     }
 

@@ -1,7 +1,6 @@
 package demo.model;
 
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 public class TimeCalculator {
 
@@ -33,7 +32,13 @@ public class TimeCalculator {
         int dif = (int) ChronoUnit.DAYS.between(project.getExpStartDate(),project.getExpEndDate());
         dif = Math.abs(dif);
 
-        int workHoursPerDay = totalProjectHours / dif;
+        int workHoursPerDay;
+
+        if(dif == 0){
+            workHoursPerDay = totalProjectHours;
+        } else{
+            workHoursPerDay = totalProjectHours / dif;
+        }
 
         return workHoursPerDay;
     }

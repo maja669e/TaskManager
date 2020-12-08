@@ -181,9 +181,8 @@ public class UserController {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
         List<Task> tasks = new ArrayList<>();
         //Retrieve values from HTML form via WebRequest
-        String subprojectName = request.getParameter("subprojectname");
 
-        userService.addSubProject(project, subprojectName, tasks);
+        userService.addSubProject(project, tasks);
 
         return "redirect:/projekt";
     }

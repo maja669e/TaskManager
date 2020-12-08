@@ -29,11 +29,12 @@ public class UserMapper {
 
             ///////////////////////////////////////
 
-            String SQL2 = "INSERT INTO projects (projectid, startdate) VALUES (?, ?)";
+            String SQL2 = "INSERT INTO projects (projectid, startdate, enddate) VALUES (?, ?, ?)";
             PreparedStatement ps2 = con.prepareStatement(SQL2);
             project.setProjectid(projectid + 1);
             ps2.setInt(1, project.getProjectid());
             ps2.setString(2, String.valueOf(LocalDate.now()));
+            ps2.setString(3, String.valueOf(LocalDate.now()));
             ps2.executeUpdate();
             ///////////////////////////////////////
 

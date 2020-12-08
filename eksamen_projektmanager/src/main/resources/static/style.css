@@ -453,7 +453,33 @@ button:hover {
     color: white;
     font-weight: bold;
 }
+.addTask{
+    display: flex;
+}
+#addTaskbtn {
+  background-color: #477d92;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 4px 8px;
+    margin-left: 5px;
+}
+.opgavenavn {
+    border: none;
+    padding: 4px 8px;
+}
 
+.addMember{
+    display: inline-block;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
 /* The Close Button (x) */
 .close {
     position: absolute;

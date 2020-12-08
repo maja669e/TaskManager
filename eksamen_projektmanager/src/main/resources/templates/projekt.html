@@ -46,12 +46,12 @@
                     <h2>Rediger projekt</h2>
 
                     <label><b>Projektnavn</b></label>
-                    <input type="text" placeholder="Indtast nyt projektnavn" name="projectName" required>
+                    <input type="text" placeholder="Indtast nyt projektnavn" name="projectName" th:value="${project.projectName}">
                     <br>
                     <label><b>Slut dato</b></label>
                     <input id="enddate" type="date"
                            th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" max="2100-01-01"
-                           name="enddate">
+                           name="enddate" th:value="${project.expEndDate}">
                     <div class="clearfix">
                         <button type="button" onclick="document.getElementById('id01').style.display='none'"
                                 class="cancelbtn">Tilbage

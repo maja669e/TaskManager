@@ -185,15 +185,13 @@
                                 <h2>Rediger opgave</h2>
 
                                 <label><b>Opgavenavn</b></label>
-                                <input type="text" placeholder="Indtast nyt opgave navn" name="taskName"
-                                       >
+                                <input type="text" th:value="${task.taskName}" name="taskName">
                                 <br>
                                 <label><b>Tidsestimering (i antal timer)</b></label>
-                                <input type="number" placeholder="Indtast tidsestimering" name="timeEstimate"
-                                       >
+                                <input type="number" name="timeEstimate" th:value="${task.timeEstimation}">
                                 <br>
                                 <label><b>Deadline</b></label>
-                                <input id="deadline" type="date"
+                                <input id="deadline" type="date" th:value="${task.deadLine}"
                                        th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" max="2100-01-01"
                                        name="deadline">
                                 <div class="clearfix">

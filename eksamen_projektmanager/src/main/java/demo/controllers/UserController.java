@@ -233,20 +233,18 @@ public class UserController {
     public String hold(WebRequest request, Model model) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
-        int userTeamId = userService.getUserTeamId(user.getUserid());
+        if (user == null) {
+            return "redirect:/";
+        } else {
+            int userTeamId = userService.getUserTeamId(user.getUserid());
 
-        List<User> teamUsers = userService.getTeam(userTeamId);
+            Team team = userService.getTeam(userTeamId);
 
-        String teamName = userService.getTeamName(userTeamId);
+            model.addAttribute("team", team);
 
-        Team team = new Team(teamName,teamUsers);
-
-        model.addAttribute("teamUsers", teamUsers);
-        model.addAttribute("team",team);
-
-        return "hold";
+            return "hold";
+        }
     }
-
 
     private void setSessionProject(WebRequest request, Project project) {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);

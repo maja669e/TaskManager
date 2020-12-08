@@ -11,6 +11,9 @@ public class Team {
         this.team = team;
     }
 
+    public Team() {
+    }
+
     public String getTeamName() {
         return teamName;
     }
@@ -25,5 +28,13 @@ public class Team {
 
     public void setTeam(List<User> team) {
         this.team = team;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "teamName='" + teamName + '\'' +
+                ", team=" + team +
+                '}';
     }
 }

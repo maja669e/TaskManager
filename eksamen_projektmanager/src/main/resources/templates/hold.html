@@ -33,9 +33,17 @@
     </div>
 </div>
 <hr>
-<tr th:each="teamUser:${teamUsers}">
-    <p th:text="${teamUser.userName}"></p>
-</tr>
+
+<table style="width:80%">
+    <tr>
+        <th>Bruger navn</th>
+    </tr>
+    <tr th:each="teamUser:${team.getTeam()}">
+        <td>
+            <p th:text="${teamUser.userName}"></p>
+        </td>
+    </tr>
+</table>
 
 
 <div th:replace="fragments/footer.html :: footer"></div>

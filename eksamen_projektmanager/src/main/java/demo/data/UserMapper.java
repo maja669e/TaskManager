@@ -468,48 +468,34 @@ public class UserMapper {
         }
     }
 
-    public List<User> getTeam(int teamid) throws ProjectManagerException {
-        List<User> team = new ArrayList<>();
-
+    public Team getTeam(int teamid) throws ProjectManagerException {
+        List<User> teamUsers = new ArrayList<>();
+        Team team = new Team();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM users LEFT JOIN teamrelations ON users.userid = teamrelations.userid WHERE teamid = ?";
+            String SQL = "SELECT * FROM users join teamrelations ON users.userid = teamrelations.userid " +
+                    "join teams ON teamrelations.teamid = teams.teamid";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, teamid);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
+            String teamName ="";
+
+            while (rs.next()) {
                 String name = rs.getString("name");
+                int id = rs.getInt("teamid");
+                teamName = rs.getString("teamname");
 
                 User user = new User(name);
-                team.add(user);
 
-            } else {
-                throw new ProjectManagerException("kunne ikke tilføje bruger til hold");
+                if(teamid == id){
+                    teamUsers.add(user);
+                    team.setTeamName(teamName);
+                }
             }
-        } catch (SQLException | ProjectManagerException ex) {
+            team.setTeam(teamUsers);
+        } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
         return team;
-    }
-
-    public String getTeamName(int teamid) throws ProjectManagerException{
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM teams WHERE teamid = ?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, teamid);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                String teamname = rs.getString("teamname");
-
-                return teamname;
-            } else {
-                throw new ProjectManagerException("kunne ikke finde hold navn");
-            }
-        } catch (SQLException | ProjectManagerException ex) {
-            throw new ProjectManagerException(ex.getMessage());
-        }
     }
 }

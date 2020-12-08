@@ -74,15 +74,11 @@ public class DataFacadeImpl implements DataFacade {
         return userMapper.getTask(taskid);
     }
 
-    public List<User> getTeam(int teamid) throws ProjectManagerException {
+    public Team getTeam(int teamid) throws ProjectManagerException {
         return userMapper.getTeam(teamid);
     }
 
     public int getUserTeamId(int userid) throws ProjectManagerException {
         return userMapper.getUserTeamId(userid);
-    }
-
-    public String getTeamName(int teamid) throws ProjectManagerException{
-        return userMapper.getTeamName(teamid);
     }
 }

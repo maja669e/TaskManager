@@ -40,14 +40,18 @@
               title="Close Modal">&times;</span>
         <div class="modal-content">
 
-            <form name="changeProjectName" action="/changeProjectName" method="POST">
+            <form name="editProject" action="/editProject" method="POST">
 
                 <div class="container_edit_project_name">
-                    <h2>Skift projektnavn</h2>
+                    <h2>Rediger projekt</h2>
 
                     <label><b>Projektnavn</b></label>
-                    <input type="text" placeholder="Indtast nyt projektnavn" name="projectName" required>
-
+                    <input type="text" placeholder="Indtast nyt projektnavn" name="projectName" th:value="${project.projectName}">
+                    <br>
+                    <label><b>Slut dato</b></label>
+                    <input id="enddate" type="date"
+                           th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" max="2100-01-01"
+                           name="enddate" th:value="${project.expEndDate}">
                     <div class="clearfix">
                         <button type="button" onclick="document.getElementById('id01').style.display='none'"
                                 class="cancelbtn">Tilbage
@@ -180,7 +184,7 @@
                             <span onclick="document.getElementById('id02').style.display='none'" class="close"
                                   title="Close Modal">&times;</span>
                     <div class="modal-content">
-                        <form name="editProject" action="/editProject" method="POST">
+                        <form name="editTask" action="/editTask" method="POST">
 
                             <div class="container_edit_task">
                                 <h2>Rediger opgave</h2>

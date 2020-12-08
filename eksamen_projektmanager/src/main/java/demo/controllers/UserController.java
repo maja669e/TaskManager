@@ -225,6 +225,15 @@ public class UserController {
         return "redirect:/projekt";
     }
 
+    @GetMapping("/tidsforbrug")
+    public String tidsforbrug(Model model) {
+        return "tidsforbrug";
+    }
+    @GetMapping("/hold")
+    public String hold(Model model) {
+        return "hold";
+    }
+
 
     private void setSessionProject(WebRequest request, Project project) {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);

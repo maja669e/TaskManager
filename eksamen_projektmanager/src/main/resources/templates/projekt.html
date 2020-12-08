@@ -125,7 +125,7 @@
                             <h2>Skift delprojekt navn</h2>
 
                             <label><b>Delprojekt</b></label>
-                            <input type="text" placeholder="Indtast nyt delprojekt navn" name="subProjectName" required>
+                            <input type="text" placeholder="Indtast nyt delprojekt navn" name="subProjectName" th:value="${subProject.subProjectName}">
 
                             <div class="clearfix">
                                 <button type="button" onclick="document.getElementById('id03').style.display='none'"
@@ -215,11 +215,13 @@
                 </form>
             </td>
             <td>
-                <div id="knapper">
-                    <button class="btnopret"
-                            onclick="document.getElementById('id02').style.display='block'">
-                    </button>
-                    <div id="id02" class="modal">
+
+            <div id="knapper">
+                <button class="btnopret"
+                        onclick="document.getElementById('id02').style.display='block'">
+                </button>
+                <div id="id02" class="modal">
+
                             <span onclick="document.getElementById('id02').style.display='none'" class="close"
                                   title="Close Modal">&times;</span>
                         <div class="modal-content">
@@ -257,6 +259,7 @@
                                 type="submit"></button>
                     </form>
                 </div>
+            </div>
             </td>
         </tr>
 

@@ -220,7 +220,6 @@ public class UserController {
     @PostMapping("deleteTask")
     public String deleteTask(WebRequest request) throws ProjectManagerException {
         int taskid = Integer.parseInt(request.getParameter("taskid"));
-        System.out.println(taskid);
         userService.deleteTask(taskid);
 
         return "redirect:/projekt";

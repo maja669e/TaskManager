@@ -124,7 +124,7 @@
                             <h2>Skift delprojekt navn</h2>
 
                             <label><b>Delprojekt</b></label>
-                            <input type="text" placeholder="Indtast nyt delprojekt navn" name="subProjectName" required>
+                            <input type="text" placeholder="Indtast nyt delprojekt navn" name="subProjectName" th:value="${subProject.subProjectName}">
 
                             <div class="clearfix">
                                 <button type="button" onclick="document.getElementById('id03').style.display='none'"
@@ -202,6 +202,7 @@
             </td>
             <td>
             <div id="knapper">
+                <div>
                 <button class="btnopret"
                         onclick="document.getElementById('id02').style.display='block'">
                 </button>
@@ -237,10 +238,13 @@
                         </form>
                     </div>
                 </div>
+                </div>
+                <div>
                 <form th:action="@{/deleteTask}" method="post">
                     <button class="btn_delete" th:name="taskid" th:value="${task.taskId}"
                             type="submit"></button>
                 </form>
+                </div>
             </div>
             </td>
         </tr>

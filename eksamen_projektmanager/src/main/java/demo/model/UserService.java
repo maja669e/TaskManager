@@ -89,4 +89,8 @@ public class UserService {
     public Task getTask(int taskid) throws ProjectManagerException {
         return facade.getTask(taskid);
     }
+
+    public List<User> getTeams(int teamid) throws ProjectManagerException {
+        return facade.getTeams(teamid);
+    }
 }

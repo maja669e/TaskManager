@@ -447,4 +447,27 @@ public class UserMapper {
             throw new ProjectManagerException(ex.getMessage());
         }
     }
+
+    public List<User> getTeams(int teamid) throws ProjectManagerException {
+        List<User> team = new ArrayList<>();
+
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM users LEFT JOIN teamrelations ON users.userid = teamrelations.userid WHERE teamid = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, teamid);
+            ps.executeUpdate();
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+            }
+
+            return team;
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
 }

@@ -47,8 +47,8 @@ public class UserService {
         return facade.getSubProjects(projectid);
     }
 
-    public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException {
-        facade.changeProjectName(projectid, newProjectName);
+    public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
+        facade.editProject(projectid, newProjectName, enddate);
     }
 
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {

@@ -32,8 +32,8 @@ public class DataFacadeImpl implements DataFacade {
         return userMapper.getSubProjects(projectid);
     }
 
-    public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException {
-        userMapper.changeProjectName(projectid, newProjectName);
+    public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
+        userMapper.editProject(projectid, newProjectName, enddate);
     }
 
 

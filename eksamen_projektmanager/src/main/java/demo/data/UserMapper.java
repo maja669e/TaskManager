@@ -213,13 +213,14 @@ public class UserMapper {
         }
     }
 
-    public void changeProjectName(int projectid, String newProjectName) throws ProjectManagerException {
+    public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "UPDATE projects set projectname = ? WHERE projectid = ?";
+            String SQL = "UPDATE projects set projectname = ?, enddate = ? WHERE projectid = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setString(1, newProjectName);
-            ps.setInt(2, projectid);
+            ps.setString(2, enddate);
+            ps.setInt(3, projectid);
             ps.executeUpdate();
 
         } catch (SQLException ex) {

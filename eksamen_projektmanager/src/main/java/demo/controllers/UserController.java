@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,16 +115,21 @@ public class UserController {
         }
     }
 
-    @PostMapping("changeProjectName")
-    public String changeProjectName(WebRequest request) throws ProjectManagerException {
+    @PostMapping("editProject")
+    public String editProject(WebRequest request) throws ProjectManagerException {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
         //Retrieve values from HTML form via WebRequest
         String newProjectName = request.getParameter("projectName");
+        String enddateTemp = request.getParameter("enddate");
 
         project.setProjectName(newProjectName);
 
-        userService.changeProjectName(project.getProjectid(), newProjectName);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate enddate = LocalDate.parse(enddateTemp, formatter);
+        project.setExpEndDate(enddate);
+
+        userService.editProject(project.getProjectid(), newProjectName, enddateTemp);
 
         return "redirect:/projekt";
     }
@@ -138,8 +144,8 @@ public class UserController {
         return "redirect:/projekt";
     }
 
-    @PostMapping("editProject")
-    public String editProject(WebRequest request) throws ProjectManagerException {
+    @PostMapping("editTask")
+    public String editTask(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
         String taskName = request.getParameter("taskName");
         int timeEstimate = Integer.parseInt(request.getParameter("timeEstimate"));

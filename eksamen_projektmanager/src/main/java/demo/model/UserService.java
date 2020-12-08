@@ -90,7 +90,15 @@ public class UserService {
         return facade.getTask(taskid);
     }
 
-    public List<User> getTeams(int teamid) throws ProjectManagerException {
-        return facade.getTeams(teamid);
+    public List<User> getTeam(int teamid) throws ProjectManagerException {
+        return facade.getTeam(teamid);
+    }
+
+    public int getUserTeamId(int userid) throws ProjectManagerException {
+        return facade.getUserTeamId(userid);
+    }
+
+    public String getTeamName(int teamid) throws ProjectManagerException{
+            return facade.getTeamName(teamid);
     }
 }

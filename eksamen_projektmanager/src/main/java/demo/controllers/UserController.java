@@ -204,7 +204,6 @@ public class UserController {
         SubProject subProject = null;
         String taskName = request.getParameter("taskname");
         int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
-        System.out.println(subprojectid);
 
         for (int i = 0; i < subProjects.size(); i++) {
             if (subProjects.get(i).getSubProjectID() == subprojectid) {
@@ -229,8 +228,22 @@ public class UserController {
     public String tidsforbrug(Model model) {
         return "tidsforbrug";
     }
+
     @GetMapping("/hold")
-    public String hold(Model model) {
+    public String hold(WebRequest request, Model model) throws ProjectManagerException {
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+
+        int userTeamId = userService.getUserTeamId(user.getUserid());
+
+        List<User> teamUsers = userService.getTeam(userTeamId);
+
+        String teamName = userService.getTeamName(userTeamId);
+
+        Team team = new Team(teamName,teamUsers);
+
+        model.addAttribute("teamUsers", teamUsers);
+        model.addAttribute("team",team);
+
         return "hold";
     }
 

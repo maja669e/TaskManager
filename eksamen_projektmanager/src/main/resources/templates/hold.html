@@ -24,6 +24,19 @@
 <body>
 
 <div th:replace="fragments/header.html :: header"></div>
+<br>
+<br>
+<br>
+<div th:object="${team}">
+    <div class="overskrift">
+            <h1 th:text="*{teamName}"></h1>
+    </div>
+</div>
+<hr>
+<tr th:each="teamUser:${teamUsers}">
+    <p th:text="${teamUser.userName}"></p>
+</tr>
+
 
 <div th:replace="fragments/footer.html :: footer"></div>
 

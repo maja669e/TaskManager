@@ -110,7 +110,7 @@ public class UserMapper {
                 String endDateTemp = rs.getString("startdate");
                 LocalDate endDate = LocalDate.parse(endDateTemp, formatter);
 
-                Project project = new Project(projectname,startDate, endDate, subProjects);
+                Project project = new Project(projectname, startDate, endDate, subProjects);
                 project.setProjectid(projectid);
 
                 if (userid == id) {
@@ -174,7 +174,7 @@ public class UserMapper {
                 String endDateTemp = rs.getString("enddate");
                 LocalDate endDate = LocalDate.parse(endDateTemp, formatter);
 
-                Project project = new Project(projectName,startDate, endDate, subProjects);
+                Project project = new Project(projectName, startDate, endDate, subProjects);
                 project.setProjectid(projectid);
 
                 return project;
@@ -448,7 +448,27 @@ public class UserMapper {
         }
     }
 
-    public List<User> getTeams(int teamid) throws ProjectManagerException {
+    public int getUserTeamId(int userid) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM teamrelations WHERE userid = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, userid);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int teamid = rs.getInt("teamid");
+                return teamid;
+
+            } else {
+                throw new ProjectManagerException("Kunne ikke finde bruger team id");
+            }
+        } catch (SQLException | ProjectManagerException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
+
+    public List<User> getTeam(int teamid) throws ProjectManagerException {
         List<User> team = new ArrayList<>();
 
         try {
@@ -456,17 +476,39 @@ public class UserMapper {
             String SQL = "SELECT * FROM users LEFT JOIN teamrelations ON users.userid = teamrelations.userid WHERE teamid = ?";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, teamid);
-            ps.executeUpdate();
-
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()) {
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-            }
+            if (rs.next()) {
+                String name = rs.getString("name");
 
-            return team;
-        } catch (SQLException ex) {
+                User user = new User(name);
+                team.add(user);
+
+            } else {
+                throw new ProjectManagerException("kunne ikke tilføje bruger til hold");
+            }
+        } catch (SQLException | ProjectManagerException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+        return team;
+    }
+
+    public String getTeamName(int teamid) throws ProjectManagerException{
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM teams WHERE teamid = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, teamid);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String teamname = rs.getString("teamname");
+
+                return teamname;
+            } else {
+                throw new ProjectManagerException("kunne ikke finde hold navn");
+            }
+        } catch (SQLException | ProjectManagerException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
     }

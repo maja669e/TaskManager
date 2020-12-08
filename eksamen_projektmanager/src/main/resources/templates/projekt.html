@@ -194,7 +194,7 @@
                                 <br>
                                 <label><b>Deadline</b></label>
                                 <input id="deadline" type="date"
-                                       th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" max="2100-01-01"
+                                       th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}" th:max="${#temporals.format(project.getExpEndDate(), 'yyyy-MM-dd')}"
                                        name="deadline">
                                 <div class="clearfix">
                                     <button type="button"

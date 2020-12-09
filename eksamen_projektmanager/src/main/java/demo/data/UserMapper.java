@@ -551,4 +551,33 @@ public class UserMapper {
             throw new ProjectManagerException(ex.getMessage());
         }
     }
+
+    public List<User> getTaskMembers(int taskid) throws ProjectManagerException{
+        List<User> taskMembers = new ArrayList<>();
+            try {
+            Connection con = DBManager.getConnection();
+
+            String SQL = "SELECT * FROM taskrelations INNER JOIN users ON taskrelations.userid = users.userid WHERE taskid = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setInt(1, taskid);
+            ResultSet rs = ps.executeQuery();
+            // Get data from database.
+            while (rs.next()) {
+
+                int userid = rs.getInt("userid");
+                String username = rs.getString("username");
+                String name = rs.getString("name");
+
+                User user = new User(username,name);
+                user.setUserid(userid);
+
+                taskMembers.add(user);
+            }
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+
+        return taskMembers;
+    }
 }

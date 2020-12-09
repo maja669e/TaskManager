@@ -265,11 +265,14 @@ public class UserController {
             int taskid = Integer.parseInt(request.getParameter("taskid"));
 
             Task task = userService.getTask(taskid);
+            task.setTaskMembers(userService.getTaskMembers(taskid));
             User taskUser = userService.getUser(userName);
 
-            userService.addMemberToTask(taskid, taskUser.getUserid());
+            if(!task.getTaskMembers().contains(taskUser)){
+                userService.addMemberToTask(taskid, taskUser.getUserid());
+            }
 
-            task.getTaskMembers().add(taskUser);
+            System.out.println(task);
 
             model.addAttribute("team", team);
 

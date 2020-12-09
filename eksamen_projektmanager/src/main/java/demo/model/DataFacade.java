@@ -24,4 +24,5 @@ public interface DataFacade {
     public int getUserTeamId(int userid) throws ProjectManagerException;
     public User getUser(String userName) throws ProjectManagerException;
     public void addMemberToTask(int taskid, int userid) throws ProjectManagerException;
+    public List<User> getTaskMembers(int taskid) throws ProjectManagerException;
 }

@@ -10,7 +10,7 @@ public class Task {
     private String taskName;
     private int taskId;
     private int taskStatus = 2; //Default set to task not started
-    private List<User> taskMembers = new ArrayList<>();
+    private List<User> taskMembers;
 
     public Task(LocalDate deadLine, int timeEstimation, String taskName) {
         this.deadLine = deadLine;

@@ -103,6 +103,14 @@ public class UserController {
                 }
             }
 
+            //set task members for all subprojects
+            for (int i = 0; i < subProjects.size(); i++) {
+                for (int j = 0; j < subProjects.get(i).getTasks().size(); j++) {
+                    subProjects.get(i).getTasks().get(j).setTaskMembers(userService.getTaskMembers(j));
+                    System.out.println(subProjects.get(i).getTasks().get(j));
+                }
+            }
+
             int projectTotalTimeConsumtion = timeCalculator.calProjectTotalTime(project);
             int workHoursPerDay = timeCalculator.calWorkHoursPerDay(project);
             int userTeamId = userService.getUserTeamId(user.getUserid());

@@ -16,8 +16,9 @@ public class UserService {
     public Project addProject(int userid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
         String projectName = "nyt projekt";
+        LocalDate localDate = LocalDate.now();
 
-        Project project = new Project(projectName, null, null, subProjects);
+        Project project = new Project(projectName, localDate, localDate, subProjects);
 
         facade.addProject(project, userid);
 

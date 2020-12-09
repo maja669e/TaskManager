@@ -84,4 +84,8 @@ public class DataFacadeImpl implements DataFacade {
     public User getUser(String userName) throws ProjectManagerException {
         return userMapper.getUser(userName);
     }
+
+    public void addMemberToTask(int taskid, int userid) throws ProjectManagerException {
+        userMapper.addMemberToTask(taskid, userid);
+    }
 }

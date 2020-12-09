@@ -267,6 +267,8 @@ public class UserController {
             Task task = userService.getTask(taskid);
             User taskUser = userService.getUser(userName);
 
+            userService.addMemberToTask(taskid, taskUser.getUserid());
+
             task.getTaskMembers().add(taskUser);
 
             model.addAttribute("team", team);

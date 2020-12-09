@@ -523,4 +523,32 @@ public class UserMapper {
         throw new ProjectManagerException(ex.getMessage());
     }
     }
+
+    public void addMemberToTask(int taskid, int userid) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM taskrelations";
+            PreparedStatement ps = con.prepareStatement(SQL);
+
+            ResultSet rs = ps.executeQuery();
+            int temp = 0;
+
+            while (rs.next()) {
+                temp = rs.getInt("taskrelationid");
+            }
+
+            int taskrelationid = temp + 1;
+            //--------------------------------------------------//
+
+            String SQL2 = "INSERT INTO taskrelations (taskrelationid, taskid, userid) VALUES (?,?,?)";
+            PreparedStatement ps2 = con.prepareStatement(SQL2);
+            ps2.setInt(1, taskrelationid);
+            ps2.setInt(2, taskid);
+            ps2.setInt(3, userid);
+            ps2.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
 }

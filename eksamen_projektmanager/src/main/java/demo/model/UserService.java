@@ -102,4 +102,8 @@ public class UserService {
     public User getUser(String userName) throws ProjectManagerException {
         return facade.getUser(userName);
     }
+
+    public void addMemberToTask(int taskid, int userid) throws ProjectManagerException {
+        facade.addMemberToTask(taskid,userid);
+    }
 }

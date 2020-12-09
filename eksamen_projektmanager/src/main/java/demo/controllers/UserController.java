@@ -104,9 +104,11 @@ public class UserController {
             }
 
             //set task members for all subprojects
+            int taskid;
             for (int i = 0; i < subProjects.size(); i++) {
                 for (int j = 0; j < subProjects.get(i).getTasks().size(); j++) {
-                    subProjects.get(i).getTasks().get(j).setTaskMembers(userService.getTaskMembers(j));
+                    taskid = subProjects.get(i).getTasks().get(j).getTaskId();
+                    subProjects.get(i).getTasks().get(j).setTaskMembers(userService.getTaskMembers(taskid));
                     System.out.println(subProjects.get(i).getTasks().get(j));
                 }
             }

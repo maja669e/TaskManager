@@ -109,7 +109,6 @@ public class UserController {
                 for (int j = 0; j < subProjects.get(i).getTasks().size(); j++) {
                     taskid = subProjects.get(i).getTasks().get(j).getTaskId();
                     subProjects.get(i).getTasks().get(j).setTaskMembers(userService.getTaskMembers(taskid));
-                    System.out.println(subProjects.get(i).getTasks().get(j));
                 }
             }
 
@@ -239,8 +238,23 @@ public class UserController {
     }
 
     @GetMapping("/tidsforbrug")
-    public String tidsforbrug(Model model) {
-        return "tidsforbrug";
+    public String tidsforbrug(WebRequest request, Model model) throws ProjectManagerException {
+        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        //Checks if user is logged in
+        if (user == null) {
+            return "redirect:/";
+        } else {
+            //Get all projects
+            List<Project> projects = userService.getProjects(user.getUserid());
+            model.addAttribute("projects", projects);
+            Project project = userService.getSingleProject(1);
+
+            int projectTimeUser = timeCalculator.calUserWorkHoursOnProject(project,user.getUserid());
+
+            model.addAttribute("projectTimeUser", projectTimeUser);
+
+            return "tidsforbrug";
+        }
     }
 
     @GetMapping("/hold")

@@ -24,6 +24,30 @@
 <body>
 
 <div th:replace="fragments/header.html :: header"></div>
+<br>
+<br>
+<br>
+<div>
+    <div class="overskrift">
+        <h1>Tidsforbrug</h1>
+    </div>
+</div>
+<hr>
+
+<table style="width:80%">
+    <tr>
+        <th>Projekt navn</th>
+        <th>Antal timer brugt</th>
+    </tr>
+    <tr th:each="project:${projects}">
+        <td>
+            <p th:text="${project.projectName}"></p>
+        </td>
+        <td>
+            <p th:text="${projectTimeUser}"></p>
+        </td>
+    </tr>
+</table>
 
 <div th:replace="fragments/footer.html :: footer"></div>
 

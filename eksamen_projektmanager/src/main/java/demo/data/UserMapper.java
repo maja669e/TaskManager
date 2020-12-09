@@ -499,4 +499,28 @@ public class UserMapper {
         }
         return team;
     }
+
+    public User getUser(String userName) throws ProjectManagerException {
+        try {
+        Connection con = DBManager.getConnection();
+        String SQL = " SELECT * FROM users WHERE username=?";
+        PreparedStatement ps = con.prepareStatement(SQL);
+        ps.setString(1, userName);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            int userid = rs.getInt("userid");
+            String name = rs.getString("name");
+
+            User user = new User(userName, name);
+            user.setUserid(userid);
+
+            return user;
+        } else {
+            throw new ProjectManagerException("kunne ikke finde bruger");
+        }
+    } catch (SQLException | ProjectManagerException ex) {
+        throw new ProjectManagerException(ex.getMessage());
+    }
+    }
 }

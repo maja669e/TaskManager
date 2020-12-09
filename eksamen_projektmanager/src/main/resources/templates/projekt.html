@@ -176,14 +176,14 @@
               title="Close Modal">&times;</span>
                     <div class="modal-content">
 
-                       <!-- <form name="addMemberToTask" th:action="/addMemberToTask" method="post"></form>-->
+                       <form name="addMemberToTask" action="/addMemberToTask" method="post">
 
                         <div class="container_edit_subproject_name">
                             <h2>Tilføj medlem til opgave</h2>
 
-                            <select>
+                            <select name="username">
                                 <option value="default">Vælg et medlem</option>
-                                <option th:each="teamUser:${team.team}" th:value="${teamUser.userName}"
+                                <option th:each="teamUser:${team.team}" th:name="userName" th:value="${teamUser.userName}"
                                         th:text="${teamUser.userName}"/>
                             </select>
 
@@ -191,11 +191,17 @@
                                 <button type="button" onclick="document.getElementById('id04').style.display='none'"
                                         class="cancelbtn">Tilbage
                                 </button>
-                                <button class="editbtn" type="submit">Tilføj</button>
+                                <button th:name="taskid" th:value="${task.taskId}" class="editbtn" type="submit">Tilføj</button>
                             </div>
                         </div>
-
+                       </form>
                     </div>
+                </div>
+                <div>
+                <span th:each="taskMember : ${task.taskMembers}">
+                    <span th:text="${taskMember.name}"></span>
+                    <span>, </span>
+                </span>
                 </div>
             </td>
             <td>

@@ -258,8 +258,16 @@ public class UserController {
             return "redirect:/";
         } else {
             int userTeamId = userService.getUserTeamId(user.getUserid());
-
             Team team = userService.getTeam(userTeamId);
+
+            //Retrieve values from HTML form via WebRequest
+            String userName = request.getParameter("username");
+            int taskid = Integer.parseInt(request.getParameter("taskid"));
+
+            Task task = userService.getTask(taskid);
+            User taskUser = userService.getUser(userName);
+
+            task.getTaskMembers().add(taskUser);
 
             model.addAttribute("team", team);
 

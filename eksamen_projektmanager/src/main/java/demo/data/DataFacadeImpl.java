@@ -81,4 +81,7 @@ public class DataFacadeImpl implements DataFacade {
     public int getUserTeamId(int userid) throws ProjectManagerException {
         return userMapper.getUserTeamId(userid);
     }
+    public User getUser(String userName) throws ProjectManagerException {
+        return userMapper.getUser(userName);
+    }
 }

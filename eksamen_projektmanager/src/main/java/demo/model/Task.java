@@ -1,6 +1,8 @@
 package demo.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Task {
     private LocalDate deadLine;
@@ -8,6 +10,7 @@ public class Task {
     private String taskName;
     private int taskId;
     private int taskStatus = 2; //Default set to task not started
+    private List<User> taskMembers = new ArrayList<>();
 
     public Task(LocalDate deadLine, int timeEstimation, String taskName) {
         this.deadLine = deadLine;
@@ -58,12 +61,23 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
+    public List<User> getTaskMembers() {
+        return taskMembers;
+    }
+
+    public void setTaskMembers(List<User> taskMembers) {
+        this.taskMembers = taskMembers;
+    }
+
     @Override
     public String toString() {
         return "Task{" +
                 "deadLine=" + deadLine +
                 ", timeEstimation=" + timeEstimation +
                 ", taskName='" + taskName + '\'' +
+                ", taskId=" + taskId +
+                ", taskStatus=" + taskStatus +
+                ", taskMembers=" + taskMembers +
                 '}';
     }
 }

@@ -92,4 +92,8 @@ public class DataFacadeImpl implements DataFacade {
     public List<User> getTaskMembers(int taskid) throws ProjectManagerException{
         return userMapper.getTaskMembers(taskid);
     }
+
+    public void deleteMemberFromTask(int taskid, int userid) throws ProjectManagerException {
+        userMapper.deleteMemberFromTask(taskid, userid);
+    }
 }

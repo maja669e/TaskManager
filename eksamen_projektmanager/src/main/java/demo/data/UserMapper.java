@@ -580,4 +580,19 @@ public class UserMapper {
 
         return taskMembers;
     }
+
+    public void deleteMemberFromTask(int taskid, int userid) throws ProjectManagerException {
+        try {
+            Connection con = DBManager.getConnection();
+
+            String SQL1 = "DELETE FROM taskrelations WHERE taskid = ? AND userid = ?";
+            PreparedStatement ps1 = con.prepareStatement(SQL1);
+            ps1.setInt(1, taskid);
+            ps1.setInt(2, userid);
+            ps1.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+    }
 }

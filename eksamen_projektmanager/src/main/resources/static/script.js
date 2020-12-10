@@ -5,6 +5,7 @@ var modal = document.getElementById('id01');
 var modal = document.getElementById('id02');
 var modal = document.getElementById('id03');
 var modal = document.getElementById('id04');
+var modal = document.getElementById('id05');
 
 function burgerMenu() {
     if (burger.className === "topnav") {

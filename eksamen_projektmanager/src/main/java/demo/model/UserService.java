@@ -110,4 +110,8 @@ public class UserService {
     public List<User> getTaskMembers(int taskid) throws ProjectManagerException{
         return facade.getTaskMembers(taskid);
     }
+
+    public void deleteMemberFromTask(int taskid, int userid) throws ProjectManagerException {
+        facade.deleteMemberFromTask(taskid, userid);
+    }
 }

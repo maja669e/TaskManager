@@ -322,9 +322,6 @@ public class UserController {
         if (user == null) {
             return "redirect:/";
         } else {
-            int userTeamId = userService.getUserTeamId(user.getUserid());
-            Team team = userService.getTeam(userTeamId);
-
             //Retrieve values from HTML form via WebRequest
             String userName = request.getParameter("username");
             int taskid = Integer.parseInt(request.getParameter("taskid"));
@@ -339,18 +336,26 @@ public class UserController {
                 hashMap.put(task.getTaskMembers().get(i).getUserName(), task.getTaskMembers().get(i));
             }
 
-            System.out.println(hashMap);
-
             if(!hashMap.containsKey(userName)){
                 userService.addMemberToTask(taskid, taskUser.getUserid());
             }
 
-            System.out.println(task);
-
-            model.addAttribute("team", team);
-
             return "redirect:/projekt";
         }
+    }
+
+    @PostMapping("deleteTaskMemberFromTask")
+    public String deleteTaskMemberFromTask(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
+        int userid = Integer.parseInt(request.getParameter("userid"));
+        int taskid = Integer.parseInt(request.getParameter("taskid"));
+
+        System.out.println(userid);
+        System.out.println(taskid);
+
+        userService.deleteMemberFromTask(taskid,userid);
+
+        return "redirect:/projekt";
     }
 
     private void setSessionProject(WebRequest request, Project project) {

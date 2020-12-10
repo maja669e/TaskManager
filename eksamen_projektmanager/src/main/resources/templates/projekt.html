@@ -198,6 +198,36 @@
                     </div>
                 </div>
                 <div>
+                    <button class="addMember" onclick="document.getElementById('id05').style.display='block'">-</button>
+                </div>
+                <div id="id05" class="modal">
+                    <span onclick="document.getElementById('id05').style.display='none'" class="close"
+                          title="Close Modal">&times;</span>
+                    <div class="modal-content">
+
+                        <form name="deleteTaskMemberFromTask" action="/deleteTaskMemberFromTask" method="post">
+
+                            <div class="container_edit_subproject_name">
+                                <h2>Fjern medlem fra opgave</h2>
+
+                                <select name="userid">
+                                    <option value="default">Vælg et medlem</option>
+                                    <option th:each="taskUser:${task.taskMembers}" th:name="userid" th:value="${taskUser.userid}"
+                                            th:text="${taskUser.userName} + ' (' + ${taskUser.name} +') '"/>
+                                </select>
+
+                                <div class="clearfix">
+                                    <button type="button" onclick="document.getElementById('id05').style.display='none'"
+                                            class="cancelbtn">Tilbage
+                                    </button>
+                                    <button th:name="taskid" th:value="${task.taskId}" class="editbtn" type="submit">Fjern</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div>
                 <span th:each="taskUsers : ${task.taskMembers}">
                     <span th:text="${taskUsers.name}"></span>
                     <span></span>

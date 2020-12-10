@@ -12,7 +12,9 @@ import org.springframework.web.context.request.WebRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -246,12 +248,51 @@ public class UserController {
         } else {
             //Get all projects
             List<Project> projects = userService.getProjects(user.getUserid());
+
+            int subprojectid;
+            int taskid;
+
+            //Populate project with data from db
+            for (Project project:projects) {
+                List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
+                project.setSubProjects(subProjects);
+
+                for (int i = 0; i < subProjects.size(); i++) {
+                    subprojectid = subProjects.get(i).getSubProjectID();
+                    if (subProjects.get(i).getSubProjectID() == subprojectid) {
+                        subProjects.get(i).setTasks(userService.getTasks(subprojectid));
+                    }
+                }
+
+                for (int i = 0; i < subProjects.size(); i++) {
+                    for (int j = 0; j < subProjects.get(i).getTasks().size(); j++) {
+                        taskid = subProjects.get(i).getTasks().get(j).getTaskId();
+                        subProjects.get(i).getTasks().get(j).setTaskMembers(userService.getTaskMembers(taskid));
+                    }
+                }
+            }
+
+            int projectTimeUser;
+            List<Integer> timeSpendOnProjects = new ArrayList<>();
+            for (Project project: projects) {
+                projectTimeUser= timeCalculator.calUserWorkHoursOnProject(project,user);
+                timeSpendOnProjects.add(projectTimeUser);
+            }
+
+            Map<String, Integer> otherMap = new HashMap<>();
+
+            for (int i = 0; i < projects.size(); i++) {
+                otherMap.put(projects.get(i).getProjectName(), timeSpendOnProjects.get(i));
+            }
+
+            List<String> keys = new ArrayList<>();
+            for (int i = 0; i < projects.size(); i++) {
+                keys.add((projects.get(i).getProjectName()));
+            }
+
+            model.addAttribute("map", keys);
+            model.addAttribute("otherMap", otherMap);
             model.addAttribute("projects", projects);
-            Project project = userService.getSingleProject(1);
-
-            int projectTimeUser = timeCalculator.calUserWorkHoursOnProject(project,user.getUserid());
-
-            model.addAttribute("projectTimeUser", projectTimeUser);
 
             return "tidsforbrug";
         }
@@ -292,7 +333,15 @@ public class UserController {
             task.setTaskMembers(userService.getTaskMembers(taskid));
             User taskUser = userService.getUser(userName);
 
-            if(!task.getTaskMembers().contains(taskUser)){
+            HashMap<String, User> hashMap = new HashMap<>();
+
+            for (int i = 0; i < task.getTaskMembers().size(); i++) {
+                hashMap.put(task.getTaskMembers().get(i).getUserName(), task.getTaskMembers().get(i));
+            }
+
+            System.out.println(hashMap);
+
+            if(!hashMap.containsKey(userName)){
                 userService.addMemberToTask(taskid, taskUser.getUserid());
             }
 

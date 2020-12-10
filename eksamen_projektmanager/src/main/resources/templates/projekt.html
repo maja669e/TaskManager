@@ -184,7 +184,7 @@
                             <select name="username">
                                 <option value="default">Vælg et medlem</option>
                                 <option th:each="teamUser:${team.team}" th:name="userName" th:value="${teamUser.userName}"
-                                        th:text="${teamUser.userName}"/>
+                                        th:text="${teamUser.userName} + ' (' + ${teamUser.name} +') '"/>
                             </select>
 
                             <div class="clearfix">

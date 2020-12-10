@@ -39,12 +39,12 @@
         <th>Projekt navn</th>
         <th>Antal timer brugt</th>
     </tr>
-    <tr th:each="project:${projects}">
+    <tr th:each="key:${map}">
         <td>
-            <p th:text="${project.projectName}"></p>
+            <p th:text="${key}"></p>
         </td>
         <td>
-            <p th:text="${projectTimeUser}"></p>
+            <p th:text="${otherMap.get(key)}"></p>
         </td>
     </tr>
 </table>

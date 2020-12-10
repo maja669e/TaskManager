@@ -43,12 +43,15 @@ public class TimeCalculator {
         return workHoursPerDay;
     }
 
-    public int calUserWorkHoursOnProject (Project project, int userid){
-
+    public int calUserWorkHoursOnProject (Project project, User user){
         int sum =0;
         for (int i = 0; i < project.getSubProjects().size(); i++) {
-            if(project.getSubProjects().get(i).getTasks().get(i).getTaskMembers().get(i).getUserid() == userid){
-                sum += project.getSubProjects().get(i).getTasks().get(i).getTimeEstimation();
+            for (int j = 0; j < project.getSubProjects().get(i).getTasks().size(); j++) {
+                for (int k = 0; k < project.getSubProjects().get(i).getTasks().get(j).getTaskMembers().size(); k++) {
+                    if(project.getSubProjects().get(i).getTasks().get(j).getTaskMembers().get(k).getUserid() == user.getUserid()){
+                        sum += project.getSubProjects().get(i).getTasks().get(j).getTimeEstimation();
+                    }
+                }
             }
         }
 

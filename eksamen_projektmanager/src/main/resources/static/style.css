@@ -516,6 +516,9 @@ button:hover {
     cursor: pointer;
     opacity: 0.7;
 }
+.names {
+    display: grid;
+}
 
 /*-------Footer-------*/
 hr {

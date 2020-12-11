@@ -18,6 +18,10 @@ public class Project {
         this.subProjects = subProjects;
     }
 
+    public Project() {
+
+    }
+
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }

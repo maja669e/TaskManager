@@ -86,7 +86,6 @@ public class TaskMapper {
         }
     }
 
-
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();

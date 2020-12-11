@@ -1,8 +1,6 @@
 package demo.data;
 
-import demo.model.Project;
-import demo.model.ProjectManagerException;
-import demo.model.SubProject;
+import demo.model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -106,31 +104,78 @@ public class ProjectMapper {
 
     public Project getSingleProject(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
-
+        List<Task> tasks = new ArrayList<>();
+        List<User> taskMembers = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = " SELECT * FROM projects WHERE projectid=?";
+            String SQL = "SELECT * FROM projects join subprojects ON projects.projectid = subprojects.projectid " +
+            "join tasks ON subprojects.subprojectid = tasks.subprojectid " +
+            "left join taskrelations ON tasks.taskid = taskrelations.taskid " +
+            "left join users ON taskrelations.userid = users.userid where projects.projectid = ? ";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, projectid);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                String projectName = rs.getString("projectname");
+            Project project = new Project();
 
+            while (rs.next()) {
+                //Formatter
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                //Project
+                String projectName = rs.getString("projectname");
                 String startDateTemp = rs.getString("startdate");
                 LocalDate startDate = LocalDate.parse(startDateTemp, formatter);
 
                 String endDateTemp = rs.getString("enddate");
                 LocalDate endDate = LocalDate.parse(endDateTemp, formatter);
 
-                Project project = new Project(projectName, startDate, endDate, subProjects);
+                project.setProjectName(projectName);
+                project.setExpStartDate(startDate);
+                project.setExpEndDate(endDate);
                 project.setProjectid(projectid);
 
-                return project;
-            } else {
-                throw new ProjectManagerException("Kunne ikke vælge projekt");
+                //Subproject
+                int subprojectid = rs.getInt("subprojectid");
+                String subprojectName = rs.getString("subprojectname");
+
+                SubProject subProject = new SubProject(subprojectName);
+
+                if(!subProjects.contains(subProject)){
+                    subProject.setSubProjectID(subprojectid);
+                    subProjects.add(subProject);
+                }
+
+                //Task
+                String temp = rs.getString("deadline");
+                LocalDate deadline = LocalDate.parse(temp, formatter);
+
+                int taskid = rs.getInt("taskid");
+                String taskname = rs.getString("taskname");
+                int timeEstimation = rs.getInt("timeestimate");
+                int taskstatus = rs.getInt("taskstatus");
+
+                //Task User
+                int userid = rs.getInt("userid");
+                String username = rs.getString("username");
+                String name = rs.getString("name");
+
+                User user = new User(username,name);
+                user.setUserid(userid);
+
+                taskMembers.add(user);
+
+                Task task = new Task(deadline, timeEstimation, taskname);
+                task.setTaskId(taskid);
+                task.setTaskStatus(taskstatus);
+
+                if(!tasks.contains(task)){
+                    tasks.add(task);
+                }
+
             }
+            return project;
+
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }

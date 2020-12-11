@@ -3,6 +3,7 @@ package demo.controllers;
 import demo.data.DataFacadeImpl;
 import demo.model.*;
 import demo.service.TaskService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -10,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.HashMap;
 import java.util.List;
 
+@Controller
 public class TaskController {
 
     private TaskService taskService = new TaskService(new DataFacadeImpl());

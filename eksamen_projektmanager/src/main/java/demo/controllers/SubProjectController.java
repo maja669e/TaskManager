@@ -6,12 +6,14 @@ import demo.model.ProjectManagerException;
 import demo.model.Task;
 import demo.service.SubProjectService;
 import demo.service.UserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Controller
 public class SubProjectController {
 
     private SubProjectService subProjectService = new SubProjectService(new DataFacadeImpl());
@@ -29,7 +31,7 @@ public class SubProjectController {
     @PostMapping("addSubProject")
     public String addSubProject(WebRequest request) throws ProjectManagerException {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks = new ArrayList<>(); //TODO: fejl?
         //Retrieve values from HTML form via WebRequest
 
         subProjectService.addSubProject(project, tasks);

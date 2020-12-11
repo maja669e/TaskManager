@@ -110,7 +110,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `projektello`.`taskrelations` (
   `taskrelationid` INT NOT NULL,
   `taskid` INT NOT NULL,
-  `userid` INT NOT NULL,
+  `userid` INT NULL DEFAULT NULL,
   PRIMARY KEY (`taskrelationid`),
   UNIQUE INDEX `taskrelationid_UNIQUE` (`taskrelationid` ASC) VISIBLE,
   INDEX `taskid_idx` (`taskid` ASC) VISIBLE,

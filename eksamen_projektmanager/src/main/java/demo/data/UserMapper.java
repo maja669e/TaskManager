@@ -60,7 +60,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException("Kunne ikke tilføje projekt");
         }
-    }
+    } //ProjectMapper
 
     public User Login(String userName, String password) throws ProjectManagerException {
         try {
@@ -84,7 +84,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //UserMapper
 
     public List<Project> getProjects(int userid) throws ProjectManagerException {
         List<Project> projects = new ArrayList<>();
@@ -122,7 +122,7 @@ public class UserMapper {
             throw new ProjectManagerException(ex.getMessage());
         }
         return projects;
-    }
+    } //ProjectMapper
 
     public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
@@ -152,7 +152,7 @@ public class UserMapper {
             throw new ProjectManagerException(ex.getMessage());
         }
         return subProjects;
-    }
+    } //SubProjectMapper
 
     public Project getSingleProject(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
@@ -184,7 +184,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //ProjectMapper
 
     public void addSubProject(Project project) throws ProjectManagerException {
         try {
@@ -210,7 +210,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //SubProjectMapper
 
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
         try {
@@ -225,7 +225,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //ProjectMapper
 
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
         try {
@@ -238,7 +238,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //SubProjectMapper
 
     public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
         List<Task> tasks = new ArrayList<>();
@@ -278,7 +278,7 @@ public class UserMapper {
         }
 
         return tasks;
-    }
+    } //TaskMapper
 
     public Task getTask(int taskid) throws ProjectManagerException {
         try {
@@ -311,7 +311,7 @@ public class UserMapper {
         } catch (SQLException | ProjectManagerException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //TaskMapper
 
     public void deleteSubproject(int subprojectid) throws ProjectManagerException {
         try {
@@ -335,7 +335,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //SubProjectMapper
 
     public void deleteProject(int projectid) throws ProjectManagerException {
         try {
@@ -369,7 +369,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //ProjectMapper
 
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
         try {
@@ -385,7 +385,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //TaskMapper
 
     public void setTaskstatus(int taskid, int taskstatus) throws ProjectManagerException {
         try {
@@ -399,7 +399,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //TaskMapper
 
     public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
         try {
@@ -427,7 +427,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //TaskMapper
 
     public void deleteTask(int taskid) throws ProjectManagerException {
         try {
@@ -446,7 +446,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //TaskMapper
 
     public int getUserTeamId(int userid) throws ProjectManagerException {
         try {
@@ -466,7 +466,7 @@ public class UserMapper {
         } catch (SQLException | ProjectManagerException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //UserMapper
 
     public Team getTeam(int teamid) throws ProjectManagerException {
         List<User> teamUsers = new ArrayList<>();
@@ -498,7 +498,7 @@ public class UserMapper {
             throw new ProjectManagerException(ex.getMessage());
         }
         return team;
-    }
+    } //UserMapper
 
     public User getUser(String userName) throws ProjectManagerException {
         try {
@@ -522,7 +522,7 @@ public class UserMapper {
     } catch (SQLException | ProjectManagerException ex) {
         throw new ProjectManagerException(ex.getMessage());
     }
-    }
+    } //UserMapper
 
     public void addMemberToTask(int taskid, int userid) throws ProjectManagerException {
         try {
@@ -550,7 +550,7 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //TaskMapper
 
     public List<User> getTaskMembers(int taskid) throws ProjectManagerException{
         List<User> taskMembers = new ArrayList<>();
@@ -579,7 +579,7 @@ public class UserMapper {
         }
 
         return taskMembers;
-    }
+    } //TaskMapper
 
     public void deleteMemberFromTask(int taskid, int userid) throws ProjectManagerException {
         try {
@@ -594,5 +594,5 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
+    } //TaskMapper
 }

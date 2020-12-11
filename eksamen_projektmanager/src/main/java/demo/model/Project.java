@@ -107,7 +107,6 @@ public class Project {
         return sum;
     }
 
-
     @Override
     public String toString() {
         return "Project{" +

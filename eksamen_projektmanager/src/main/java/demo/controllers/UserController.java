@@ -11,12 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
 @Controller
 public class UserController {
 
@@ -64,11 +58,11 @@ public class UserController {
             return "redirect:/";
         } else {
             //Get all projects
-            List<Project> projects = projectService.getProjects(user.getUserid());
+            //List<Project> projects = projectService.getProjects(user.getUserid());
 
             int subprojectid;
             int taskid;
-
+/*
             //Populate project with data from db
             for (Project project:projects) {
                 List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
@@ -88,6 +82,8 @@ public class UserController {
                     }
                 }
             }
+
+
 
             int projectTimeUser;
             List<Integer> timeSpendOnProjects = new ArrayList<>();
@@ -110,7 +106,7 @@ public class UserController {
             model.addAttribute("map", keys);
             model.addAttribute("otherMap", otherMap);
             model.addAttribute("projects", projects);
-
+ */
             return "tidsforbrug";
         }
     }

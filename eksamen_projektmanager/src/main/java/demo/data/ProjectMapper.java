@@ -105,7 +105,6 @@ public class ProjectMapper {
     public Project getSingleProject(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
         List<Task> tasks = new ArrayList<>();
-        List<User> taskMembers = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM projects join subprojects ON projects.projectid = subprojects.projectid " +
@@ -163,15 +162,18 @@ public class ProjectMapper {
                 User user = new User(username,name);
                 user.setUserid(userid);
 
-                taskMembers.add(user);
-
                 Task task = new Task(deadline, timeEstimation, taskname);
                 task.setTaskId(taskid);
                 task.setTaskStatus(taskstatus);
+                task.getTaskMembers().add(user);
 
-                if(!tasks.contains(task)){
-                    tasks.add(task);
+                for (Task taskObj: tasks) {
+                    if(taskObj.equals(task)){
+                        tasks.add(task);
+                    }
                 }
+
+                subProject.getTasks().add(task);
 
             }
             return project;

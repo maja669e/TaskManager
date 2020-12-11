@@ -94,38 +94,17 @@ public class ProjectController {
         if (user == null) {
             return "redirect:/";
         } else {
-            List<SubProject> subProjects = userService.getSubProjects(project.getProjectid());
-            project.setSubProjects(subProjects);
-
-            //TODO dette skulle måske være et andet sted
-            int subprojectid;
-            for (int i = 0; i < subProjects.size(); i++) {
-                subprojectid = subProjects.get(i).getSubProjectID();
-                if (subProjects.get(i).getSubProjectID() == subprojectid) {
-                    subProjects.get(i).setTasks(userService.getTasks(subprojectid));
-                }
-            }
-
-            //set task members for all subprojects
-            int taskid;
-            for (int i = 0; i < subProjects.size(); i++) {
-                for (int j = 0; j < subProjects.get(i).getTasks().size(); j++) {
-                    taskid = subProjects.get(i).getTasks().get(j).getTaskId();
-                    subProjects.get(i).getTasks().get(j).setTaskMembers(userService.getTaskMembers(taskid));
-                }
-            }
 
             int projectTotalTimeConsumtion = project.calProjectTotalTime();
             int workHoursPerDay = project.calWorkHoursPerDay();
-            int userTeamId = userService.getUserTeamId(user.getUserid());
+           // int userTeamId = userService.getUserTeamId(user.getUserid());
+            //Team team = userService.getTeam(userTeamId);
 
-            Team team = userService.getTeam(userTeamId);
-
-            model.addAttribute("team", team);
+            //model.addAttribute("team", team);
             model.addAttribute("workHoursPerDay", workHoursPerDay);
             model.addAttribute("currentDate", LocalDate.now());
             model.addAttribute("projectTime", projectTotalTimeConsumtion);
-            model.addAttribute("subProjects", subProjects);
+            //model.addAttribute("subProjects", subProjects);
             model.addAttribute("project", project);
             return "projekt";
         }

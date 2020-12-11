@@ -91,7 +91,7 @@
         <p>Du har ikke oprettet nogen delprojekter endnu.</p>
     </div>
 </div>
-<tr th:each="subProject:${subProjects}">
+<tr th:each="subProject:${project.subProjects}">
 
     <table style="width: 80%">
 
@@ -183,7 +183,7 @@
 
                             <select name="username">
                                 <option value="default">Vælg et medlem</option>
-                                <option th:each="teamUser:${team.team}" th:name="userName" th:value="${teamUser.userName}"
+                                <option th:each="teamUser:${task.taskMembers}" th:name="userName" th:value="${teamUser.userName}"
                                         th:text="${teamUser.userName} + ' (' + ${teamUser.name} +') '"/>
                             </select>
 

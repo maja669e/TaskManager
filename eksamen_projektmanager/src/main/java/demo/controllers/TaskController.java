@@ -29,7 +29,7 @@ public class TaskController {
 
             Task task = taskService.getTask(taskid);
             task.setTaskMembers(taskService.getTaskMembers(taskid));
-            User taskUser = taskService.getUser(userName);
+            //User taskUser = taskService.getUser(userName);
 
             HashMap<String, User> hashMap = new HashMap<>();
 
@@ -38,7 +38,7 @@ public class TaskController {
             }
 
             if(!hashMap.containsKey(userName)){
-                taskService.addMemberToTask(taskid, taskUser.getUserid());
+              //  taskService.addMemberToTask(taskid, taskUser.getUserid());
             }
 
             return "redirect:/projekt";
@@ -60,16 +60,18 @@ public class TaskController {
     public String addTask(WebRequest request, Model model) throws ProjectManagerException {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
-        List<SubProject> subProjects = taskService.getSubProjects(project.getProjectid());
+        //List<SubProject> subProjects = taskService.getSubProjects(project.getProjectid());
         SubProject subProject = null;
         String taskName = request.getParameter("taskname");
         int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
-
+/*
         for (int i = 0; i < subProjects.size(); i++) {
             if (subProjects.get(i).getSubProjectID() == subprojectid) {
                 subProject = subProjects.get(i);
             }
         }
+
+ */
 
         taskService.addTask(project, subProject, taskName);
 

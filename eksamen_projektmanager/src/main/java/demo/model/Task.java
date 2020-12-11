@@ -2,6 +2,7 @@ package demo.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 public class Task {
     private LocalDate deadLine;
@@ -66,6 +67,19 @@ public class Task {
 
     public void setTaskMembers(List<User> taskMembers) {
         this.taskMembers = taskMembers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task)) return false;
+        Task task = (Task) o;
+        return taskId == task.taskId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskId);
     }
 
     @Override

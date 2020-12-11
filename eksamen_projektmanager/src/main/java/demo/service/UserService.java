@@ -40,23 +40,8 @@ public class UserService {
         return facade.getSingleProject(projectid);
     }
 
-    public void addSubProject(Project project, List<Task> tasks) throws ProjectManagerException {
-        String subProjectName = "nyt delprojekt";
-        SubProject subProject = new SubProject(subProjectName, tasks);
-        project.getSubProjects().add(subProject);
-        facade.addSubProject(project, tasks);
-    }
-
-    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
-        return facade.getSubProjects(projectid);
-    }
-
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
         facade.editProject(projectid, newProjectName, enddate);
-    }
-
-    public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
-        facade.changeSubProjectName(subProjectid, newSubProjectName);
     }
 
     public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
@@ -67,10 +52,6 @@ public class UserService {
         Task task = new Task(taskName);
         subProject.getTasks().add(task);
         facade.addTask(project, subProject, taskName);
-    }
-
-    public void deleteSubproject(int subprojectid) throws ProjectManagerException {
-        facade.deleteSubproject(subprojectid);
     }
 
     public void deleteTask(int taskid) throws ProjectManagerException {

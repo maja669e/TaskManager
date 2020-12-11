@@ -7,6 +7,7 @@ import java.util.List;
 public class DataFacadeImpl implements DataFacade {
 
     private UserMapper userMapper = new UserMapper();
+    private SubProjectMapper subProjectMapper = new SubProjectMapper();
 
     public void addProject(Project project, int userid) throws ProjectManagerException {
         userMapper.addProject(project, userid);
@@ -25,11 +26,11 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public void addSubProject(Project project, List<Task> tasks) throws ProjectManagerException {
-        userMapper.addSubProject(project);
+        subProjectMapper.addSubProject(project);
     }
 
     public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
-        return userMapper.getSubProjects(projectid);
+        return subProjectMapper.getSubProjects(projectid);
     }
 
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
@@ -38,7 +39,7 @@ public class DataFacadeImpl implements DataFacade {
 
 
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
-        userMapper.changeSubProjectName(subProjectid, newSubProjectName);
+        subProjectMapper.changeSubProjectName(subProjectid, newSubProjectName);
     }
 
     public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
@@ -50,7 +51,7 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public void deleteSubproject(int subprojectid) throws ProjectManagerException {
-        userMapper.deleteSubproject(subprojectid);
+        subProjectMapper.deleteSubproject(subprojectid);
     }
 
 

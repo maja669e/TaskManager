@@ -151,16 +151,6 @@ public class UserController {
         return "redirect:/projekt";
     }
 
-    @PostMapping("changeSubProjectName")
-    public String changeSubProjectName(WebRequest request) throws ProjectManagerException {
-        //Retrieve values from HTML form via WebRequest
-        String newSubProjectName = request.getParameter("subProjectName");
-        int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
-        userService.changeSubProjectName(subprojectid,newSubProjectName);
-
-        return "redirect:/projekt";
-    }
-
     @PostMapping("editTask")
     public String editTask(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -190,26 +180,6 @@ public class UserController {
         }
 
         userService.setTaskstatus(taskid, task.getTaskStatus());
-        return "redirect:/projekt";
-    }
-
-    @PostMapping("addSubProject")
-    public String addSubProject(WebRequest request) throws ProjectManagerException {
-        Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        List<Task> tasks = new ArrayList<>();
-        //Retrieve values from HTML form via WebRequest
-
-        userService.addSubProject(project, tasks);
-
-        return "redirect:/projekt";
-    }
-
-    @PostMapping("deleteSubProject")
-    public String deleteSubProject(WebRequest request) throws ProjectManagerException {
-        //Retrieve values from HTML form via WebRequest
-        int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
-        userService.deleteSubproject(subprojectid);
-
         return "redirect:/projekt";
     }
 

@@ -2,6 +2,7 @@ package demo.controllers;
 
 import demo.data.DataFacadeImpl;
 import demo.model.*;
+import demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -89,7 +90,8 @@ public class UserController {
     public String project(WebRequest request, Model model) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-
+        System.out.println(project.getSubProjects().size() + " test");
+//check if project is null
         if (user == null) {
             return "redirect:/";
         } else {
@@ -349,9 +351,6 @@ public class UserController {
         //Retrieve values from HTML form via WebRequest
         int userid = Integer.parseInt(request.getParameter("userid"));
         int taskid = Integer.parseInt(request.getParameter("taskid"));
-
-        System.out.println(userid);
-        System.out.println(taskid);
 
         userService.deleteMemberFromTask(taskid,userid);
 

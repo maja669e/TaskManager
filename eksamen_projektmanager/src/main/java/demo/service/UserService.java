@@ -1,4 +1,6 @@
-package demo.model;
+package demo.service;
+
+import demo.model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

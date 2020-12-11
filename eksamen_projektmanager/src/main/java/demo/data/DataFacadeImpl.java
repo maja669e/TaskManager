@@ -8,9 +8,12 @@ public class DataFacadeImpl implements DataFacade {
 
     private UserMapper userMapper = new UserMapper();
     private SubProjectMapper subProjectMapper = new SubProjectMapper();
+    private ProjectMapper projectMapper = new ProjectMapper();
+    private TaskMapper taskMapper = new TaskMapper();
+
 
     public void addProject(Project project, int userid) throws ProjectManagerException {
-        userMapper.addProject(project, userid);
+        projectMapper.addProject(project, userid);
     }
 
     public User Login(String userName, String password) throws ProjectManagerException {
@@ -18,11 +21,11 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public List<Project> getProjects(int userid) throws ProjectManagerException {
-        return userMapper.getProjects(userid);
+        return projectMapper.getProjects(userid);
     }
 
     public Project getSingleProject(int projectid) throws ProjectManagerException {
-        return userMapper.getSingleProject(projectid);
+        return projectMapper.getSingleProject(projectid);
     }
 
     public void addSubProject(Project project, List<Task> tasks) throws ProjectManagerException {
@@ -34,7 +37,7 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
-        userMapper.editProject(projectid, newProjectName, enddate);
+        projectMapper.editProject(projectid, newProjectName, enddate);
     }
 
 
@@ -43,11 +46,11 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
-        return userMapper.getTasks(subprojectid);
+        return taskMapper.getTasks(subprojectid);
     }
 
     public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
-        userMapper.addTask(project, subProject, taskName);
+        taskMapper.addTask(project, subProject, taskName);
     }
 
     public void deleteSubproject(int subprojectid) throws ProjectManagerException {
@@ -56,23 +59,23 @@ public class DataFacadeImpl implements DataFacade {
 
 
     public void deleteTask(int taskid) throws ProjectManagerException {
-        userMapper.deleteTask(taskid);
+        taskMapper.deleteTask(taskid);
     }
 
     public void deleteProject(int projectid) throws ProjectManagerException {
-        userMapper.deleteProject(projectid);
+        projectMapper.deleteProject(projectid);
     }
 
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
-        userMapper.editTask(taskid, taskName, timeEstimate, deadline);
+        taskMapper.editTask(taskid, taskName, timeEstimate, deadline);
     }
 
     public void setTaskstatus(int taskid, int taskstatus) throws ProjectManagerException {
-        userMapper.setTaskstatus(taskid, taskstatus);
+        taskMapper.setTaskstatus(taskid, taskstatus);
     }
 
     public Task getTask(int taskid) throws ProjectManagerException {
-        return userMapper.getTask(taskid);
+        return taskMapper.getTask(taskid);
     }
 
     public Team getTeam(int teamid) throws ProjectManagerException {
@@ -87,14 +90,14 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public void addMemberToTask(int taskid, int userid) throws ProjectManagerException {
-        userMapper.addMemberToTask(taskid, userid);
+        taskMapper.addMemberToTask(taskid, userid);
     }
 
     public List<User> getTaskMembers(int taskid) throws ProjectManagerException{
-        return userMapper.getTaskMembers(taskid);
+        return taskMapper.getTaskMembers(taskid);
     }
 
     public void deleteMemberFromTask(int taskid, int userid) throws ProjectManagerException {
-        userMapper.deleteMemberFromTask(taskid, userid);
+        taskMapper.deleteMemberFromTask(taskid, userid);
     }
 }

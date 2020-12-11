@@ -1,6 +1,7 @@
 package demo.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class Project {
@@ -56,6 +57,53 @@ public class Project {
     public void setExpEndDate(LocalDate expEndDate) {
         this.expEndDate = expEndDate;
     }
+
+    public int calWorkHoursPerDay (){
+
+        int totalProjectHours = calProjectTotalTime();
+
+        int dif = (int) ChronoUnit.DAYS.between(expStartDate,expEndDate);
+        dif = Math.abs(dif);
+
+        int workHoursPerDay;
+
+        if(dif == 0){
+            workHoursPerDay = totalProjectHours;
+        } else{
+            workHoursPerDay = totalProjectHours / dif;
+        }
+
+        return workHoursPerDay;
+    }
+
+    public int calProjectTotalTime() {
+
+        int totalTime = 0;
+
+        for (int i = 0; i < subProjects.size(); i++) {
+            SubProject subProject = subProjects.get(i);
+            totalTime += subProject.calSubProjectTotalTime();
+        }
+
+        return totalTime;
+    }
+/*
+    public int calUserWorkHoursOnProject (Project project, User user){
+        int sum =0;
+        for (int i = 0; i < project.getSubProjects().size(); i++) {
+            for (int j = 0; j < project.getSubProjects().get(i).getTasks().size(); j++) {
+                for (int k = 0; k < project.getSubProjects().get(i).getTasks().get(j).getTaskMembers().size(); k++) {
+                    if(project.getSubProjects().get(i).getTasks().get(j).getTaskMembers().get(k).getUserid() == user.getUserid()){
+                        sum += project.getSubProjects().get(i).getTasks().get(j).getTimeEstimation();
+                    }
+                }
+            }
+        }
+
+        return sum;
+    }
+
+ */
 
     @Override
     public String toString() {

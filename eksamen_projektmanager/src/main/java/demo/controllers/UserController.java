@@ -92,7 +92,7 @@ public class UserController {
             int projectTimeUser;
             List<Integer> timeSpendOnProjects = new ArrayList<>();
             for (Project project: projects) {
-                projectTimeUser= timeCalculator.calUserWorkHoursOnProject(project,user);
+                projectTimeUser= project.calUserWorkHoursOnProject(user);
                 timeSpendOnProjects.add(projectTimeUser);
             }
 

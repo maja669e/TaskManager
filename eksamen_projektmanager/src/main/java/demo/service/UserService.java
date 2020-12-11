@@ -15,29 +15,8 @@ public class UserService {
         this.facade = facade;
     }
 
-    public Project addProject(int userid) throws ProjectManagerException {
-        List<SubProject> subProjects = new ArrayList<>();
-        String projectName = "nyt projekt";
-        LocalDate localDate = LocalDate.now();
-
-        Project project = new Project(projectName, localDate, localDate, subProjects);
-
-        facade.addProject(project, userid);
-
-        return project;
-    }
-
     public User Login(String userName, String password) throws ProjectManagerException {
         return facade.Login(userName, password);
-    }
-
-
-    public List<Project> getProjects(int userid) throws ProjectManagerException {
-        return facade.getProjects(userid);
-    }
-
-    public Project getSingleProject(int projectid) throws ProjectManagerException {
-        return facade.getSingleProject(projectid);
     }
 
     public void addSubProject(Project project, List<Task> tasks) throws ProjectManagerException {
@@ -49,10 +28,6 @@ public class UserService {
 
     public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
         return facade.getSubProjects(projectid);
-    }
-
-    public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
-        facade.editProject(projectid, newProjectName, enddate);
     }
 
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
@@ -75,10 +50,6 @@ public class UserService {
 
     public void deleteTask(int taskid) throws ProjectManagerException {
         facade.deleteTask(taskid);
-    }
-
-    public void deleteProject(int projectid) throws ProjectManagerException {
-        facade.deleteProject(projectid);
     }
 
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {

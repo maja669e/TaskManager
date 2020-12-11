@@ -7,9 +7,10 @@ import java.util.List;
 public class DataFacadeImpl implements DataFacade {
 
     private UserMapper userMapper = new UserMapper();
+    private ProjectMapper projectMapper = new ProjectMapper();
 
     public void addProject(Project project, int userid) throws ProjectManagerException {
-        userMapper.addProject(project, userid);
+        projectMapper.addProject(project, userid);
     }
 
     public User Login(String userName, String password) throws ProjectManagerException {
@@ -17,11 +18,11 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public List<Project> getProjects(int userid) throws ProjectManagerException {
-        return userMapper.getProjects(userid);
+        return projectMapper.getProjects(userid);
     }
 
     public Project getSingleProject(int projectid) throws ProjectManagerException {
-        return userMapper.getSingleProject(projectid);
+        return projectMapper.getSingleProject(projectid);
     }
 
     public void addSubProject(Project project, List<Task> tasks) throws ProjectManagerException {
@@ -33,7 +34,7 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
-        userMapper.editProject(projectid, newProjectName, enddate);
+        projectMapper.editProject(projectid, newProjectName, enddate);
     }
 
 
@@ -59,7 +60,7 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public void deleteProject(int projectid) throws ProjectManagerException {
-        userMapper.deleteProject(projectid);
+        projectMapper.deleteProject(projectid);
     }
 
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {

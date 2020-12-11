@@ -8,6 +8,7 @@ public class DataFacadeImpl implements DataFacade {
 
     private UserMapper userMapper = new UserMapper();
     private ProjectMapper projectMapper = new ProjectMapper();
+    private TaskMapper taskMapper = new TaskMapper();
 
     public void addProject(Project project, int userid) throws ProjectManagerException {
         projectMapper.addProject(project, userid);
@@ -43,11 +44,11 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
-        return userMapper.getTasks(subprojectid);
+        return taskMapper.getTasks(subprojectid);
     }
 
     public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
-        userMapper.addTask(project, subProject, taskName);
+        taskMapper.addTask(project, subProject, taskName);
     }
 
     public void deleteSubproject(int subprojectid) throws ProjectManagerException {
@@ -56,7 +57,7 @@ public class DataFacadeImpl implements DataFacade {
 
 
     public void deleteTask(int taskid) throws ProjectManagerException {
-        userMapper.deleteTask(taskid);
+        taskMapper.deleteTask(taskid);
     }
 
     public void deleteProject(int projectid) throws ProjectManagerException {
@@ -64,15 +65,15 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
-        userMapper.editTask(taskid, taskName, timeEstimate, deadline);
+        taskMapper.editTask(taskid, taskName, timeEstimate, deadline);
     }
 
     public void setTaskstatus(int taskid, int taskstatus) throws ProjectManagerException {
-        userMapper.setTaskstatus(taskid, taskstatus);
+        taskMapper.setTaskstatus(taskid, taskstatus);
     }
 
     public Task getTask(int taskid) throws ProjectManagerException {
-        return userMapper.getTask(taskid);
+        return taskMapper.getTask(taskid);
     }
 
     public Team getTeam(int teamid) throws ProjectManagerException {
@@ -87,14 +88,14 @@ public class DataFacadeImpl implements DataFacade {
     }
 
     public void addMemberToTask(int taskid, int userid) throws ProjectManagerException {
-        userMapper.addMemberToTask(taskid, userid);
+        taskMapper.addMemberToTask(taskid, userid);
     }
 
     public List<User> getTaskMembers(int taskid) throws ProjectManagerException{
-        return userMapper.getTaskMembers(taskid);
+        return taskMapper.getTaskMembers(taskid);
     }
 
     public void deleteMemberFromTask(int taskid, int userid) throws ProjectManagerException {
-        userMapper.deleteMemberFromTask(taskid, userid);
+        taskMapper.deleteMemberFromTask(taskid, userid);
     }
 }

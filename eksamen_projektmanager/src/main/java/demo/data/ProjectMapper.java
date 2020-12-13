@@ -102,7 +102,6 @@ public class ProjectMapper {
 
                 //Project
                 String projectName = rs.getString("projectname");
-                System.out.println("project name= " + projectName);
                 String startDateTemp = rs.getString("startdate");
                 LocalDate startDate = LocalDate.parse(startDateTemp, formatter);
 
@@ -176,8 +175,6 @@ public class ProjectMapper {
                 }
 
                 boolean userInTask = false;
-                System.out.println("test user= " + taskUser);
-                System.out.println("task list value= " + task.getTaskMembers());
                 if (taskUser.getUserid() != 0) {
                     if (!task.getTaskMembers().isEmpty()) {
                         for (User userObj : task.getTaskMembers()) {
@@ -186,8 +183,6 @@ public class ProjectMapper {
                             }
                         }
                         if (!userInTask) {
-                            System.out.println("not empty test");
-                            System.out.println("formerid= " + formerTaskid);
                             if (formerTaskid != taskid) {
                                 List<User> taskUsers = new ArrayList<>();
                                 task.setTaskMembers(taskUsers);
@@ -195,7 +190,6 @@ public class ProjectMapper {
                             task.getTaskMembers().add(taskUser);
                         }
                     } else {
-                        System.out.println("test empty list");
                         List<User> taskUsers = new ArrayList<>();
                         task.setTaskMembers(taskUsers);
                         task.getTaskMembers().add(taskUser);
@@ -223,14 +217,10 @@ public class ProjectMapper {
                         }
                     }
                 }
-                System.out.println(subProject);
-                System.out.println("end test");
-                System.out.println("-----------------------------");
             }
             if (project.getSubProjects() != null) {
                 Collections.sort(project.getSubProjects());
             }
-            System.out.println(project);
             return project;
 
         } catch (

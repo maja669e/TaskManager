@@ -39,7 +39,6 @@ public class ProjectController {
 
         Project project = projectService.addProject(user.getUserid());
         setSessionProject(request, project);
-        System.out.println(project);
 
         return "redirect:/projekt";
     }
@@ -91,6 +90,7 @@ public class ProjectController {
             return "redirect:/";
         } else {
             project = projectService.getSingleProject(project.getProjectid());
+            setSessionProject(request,project);
             int projectTotalTimeConsumtion = project.calProjectTotalTime();
             int workHoursPerDay = project.calWorkHoursPerDay();
 

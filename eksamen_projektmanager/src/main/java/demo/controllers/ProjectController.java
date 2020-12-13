@@ -27,6 +27,11 @@ public class ProjectController {
         } else {
             //Get all projects
             List<Project> projects = projectService.getProjects(user.getUserid());
+            for (Project project: projects) {
+                Project projectObj = projectService.getSingleProject(project.getProjectid());
+                project.setSubProjects(projectObj.getSubProjects());
+            }
+            
             setSessionProjects(request, projects);
             model.addAttribute("projects", projects);
             return "projekt_oversigt";

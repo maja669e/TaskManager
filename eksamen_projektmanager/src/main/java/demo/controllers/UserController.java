@@ -66,14 +66,15 @@ public class UserController {
             int projectTimeUser;
             List<Integer> timeSpendOnProjects = new ArrayList<>();
             for (Project project: projects) {
+                System.out.println("test");
                 projectTimeUser= project.calUserWorkHoursOnProject(user);
+                System.out.println("test loop for time and time on project= " + projectTimeUser);
                 timeSpendOnProjects.add(projectTimeUser);
             }
 
             Map<String, Integer> otherMap = new HashMap<>();
 
             for (int i = 0; i < projects.size(); i++) {
-                System.out.println(timeSpendOnProjects.get(i) );
                 otherMap.put(projects.get(i).getProjectName(), timeSpendOnProjects.get(i));
             }
 

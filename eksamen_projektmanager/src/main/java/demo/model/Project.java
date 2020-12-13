@@ -62,7 +62,7 @@ public class Project {
         this.expEndDate = expEndDate;
     }
 
-    public int calWorkHoursPerDay (){
+    public int calWorkHoursPerDay () {
 
         int totalProjectHours = calProjectTotalTime();
 

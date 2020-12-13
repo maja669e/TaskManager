@@ -5,7 +5,6 @@ import demo.model.Project;
 import demo.model.ProjectManagerException;
 import demo.model.Task;
 import demo.service.SubProjectService;
-import demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;

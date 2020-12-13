@@ -26,6 +26,7 @@ public class UserMapper {
                 String name = rs.getString("name");
                 int userid = rs.getInt("userid");
                 User user = new User(userName, password, userid, name);
+                user.setUserid(userid);
                 return user;
             } else {
                 throw new ProjectManagerException("Kan ikke valider bruger - prøv igen");
@@ -33,6 +34,38 @@ public class UserMapper {
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
+    }
+
+    public Team getTeam(int teamid) throws ProjectManagerException {
+        List<User> teamUsers = new ArrayList<>();
+        Team team = new Team();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM users join teamrelations ON users.userid = teamrelations.userid " +
+                    "join teams ON teamrelations.teamid = teams.teamid";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            String teamName = "";
+
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String name = rs.getString("name");
+                int id = rs.getInt("teamid");
+                teamName = rs.getString("teamname");
+
+                User user = new User(username, name);
+
+                if (teamid == id) {
+                    teamUsers.add(user);
+                    team.setTeamName(teamName);
+                }
+            }
+            team.setTeam(teamUsers);
+        } catch (SQLException ex) {
+            throw new ProjectManagerException(ex.getMessage());
+        }
+        return team;
     }
 
     public int getUserTeamId(int userid) throws ProjectManagerException {
@@ -53,61 +86,5 @@ public class UserMapper {
         } catch (SQLException | ProjectManagerException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
-    }
-
-    public Team getTeam(int teamid) throws ProjectManagerException {
-        List<User> teamUsers = new ArrayList<>();
-        Team team = new Team();
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM users join teamrelations ON users.userid = teamrelations.userid " +
-                    "join teams ON teamrelations.teamid = teams.teamid";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-
-            String teamName ="";
-
-            while (rs.next()) {
-                String username = rs.getString("username");
-                String name = rs.getString("name");
-                int id = rs.getInt("teamid");
-                teamName = rs.getString("teamname");
-
-                User user = new User(username, name);
-
-                if(teamid == id){
-                    teamUsers.add(user);
-                    team.setTeamName(teamName);
-                }
-            }
-            team.setTeam(teamUsers);
-        } catch (SQLException ex) {
-            throw new ProjectManagerException(ex.getMessage());
-        }
-        return team;
-    }
-
-    public User getUser(String userName) throws ProjectManagerException {
-        try {
-        Connection con = DBManager.getConnection();
-        String SQL = " SELECT * FROM users WHERE username=?";
-        PreparedStatement ps = con.prepareStatement(SQL);
-        ps.setString(1, userName);
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-            int userid = rs.getInt("userid");
-            String name = rs.getString("name");
-
-            User user = new User(userName, name);
-            user.setUserid(userid);
-
-            return user;
-        } else {
-            throw new ProjectManagerException("kunne ikke finde bruger");
-        }
-    } catch (SQLException | ProjectManagerException ex) {
-        throw new ProjectManagerException(ex.getMessage());
-    }
     }
 }

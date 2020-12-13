@@ -1,5 +1,7 @@
 package demo.model;
 
+import java.util.Objects;
+
 public class User {
     private String userName;
     private String password;
@@ -48,6 +50,19 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return userid == user.userid;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userid);
     }
 
     @Override

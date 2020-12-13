@@ -26,9 +26,4 @@ public class UserService {
     public int getUserTeamId(int userid) throws ProjectManagerException {
         return facade.getUserTeamId(userid);
     }
-
-    public User getUser(String userName) throws ProjectManagerException {
-        return facade.getUser(userName);
-    }
-    
 }

@@ -3,7 +3,6 @@ package demo.controllers;
 import demo.data.DataFacadeImpl;
 import demo.model.*;
 import demo.service.ProjectService;
-import demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class ProjectController {
@@ -40,7 +36,6 @@ public class ProjectController {
     public String addProject(WebRequest request) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
-        //Retrieve values from HTML form via WebRequest
         Project project = projectService.addProject(user.getUserid());
         setSessionProject(request, project);
 
@@ -89,22 +84,17 @@ public class ProjectController {
     public String project(WebRequest request, Model model) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        System.out.println(project.getSubProjects().size() + " test");
-//check if project is null
-        if (user == null) {
+        Team team = (Team) request.getAttribute("team", WebRequest.SCOPE_SESSION);
+        if (user == null || project == null) {
             return "redirect:/";
         } else {
-
             int projectTotalTimeConsumtion = project.calProjectTotalTime();
             int workHoursPerDay = project.calWorkHoursPerDay();
-           // int userTeamId = userService.getUserTeamId(user.getUserid());
-            //Team team = userService.getTeam(userTeamId);
 
-            //model.addAttribute("team", team);
+            model.addAttribute("team", team);
             model.addAttribute("workHoursPerDay", workHoursPerDay);
             model.addAttribute("currentDate", LocalDate.now());
             model.addAttribute("projectTime", projectTotalTimeConsumtion);
-            //model.addAttribute("subProjects", subProjects);
             model.addAttribute("project", project);
             return "projekt";
         }

@@ -48,4 +48,8 @@ public class TaskService {
     public Task getTask(int taskid) throws ProjectManagerException {
         return facade.getTask(taskid);
     }
+
+    public User getTaskUser(String userName) throws ProjectManagerException {
+        return facade.getTaskUser(userName);
+    }
 }

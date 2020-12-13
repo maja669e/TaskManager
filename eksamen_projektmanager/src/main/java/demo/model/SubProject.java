@@ -1,6 +1,7 @@
 package demo.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SubProject {
     private String subProjectName;
@@ -47,6 +48,19 @@ public class SubProject {
         }
 
         return totalTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SubProject)) return false;
+        SubProject that = (SubProject) o;
+        return subProjectID == that.subProjectID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(subProjectID);
     }
 
     @Override

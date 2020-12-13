@@ -17,7 +17,7 @@ public class TaskController {
     private TaskService taskService = new TaskService(new DataFacadeImpl());
 
     @PostMapping("addMemberToTask")
-    public String addMemberToTask(WebRequest request, Model model) throws ProjectManagerException {
+    public String addMemberToTask(WebRequest request) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
         if (user == null) {
@@ -29,7 +29,7 @@ public class TaskController {
 
             Task task = taskService.getTask(taskid);
             task.setTaskMembers(taskService.getTaskMembers(taskid));
-            //User taskUser = taskService.getUser(userName);
+            User taskUser = taskService.getTaskUser(userName);
 
             HashMap<String, User> hashMap = new HashMap<>();
 
@@ -38,7 +38,7 @@ public class TaskController {
             }
 
             if(!hashMap.containsKey(userName)){
-              //  taskService.addMemberToTask(taskid, taskUser.getUserid());
+                taskService.addMemberToTask(taskid, taskUser.getUserid());
             }
 
             return "redirect:/projekt";
@@ -57,21 +57,19 @@ public class TaskController {
     }
 
     @PostMapping("addTask")
-    public String addTask(WebRequest request, Model model) throws ProjectManagerException {
+    public String addTask(WebRequest request) throws ProjectManagerException {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
-        //List<SubProject> subProjects = taskService.getSubProjects(project.getProjectid());
         SubProject subProject = null;
         String taskName = request.getParameter("taskname");
         int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
-/*
-        for (int i = 0; i < subProjects.size(); i++) {
-            if (subProjects.get(i).getSubProjectID() == subprojectid) {
-                subProject = subProjects.get(i);
+
+        //TODO: se om dette kan laves anderledes
+        for (int i = 0; i < project.getSubProjects().size(); i++) {
+            if (project.getSubProjects().get(i).getSubProjectID() == subprojectid) {
+                subProject = project.getSubProjects().get(i);
             }
         }
-
- */
 
         taskService.addTask(project, subProject, taskName);
 

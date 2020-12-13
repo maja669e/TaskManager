@@ -2,7 +2,6 @@ package demo.controllers;
 
 import demo.data.DataFacadeImpl;
 import demo.model.*;
-import demo.service.TaskService;
 import demo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,20 +28,20 @@ public class UserController {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         User user = userService.Login(userName, password);
-        setSessionInfo(request, user);
+        int userTeamId = userService.getUserTeamId(user.getUserid());
+        Team team = userService.getTeam(userTeamId);
+        setSessionTeam(request, team);
+        setSessionUser(request, user);
         return "redirect:/projekt_oversigt";
     }
 
     @GetMapping("/hold")
     public String hold(WebRequest request, Model model) throws ProjectManagerException {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-
+        Team team = (Team) request.getAttribute("team", WebRequest.SCOPE_SESSION);
         if (user == null) {
             return "redirect:/";
         } else {
-            int userTeamId = userService.getUserTeamId(user.getUserid());
-
-            Team team = userService.getTeam(userTeamId);
 
             model.addAttribute("team", team);
 
@@ -111,7 +110,12 @@ public class UserController {
         }
     }
 
-    private void setSessionInfo(WebRequest request, User user) {
+    private void setSessionUser(WebRequest request, User user) {
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
     }
+
+    private void setSessionTeam(WebRequest request, Team team) {
+        request.setAttribute("team", team, WebRequest.SCOPE_SESSION);
+    }
+
 }

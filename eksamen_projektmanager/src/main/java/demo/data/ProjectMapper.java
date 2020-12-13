@@ -104,13 +104,13 @@ public class ProjectMapper {
 
     public Project getSingleProject(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
-        List<Task> tasks = new ArrayList<>();
+        List<User> tempUserList = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM projects join subprojects ON projects.projectid = subprojects.projectid " +
-            "join tasks ON subprojects.subprojectid = tasks.subprojectid " +
-            "left join taskrelations ON tasks.taskid = taskrelations.taskid " +
-            "left join users ON taskrelations.userid = users.userid where projects.projectid = ? ";
+                    "join tasks ON subprojects.subprojectid = tasks.subprojectid " +
+                    "left join taskrelations ON tasks.taskid = taskrelations.taskid " +
+                    "left join users ON taskrelations.userid = users.userid where projects.projectid = ? ";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setInt(1, projectid);
             ResultSet rs = ps.executeQuery();
@@ -133,16 +133,32 @@ public class ProjectMapper {
                 project.setExpStartDate(startDate);
                 project.setExpEndDate(endDate);
                 project.setProjectid(projectid);
+                project.setSubProjects(subProjects);
 
                 //Subproject
                 int subprojectid = rs.getInt("subprojectid");
                 String subprojectName = rs.getString("subprojectname");
 
                 SubProject subProject = new SubProject(subprojectName);
+                subProject.setSubProjectID(subprojectid);
 
-                if(!subProjects.contains(subProject)){
-                    subProject.setSubProjectID(subprojectid);
-                    subProjects.add(subProject);
+                boolean subidInProject = false;
+
+                if (!subProjects.isEmpty()) {
+                    for (SubProject subProjectObj : project.getSubProjects()) {
+                        if (subProjectObj.equals(subProject)) {
+                            subidInProject = true;
+                        }
+                    }
+                    if (!subidInProject) {
+                        project.getSubProjects().add(subProject);
+                        List<Task> tasks = new ArrayList<>();
+                        subProject.setTasks(tasks);
+                    }
+                } else {
+                    project.getSubProjects().add(subProject);
+                    List<Task> tasks = new ArrayList<>();
+                    subProject.setTasks(tasks);
                 }
 
                 //Task
@@ -154,33 +170,82 @@ public class ProjectMapper {
                 int timeEstimation = rs.getInt("timeestimate");
                 int taskstatus = rs.getInt("taskstatus");
 
+                Task task = new Task(deadline, timeEstimation, taskname);
+                task.setTaskId(taskid);
+                task.setTaskStatus(taskstatus);
+                task.setTaskMembers(tempUserList);
+
                 //Task User
                 int userid = rs.getInt("userid");
                 String username = rs.getString("username");
                 String name = rs.getString("name");
 
-                User user = new User(username,name);
-                user.setUserid(userid);
+                User taskUser = new User(username, name);
+                taskUser.setUserid(userid);
 
-                Task task = new Task(deadline, timeEstimation, taskname);
-                task.setTaskId(taskid);
-                task.setTaskStatus(taskstatus);
-                task.getTaskMembers().add(user);
+                if (taskUser.getName() == null) {
+                    taskUser.setName("temp name");
+                }
 
-                for (Task taskObj: tasks) {
-                    if(taskObj.equals(task)){
-                        tasks.add(task);
+                if (taskUser.getUserName() == null) {
+                    taskUser.setUserName("temp username");
+                }
+
+                boolean userInTask = false;
+                System.out.println("test user= " + taskUser);
+                System.out.println("task list value= " + task.getTaskMembers());
+                if (taskUser.getUserid() != 0) {
+                    if (!task.getTaskMembers().isEmpty()) {
+                        for (User userObj : task.getTaskMembers()) {
+                            if (userObj.equals(taskUser)) {
+                                userInTask = true;
+                            }
+                        }
+                        if (!userInTask) {
+                            System.out.println("not empty test");
+                            List<User> taskUsers = new ArrayList<>();
+                            task.setTaskMembers(taskUsers);
+                            task.getTaskMembers().add(taskUser);
+                        }
+                    } else {
+                        System.out.println("test empty list");
+                        List<User> taskUsers = new ArrayList<>();
+                        task.setTaskMembers(taskUsers);
+                        task.getTaskMembers().add(taskUser);
                     }
                 }
 
-                subProject.getTasks().add(task);
+                boolean taskidInSubProject = false;
 
+                for (SubProject subProjectObj : project.getSubProjects()) {
+                    if (subProjectObj.getSubProjectID() == subprojectid) {
+                        if (!subProjectObj.getTasks().isEmpty()) {
+                            for (Task taskObj : subProjectObj.getTasks()) {
+                                if (taskObj.equals(task)) {
+                                    taskidInSubProject = true;
+                                }
+                            }
+                            if (!taskidInSubProject) {
+                                subProjectObj.getTasks().add(task);
+                            }
+                        } else {
+                            subProjectObj.getTasks().add(task);
+                        }
+                    }
+                }
+                System.out.println(subProject);
+                System.out.println("end test");
+                System.out.println("-----------------------------");
             }
+
+            System.out.println(project);
             return project;
 
-        } catch (SQLException ex) {
+        } catch (
+                SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
         }
+
     }
 
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {

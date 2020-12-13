@@ -8,7 +8,7 @@ USE `projektello` ;
 -- Table projects
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projektello`.`projects` (
-  `projectid` INT NOT NULL,
+  `projectid` INT NOT NULL AUTO_INCREMENT,
   `projectname` VARCHAR(100) NULL DEFAULT 'nyt projekt',
   `startdate` DATE NULL DEFAULT NULL,
   `enddate` DATE NULL DEFAULT NULL,
@@ -41,7 +41,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table projectrelations
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projektello`.`projectrelations` (
-  `projectrelationid` INT NOT NULL,
+  `projectrelationid` INT NOT NULL AUTO_INCREMENT,
   `userid` INT NOT NULL,
   `projectid` INT NOT NULL,
   PRIMARY KEY (`projectrelationid`),
@@ -64,7 +64,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table subprojects
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projektello`.`subprojects` (
-  `subprojectid` INT NOT NULL,
+  `subprojectid` INT NOT NULL AUTO_INCREMENT,
   `projectid` INT NOT NULL,
   `subprojectname` VARCHAR(100) NOT NULL DEFAULT 'nyt delprojekt',
   PRIMARY KEY (`subprojectid`, `projectid`),
@@ -82,7 +82,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table tasks
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projektello`.`tasks` (
-  `taskid` INT NOT NULL,
+  `taskid` INT NOT NULL AUTO_INCREMENT,
   `projectid` INT NOT NULL,
   `subprojectid` INT NOT NULL,
   `taskname` VARCHAR(100) NOT NULL DEFAULT 'ny opgave',
@@ -108,9 +108,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table taskrelations
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projektello`.`taskrelations` (
-  `taskrelationid` INT NOT NULL,
+  `taskrelationid` INT NOT NULL AUTO_INCREMENT,
   `taskid` INT NOT NULL,
-  `userid` INT NULL DEFAULT NULL,
+  `userid` INT NOT NULL,
   PRIMARY KEY (`taskrelationid`),
   UNIQUE INDEX `taskrelationid_UNIQUE` (`taskrelationid` ASC) VISIBLE,
   INDEX `taskid_idx` (`taskid` ASC) VISIBLE,
@@ -131,7 +131,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table teams
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projektello`.`teams` (
-  `teamid` INT NOT NULL,
+  `teamid` INT NOT NULL AUTO_INCREMENT,
   `teamname` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`teamid`),
   UNIQUE INDEX `teamid_UNIQUE` (`teamid` ASC) VISIBLE)
@@ -145,7 +145,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table teamrelations
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projektello`.`teamrelations` (
-  `teamrelationid` INT NOT NULL,
+  `teamrelationid` INT NOT NULL AUTO_INCREMENT,
   `userid` INT NOT NULL,
   `teamid` INT NOT NULL,
   PRIMARY KEY (`teamrelationid`),

@@ -105,19 +105,18 @@
                         <input id="subtext" type="text" th:value="${subProject.subProjectName}" name="subProjectName">
                     </div>
                     <div class="element2">
-                        <button th:name="subprojectid" th:value="${subProject.subProjectID}" class="editbtn"
-                                type="submit">Gem
+                        <button th:name="subprojectid" th:value="${subProject.subProjectID}" class="editbtn1"
+                                type="submit">Skift
                         </button>
                     </div>
                 </div>
 
-                <div class="center">
-                    <div th:if="${subProject.tasks.empty}">
-                        <p>Der er ikke oprettet nogen opgaver endnu.</p>
-                    </div>
-                </div>
             </form>
-
+            <div class="center">
+                <div th:if="${subProject.tasks.empty}">
+                    <p>Der er ikke oprettet nogen opgaver endnu.</p>
+                </div>
+            </div>
 
             <hr class="subproject_hr">
         </caption>
@@ -154,7 +153,7 @@
 
                     <div class="clearfix">
                         <select name="username">
-                            <option value="default">Tilføj et medlem</option>
+                            <option value="default">Tilføj medlem</option>
                             <option th:each="teamUser:${team.getTeam()}" th:name="userName"
                                     th:value="${teamUser.userName}"
                                     th:text="${teamUser.userName} + ' (' + ${teamUser.name} +') '"/>
@@ -171,13 +170,13 @@
                 <form name="deleteTaskMemberFromTask" action="/deleteTaskMemberFromTask" method="post">
                     <div class="clearfix">
                         <select name="userid">
-                            <option value="default">Fjern et medlem</option>
+                            <option value="default">Fjern medlem</option>
                             <option th:each="taskUser:${task.taskMembers}" th:name="userid"
                                     th:value="${taskUser.userid}"
                                     th:text="${taskUser.userName} + ' (' + ${taskUser.name} +') '"/>
                         </select>
 
-                        <button th:name="taskid" th:value="${task.taskId}" style="background-color: transparent; border: none; font-weight: bold; cursor: pointer; text-align: left;" type="submit">
+                        <button th:name="taskid" th:value="${task.taskId}" style="background-color: transparent; border: none; cursor: pointer; text-align: left; font-size: 25px" type="submit">
                             &#45;
                         </button>
                     </div>

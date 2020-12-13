@@ -15,47 +15,26 @@ public class ProjectMapper {
         try {
             Connection con = DBManager.getConnection();
 
+            String SQL = "INSERT INTO projects (startdate, enddate) VALUES (?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, String.valueOf(LocalDate.now()));
+            ps.setString(2, String.valueOf(LocalDate.now()));
+            ps.executeUpdate();
+
+            ResultSet projectids = ps.getGeneratedKeys();
+            projectids.next();
+            int id = projectids.getInt(1);
+            project.setProjectid(id);
             ///////////////////////////////////////
 
-            String SQL = "SELECT * FROM projects";
-            PreparedStatement ps = con.prepareStatement(SQL);
-
-            ResultSet rs = ps.executeQuery();
-            int projectid = 0;
-
-            while (rs.next()) {
-                projectid = rs.getInt("projectid"); //gets last row projectid
-            }
-
-            ///////////////////////////////////////
-
-            String SQL2 = "INSERT INTO projects (projectid, startdate, enddate) VALUES (?, ?, ?)";
-            PreparedStatement ps2 = con.prepareStatement(SQL2);
-            project.setProjectid(projectid + 1);
-            ps2.setInt(1, project.getProjectid());
-            ps2.setString(2, String.valueOf(LocalDate.now()));
-            ps2.setString(3, String.valueOf(LocalDate.now()));
+            String SQL2 = "INSERT INTO projectrelations (userid, projectid) VALUES (?,?)";
+            PreparedStatement ps2 = con.prepareStatement(SQL2, Statement.RETURN_GENERATED_KEYS);
+            ps2.setInt(1, userid);
+            ps2.setInt(2, project.getProjectid());
             ps2.executeUpdate();
-            ///////////////////////////////////////
 
-            String SQL4 = "SELECT * FROM projectrelations";
-            PreparedStatement ps4 = con.prepareStatement(SQL4);
-
-            ResultSet rs3 = ps4.executeQuery();
-            int projectrelationid = 0;
-
-            while (rs3.next()) {
-                projectrelationid = rs3.getInt("projectrelationid"); //gets last row projectrelationid
-            }
-            ///////////////////////////////////////
-
-            String SQL5 = "INSERT INTO projectrelations (projectrelationid, userid, projectid) VALUES (?,?,?)";
-            PreparedStatement ps5 = con.prepareStatement(SQL5);
-            ps5.setInt(1, projectrelationid + 1);
-            ps5.setInt(2, userid);
-            ps5.setInt(3, project.getProjectid());
-            ps5.executeUpdate();
-
+            ResultSet projectrelationids = ps2.getGeneratedKeys();
+            projectrelationids.next();
 
         } catch (SQLException ex) {
             throw new ProjectManagerException("Kunne ikke tilføje projekt");

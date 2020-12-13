@@ -27,6 +27,7 @@ public class ProjectController {
         } else {
             //Get all projects
             List<Project> projects = projectService.getProjects(user.getUserid());
+            setSessionProjects(request, projects);
             model.addAttribute("projects", projects);
             return "projekt_oversigt";
         }
@@ -38,6 +39,7 @@ public class ProjectController {
 
         Project project = projectService.addProject(user.getUserid());
         setSessionProject(request, project);
+        System.out.println(project);
 
         return "redirect:/projekt";
     }
@@ -103,5 +105,9 @@ public class ProjectController {
 
     private void setSessionProject(WebRequest request, Project project) {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
+    }
+
+    private void setSessionProjects(WebRequest request, List<Project> projects){
+        request.setAttribute("projects", projects, WebRequest.SCOPE_SESSION);
     }
 }

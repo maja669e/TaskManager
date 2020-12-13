@@ -59,12 +59,13 @@ public class TaskController {
     @PostMapping("addTask")
     public String addTask(WebRequest request) throws ProjectManagerException {
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-
+        System.out.println(project);
         SubProject subProject = null;
         String taskName = request.getParameter("taskname");
         int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
 
         //TODO: se om dette kan laves anderledes
+        System.out.println(project.getSubProjects().size());
         for (int i = 0; i < project.getSubProjects().size(); i++) {
             if (project.getSubProjects().get(i).getSubProjectID() == subprojectid) {
                 subProject = project.getSubProjects().get(i);

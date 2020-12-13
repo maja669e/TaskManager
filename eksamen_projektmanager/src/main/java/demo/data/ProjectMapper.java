@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProjectMapper {
@@ -108,7 +109,7 @@ public class ProjectMapper {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "SELECT * FROM projects join subprojects ON projects.projectid = subprojects.projectid " +
-                    "join tasks ON subprojects.subprojectid = tasks.subprojectid " +
+                    "left join tasks ON subprojects.subprojectid = tasks.subprojectid " +
                     "left join taskrelations ON tasks.taskid = taskrelations.taskid " +
                     "left join users ON taskrelations.userid = users.userid where projects.projectid = ? ";
             PreparedStatement ps = con.prepareStatement(SQL);
@@ -118,7 +119,7 @@ public class ProjectMapper {
             Project project = new Project();
 
             int formerTaskid = 0;
-            
+
             while (rs.next()) {
                 //Formatter
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -165,12 +166,17 @@ public class ProjectMapper {
 
                 //Task
                 String temp = rs.getString("deadline");
-                LocalDate deadline = LocalDate.parse(temp, formatter);
-
                 int taskid = rs.getInt("taskid");
                 String taskname = rs.getString("taskname");
                 int timeEstimation = rs.getInt("timeestimate");
                 int taskstatus = rs.getInt("taskstatus");
+
+                if (temp == null && taskname == null) {
+                    taskname = "temp";
+                    temp = "2021-02-02"; // temp
+                }
+
+                LocalDate deadline = LocalDate.parse(temp, formatter);
 
                 Task task = new Task(deadline, timeEstimation, taskname);
                 task.setTaskId(taskid);
@@ -185,11 +191,8 @@ public class ProjectMapper {
                 User taskUser = new User(username, name);
                 taskUser.setUserid(userid);
 
-                if (taskUser.getName() == null) {
+                if (taskUser.getName() == null && taskUser.getUserName() == null) {
                     taskUser.setName("temp name");
-                }
-
-                if (taskUser.getUserName() == null) {
                     taskUser.setUserName("temp username");
                 }
 
@@ -205,7 +208,7 @@ public class ProjectMapper {
                         }
                         if (!userInTask) {
                             System.out.println("not empty test");
-                            if(formerTaskid == taskid){
+                            if (formerTaskid == taskid) {
                                 List<User> taskUsers = new ArrayList<>();
                                 task.setTaskMembers(taskUsers);
                             }
@@ -218,24 +221,25 @@ public class ProjectMapper {
                         task.getTaskMembers().add(taskUser);
                     }
                 }
-                
+
                 formerTaskid = taskid;
 
                 boolean taskidInSubProject = false;
-
-                for (SubProject subProjectObj : project.getSubProjects()) {
-                    if (subProjectObj.getSubProjectID() == subprojectid) {
-                        if (!subProjectObj.getTasks().isEmpty()) {
-                            for (Task taskObj : subProjectObj.getTasks()) {
-                                if (taskObj.equals(task)) {
-                                    taskidInSubProject = true;
+                if (task.getTaskId() != 0) {
+                    for (SubProject subProjectObj : project.getSubProjects()) {
+                        if (subProjectObj.getSubProjectID() == subprojectid) {
+                            if (!subProjectObj.getTasks().isEmpty()) {
+                                for (Task taskObj : subProjectObj.getTasks()) {
+                                    if (taskObj.equals(task)) {
+                                        taskidInSubProject = true;
+                                    }
                                 }
-                            }
-                            if (!taskidInSubProject) {
+                                if (!taskidInSubProject) {
+                                    subProjectObj.getTasks().add(task);
+                                }
+                            } else {
                                 subProjectObj.getTasks().add(task);
                             }
-                        } else {
-                            subProjectObj.getTasks().add(task);
                         }
                     }
                 }
@@ -243,7 +247,7 @@ public class ProjectMapper {
                 System.out.println("end test");
                 System.out.println("-----------------------------");
             }
-
+            Collections.sort(project.getSubProjects());
             System.out.println(project);
             return project;
 

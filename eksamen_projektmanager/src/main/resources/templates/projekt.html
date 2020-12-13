@@ -96,50 +96,27 @@
     <table style="width: 80%">
 
         <caption>
-            <div id="subproject" class="overskrift">
-                <div class="element1">
-                    <h2>Delprojekt: </h2>
+            <form name="changeSubProjectName" action="/changeSubProjectName" method="POST">
+                <div id="subproject" class="overskrift">
+                    <div class="element1">
+                        <h2>Delprojekt: </h2>
+                    </div>
+                    <div class="element2">
+                        <input id="subtext" type="text" th:value="${subProject.subProjectName}" name="subProjectName">
+                    </div>
+                    <div class="element2">
+                        <button th:name="subprojectid" th:value="${subProject.subProjectID}" class="editbtn"
+                                type="submit">Gem</button>
+                    </div>
                 </div>
-                <div class="element2">
-                    <h2 th:text="${subProject.subProjectName}"></h2>
+
+                <div class="center">
+                    <div th:if="${subProject.tasks.empty}">
+                        <p>Der er ikke oprettet nogen opgaver endnu.</p>
+                    </div>
                 </div>
-                <div class="element2">
-                    <button class="btnopret" onclick="document.getElementById('id03').style.display='block'"></button>
-                </div>
-            </div>
+            </form>
 
-            <div class="center">
-                <div th:if="${subProject.tasks.empty}">
-                    <p>Der er ikke oprettet nogen opgaver endnu.</p>
-                </div>
-            </div>
-
-            <div id="id03" class="modal">
-        <span onclick="document.getElementById('id03').style.display='none'" class="close"
-              title="Close Modal">&times;</span>
-                <div class="modal-content">
-
-                    <form name="changeSubProjectName" action="/changeSubProjectName" method="POST">
-
-                        <div class="container_edit_subproject_name">
-                            <h2>Skift delprojekt navn</h2>
-
-                            <label><b>Delprojekt</b></label>
-                            <input type="text" placeholder="Indtast nyt delprojekt navn" name="subProjectName"
-                                   th:value="${subProject.subProjectName}">
-
-                            <div class="clearfix">
-                                <button type="button" onclick="document.getElementById('id03').style.display='none'"
-                                        class="cancelbtn">Tilbage
-                                </button>
-                                <button th:name="subprojectid" th:value="${subProject.subProjectID}" class="editbtn"
-                                        type="submit">Gem
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
 
             <hr class="subproject_hr">
         </caption>
@@ -168,35 +145,24 @@
                 <span th:unless="${task.taskStatus == 0}" th:text="${task.deadLine}"></span>
             </td>
             <td>
-                <div>
-                    <button class="addMember" onclick="document.getElementById('id04').style.display='block'">+</button>
-                </div>
-                <div id="id04" class="modal">
-                    <span onclick="document.getElementById('id04').style.display='none'" class="close"
-                    title="Close Modal">&times;</span>
-                    <div class="modal-content">
 
-                       <form name="addMemberToTask" action="/addMemberToTask" method="post">
 
-                        <div class="container_edit_subproject_name">
-                            <h2>Tilføj medlem til opgave</h2>
+                <form name="addMemberToTask" action="/addMemberToTask" method="post">
 
-                            <select name="username">
-                                <option value="default">Vælg et medlem</option>
-                                <option th:each="teamUser:${task.taskMembers}" th:name="userName" th:value="${teamUser.userName}"
-                                        th:text="${teamUser.userName} + ' (' + ${teamUser.name} +') '"/>
-                            </select>
+                    <div class="clearfix">
+                        <select name="username">
+                            <option value="default">Tilføj et medlem</option>
+                            <option th:each="teamUser:${task.taskMembers}" th:name="userName"
+                                    th:value="${teamUser.userName}"
+                                    th:text="${teamUser.userName} + ' (' + ${teamUser.name} +') '"/>
+                        </select>
 
-                            <div class="clearfix">
-                                <button type="button" onclick="document.getElementById('id04').style.display='none'"
-                                        class="cancelbtn">Tilbage
-                                </button>
-                                <button th:name="taskid" th:value="${task.taskId}" class="editbtn" type="submit">Tilføj</button>
-                            </div>
-                        </div>
-                       </form>
+                        <button th:name="taskid" th:value="${task.taskId}" style="background-color: transparent; border: none; font-weight: bold; cursor: pointer; text-align: left;" type="submit"> &#43;</button>
+
                     </div>
-                </div>
+                </form>
+
+
                 <div>
                     <button class="addMember" onclick="document.getElementById('id05').style.display='block'">-</button>
                 </div>
@@ -212,7 +178,8 @@
 
                                 <select name="userid">
                                     <option value="default">Vælg et medlem</option>
-                                    <option th:each="taskUser:${task.taskMembers}" th:name="userid" th:value="${taskUser.userid}"
+                                    <option th:each="taskUser:${task.taskMembers}" th:name="userid"
+                                            th:value="${taskUser.userid}"
                                             th:text="${taskUser.userName} + ' (' + ${taskUser.name} +') '"/>
                                 </select>
 
@@ -220,7 +187,9 @@
                                     <button type="button" onclick="document.getElementById('id05').style.display='none'"
                                             class="cancelbtn">Tilbage
                                     </button>
-                                    <button th:name="taskid" th:value="${task.taskId}" class="editbtn" type="submit">Fjern</button>
+                                    <button th:name="taskid" th:value="${task.taskId}" class="editbtn" type="submit">
+                                        Fjern
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -252,13 +221,18 @@
             <td>
 
                 <div id="knapper">
-                    <button class="btnopret"
-                            onclick="document.getElementById('id02').style.display='block'">
-                    </button>
-                    <div id="id02" class="modal">
+                    <a th:href="'#'+${task.taskId}" data-toggle="modal">
+                        <button class="btnopret"
+                                data-toggle="modal" data-target="#id02">
+                        </button>
+                    </a>
 
-                            <span onclick="document.getElementById('id02').style.display='none'" class="close"
+
+                    <div tabindex="-1" role="dialog" th:id="${task.taskId}" id="id02" class="modal">
+
+                            <span data-dismiss="modal" class="close"
                                   title="Close Modal">&times;</span>
+
                         <div class="modal-content">
                             <form name="editTask" action="/editTask" method="POST">
 
@@ -278,7 +252,7 @@
                                            name="deadline">
                                     <div class="clearfix">
                                         <button type="button"
-                                                onclick="document.getElementById('id02').style.display='none'"
+                                                data-dismiss="modal"
                                                 class="cancelbtn">Tilbage
                                         </button>
                                         <button th:name="taskid" th:value="${task.taskId}" class="editbtn"

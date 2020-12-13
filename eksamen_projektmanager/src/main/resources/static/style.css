@@ -47,6 +47,15 @@ h4 {
     margin-top: 5vw;
 }
 
+input[name=subProjectName] {
+    font-size: 24px;
+    color: #525050;
+    background-color: transparent;
+    border: 0.5px solid #525050;
+    padding: 0.5vw;
+    border-radius: 5px;
+}
+
 /*-------Navigation-------*/
 header {
     width: 100%;

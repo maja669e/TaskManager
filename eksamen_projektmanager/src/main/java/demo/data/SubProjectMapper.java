@@ -2,68 +2,21 @@ package demo.data;
 
 import demo.model.Project;
 import demo.model.ProjectManagerException;
-import demo.model.SubProject;
-import demo.model.Task;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 
 public class SubProjectMapper {
-
-    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
-        List<SubProject> subProjects = new ArrayList<>();
-        List<Task> tasks = new ArrayList<>();
-        try {
-            Connection con = DBManager.getConnection();
-
-            String SQL = " SELECT * FROM subprojects;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-            // Get data from database.
-            while (rs.next()) {
-
-                int subprojectid = rs.getInt("subprojectid");
-                int id = rs.getInt("projectid");
-                String subprojectname = rs.getString("subprojectname");
-
-                SubProject subProject = new SubProject(subprojectname, tasks);
-                subProject.setSubProjectID(subprojectid);
-
-                if (projectid == id) {
-                    subProjects.add(subProject);
-                }
-            }
-
-        } catch (SQLException ex) {
-            throw new ProjectManagerException(ex.getMessage());
-        }
-        return subProjects;
-    }
 
     public void addSubProject(Project project) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM subprojects";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            String SQL = "INSERT INTO subprojects (projectid) VALUES (?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, project.getProjectid());
+            ps.executeUpdate();
 
-            ResultSet rs = ps.executeQuery();
-            int temp = 0;
-
-            while (rs.next()) {
-                temp = rs.getInt("subprojectid"); //gets last row subprojectid
-            }
-            int subprojectid = temp + 1;
-            //--------------------------------------------------//
-
-            String SQL2 = "INSERT INTO subprojects (subprojectid, projectid) VALUES (?,?)";
-            PreparedStatement ps2 = con.prepareStatement(SQL2);
-            ps2.setInt(1, subprojectid);
-            ps2.setInt(2, project.getProjectid());
-            ps2.executeUpdate();
+            ResultSet subprojectids = ps.getGeneratedKeys();
+            subprojectids.next();
 
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
@@ -106,6 +59,5 @@ public class SubProjectMapper {
             throw new ProjectManagerException(ex.getMessage());
         }
     }
-
 
 }

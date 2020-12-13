@@ -19,10 +19,6 @@ public class SubProjectService {
         facade.addSubProject(project, tasks);
     }
 
-    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
-        return facade.getSubProjects(projectid);
-    }
-
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
         facade.changeSubProjectName(subProjectid, newSubProjectName);
     }

@@ -2,56 +2,13 @@ package demo.data;
 
 import demo.model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskMapper {
-
-    public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
-        List<Task> tasks = new ArrayList<>();
-        try {
-            Connection con = DBManager.getConnection();
-
-            String SQL = "SELECT * FROM tasks";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ResultSet rs = ps.executeQuery();
-            // Get data from database.
-            while (rs.next()) {
-
-                int id = rs.getInt("subprojectid");
-
-                String temp = rs.getString("deadline");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate deadline = LocalDate.parse(temp, formatter);
-
-                String taskname = rs.getString("taskname");
-                int timeEstimation = rs.getInt("timeestimate");
-                int taskId = rs.getInt("taskid");
-                int taskstatus = rs.getInt("taskstatus");
-
-                Task task = new Task(deadline, timeEstimation, taskname);
-                task.setTaskId(taskId);
-                task.setTaskStatus(taskstatus);
-
-
-                if (subprojectid == id) {
-                    tasks.add(task);
-                }
-
-            }
-
-        } catch (SQLException ex) {
-            throw new ProjectManagerException(ex.getMessage());
-        }
-
-        return tasks;
-    }
 
     public Task getTask(int taskid) throws ProjectManagerException {
         try {
@@ -119,25 +76,16 @@ public class TaskMapper {
     public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM tasks";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            String SQL = "INSERT INTO tasks (projectid, subprojectid, taskname, taskstatus) VALUES (?,?,?,?)";
+            PreparedStatement ps = con.prepareStatement(SQL,  Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, project.getProjectid());
+            ps.setInt(2, subProject.getSubProjectID());
+            ps.setString(3, taskName);
+            ps.setString(4, String.valueOf(2));
+            ps.executeUpdate();
 
-            ResultSet rs = ps.executeQuery();
-            int temp = 0;
-
-            while (rs.next()) {
-                temp = rs.getInt("taskid"); //gets last row subprojectid
-            }
-            int taskid = temp + 1;
-            //--------------------------------------------------//
-            String SQL2 = "INSERT INTO tasks (taskid, projectid, subprojectid, taskname, taskstatus) VALUES (?,?,?,?,?)";
-            PreparedStatement ps2 = con.prepareStatement(SQL2);
-            ps2.setInt(1, taskid);
-            ps2.setInt(2, project.getProjectid());
-            ps2.setInt(3, subProject.getSubProjectID());
-            ps2.setString(4, taskName);
-            ps2.setString(5, String.valueOf(2));
-            ps2.executeUpdate();
+            ResultSet taskids = ps.getGeneratedKeys();
+            taskids.next();
 
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());
@@ -166,25 +114,14 @@ public class TaskMapper {
     public void addMemberToTask(int taskid, int userid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM taskrelations";
-            PreparedStatement ps = con.prepareStatement(SQL);
+            String SQL = "INSERT INTO taskrelations (taskid, userid) VALUES (?,?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, taskid);
+            ps.setInt(2, userid);
+            ps.executeUpdate();
 
-            ResultSet rs = ps.executeQuery();
-            int temp = 0;
-
-            while (rs.next()) {
-                temp = rs.getInt("taskrelationid");
-            }
-
-            int taskrelationid = temp + 1;
-            //--------------------------------------------------//
-
-            String SQL2 = "INSERT INTO taskrelations (taskrelationid, taskid, userid) VALUES (?,?,?)";
-            PreparedStatement ps2 = con.prepareStatement(SQL2);
-            ps2.setInt(1, taskrelationid);
-            ps2.setInt(2, taskid);
-            ps2.setInt(3, userid);
-            ps2.executeUpdate();
+            ResultSet taskrelationids = ps.getGeneratedKeys();
+            taskrelationids.next();
 
         } catch (SQLException ex) {
             throw new ProjectManagerException(ex.getMessage());

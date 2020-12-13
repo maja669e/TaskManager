@@ -32,21 +32,12 @@ public class DataFacadeImpl implements DataFacade {
         subProjectMapper.addSubProject(project);
     }
 
-    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException {
-        return subProjectMapper.getSubProjects(projectid);
-    }
-
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
         projectMapper.editProject(projectid, newProjectName, enddate);
     }
 
-
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
         subProjectMapper.changeSubProjectName(subProjectid, newSubProjectName);
-    }
-
-    public List<Task> getTasks(int subprojectid) throws ProjectManagerException {
-        return taskMapper.getTasks(subprojectid);
     }
 
     public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
@@ -56,7 +47,6 @@ public class DataFacadeImpl implements DataFacade {
     public void deleteSubproject(int subprojectid) throws ProjectManagerException {
         subProjectMapper.deleteSubproject(subprojectid);
     }
-
 
     public void deleteTask(int taskid) throws ProjectManagerException {
         taskMapper.deleteTask(taskid);

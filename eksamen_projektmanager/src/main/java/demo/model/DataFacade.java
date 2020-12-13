@@ -9,10 +9,8 @@ public interface DataFacade {
     public List<Project> getProjects(int userid) throws ProjectManagerException ;
     public Project getSingleProject(int projectid) throws ProjectManagerException;
     public void addSubProject(Project project, List<Task> tasks) throws ProjectManagerException;
-    public List<SubProject> getSubProjects(int projectid) throws ProjectManagerException;
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException;
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException;
-    public List<Task> getTasks(int subprojectid) throws ProjectManagerException;
     public void deleteSubproject(int subprojectid)throws ProjectManagerException;
     public void deleteProject(int projectid)throws ProjectManagerException;
     public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException;

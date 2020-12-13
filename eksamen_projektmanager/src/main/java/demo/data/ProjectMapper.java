@@ -117,6 +117,8 @@ public class ProjectMapper {
 
             Project project = new Project();
 
+            int formerTaskid = 0;
+            
             while (rs.next()) {
                 //Formatter
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -203,8 +205,10 @@ public class ProjectMapper {
                         }
                         if (!userInTask) {
                             System.out.println("not empty test");
-                            List<User> taskUsers = new ArrayList<>();
-                            task.setTaskMembers(taskUsers);
+                            if(formerTaskid == taskid){
+                                List<User> taskUsers = new ArrayList<>();
+                                task.setTaskMembers(taskUsers);
+                            }
                             task.getTaskMembers().add(taskUser);
                         }
                     } else {
@@ -214,6 +218,8 @@ public class ProjectMapper {
                         task.getTaskMembers().add(taskUser);
                     }
                 }
+                
+                formerTaskid = taskid;
 
                 boolean taskidInSubProject = false;
 

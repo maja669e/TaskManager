@@ -2,10 +2,7 @@ package demo.data;
 
 import demo.model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -108,7 +105,7 @@ public class ProjectMapper {
         List<User> tempUserList = new ArrayList<>();
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT * FROM projects join subprojects ON projects.projectid = subprojects.projectid " +
+            String SQL = "SELECT * FROM projects left join subprojects ON projects.projectid = subprojects.projectid " +
                     "left join tasks ON subprojects.subprojectid = tasks.subprojectid " +
                     "left join taskrelations ON tasks.taskid = taskrelations.taskid " +
                     "left join users ON taskrelations.userid = users.userid where projects.projectid = ? ";
@@ -126,6 +123,7 @@ public class ProjectMapper {
 
                 //Project
                 String projectName = rs.getString("projectname");
+                System.out.println("project name= " + projectName);
                 String startDateTemp = rs.getString("startdate");
                 LocalDate startDate = LocalDate.parse(startDateTemp, formatter);
 
@@ -147,21 +145,23 @@ public class ProjectMapper {
 
                 boolean subidInProject = false;
 
-                if (!subProjects.isEmpty()) {
-                    for (SubProject subProjectObj : project.getSubProjects()) {
-                        if (subProjectObj.equals(subProject)) {
-                            subidInProject = true;
+                if (subProject.getSubProjectID() != 0) {
+                    if (!subProjects.isEmpty()) {
+                        for (SubProject subProjectObj : project.getSubProjects()) {
+                            if (subProjectObj.equals(subProject)) {
+                                subidInProject = true;
+                            }
                         }
-                    }
-                    if (!subidInProject) {
+                        if (!subidInProject) {
+                            project.getSubProjects().add(subProject);
+                            List<Task> tasks = new ArrayList<>();
+                            subProject.setTasks(tasks);
+                        }
+                    } else {
                         project.getSubProjects().add(subProject);
                         List<Task> tasks = new ArrayList<>();
                         subProject.setTasks(tasks);
                     }
-                } else {
-                    project.getSubProjects().add(subProject);
-                    List<Task> tasks = new ArrayList<>();
-                    subProject.setTasks(tasks);
                 }
 
                 //Task
@@ -208,7 +208,8 @@ public class ProjectMapper {
                         }
                         if (!userInTask) {
                             System.out.println("not empty test");
-                            if (formerTaskid == taskid) {
+                            System.out.println("formerid= " + formerTaskid);
+                            if (formerTaskid != taskid) {
                                 List<User> taskUsers = new ArrayList<>();
                                 task.setTaskMembers(taskUsers);
                             }
@@ -247,7 +248,9 @@ public class ProjectMapper {
                 System.out.println("end test");
                 System.out.println("-----------------------------");
             }
-            Collections.sort(project.getSubProjects());
+            if (project.getSubProjects() != null) {
+                Collections.sort(project.getSubProjects());
+            }
             System.out.println(project);
             return project;
 

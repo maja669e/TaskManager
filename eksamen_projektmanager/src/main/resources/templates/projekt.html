@@ -152,7 +152,7 @@
                     <div class="clearfix">
                         <select name="username">
                             <option value="default">Tilføj et medlem</option>
-                            <option th:each="teamUser:${task.taskMembers}" th:name="userName"
+                            <option th:each="teamUser:${team.getTeam()}" th:name="userName"
                                     th:value="${teamUser.userName}"
                                     th:text="${teamUser.userName} + ' (' + ${teamUser.name} +') '"/>
                         </select>

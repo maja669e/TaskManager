@@ -23,7 +23,6 @@ public class SubProjectController {
         String newSubProjectName = request.getParameter("subProjectName");
         int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
         subProjectService.changeSubProjectName(subprojectid,newSubProjectName);
-
         return "redirect:/projekt";
     }
 

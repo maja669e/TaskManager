@@ -88,6 +88,7 @@ public class ProjectController {
         if (user == null || project == null) {
             return "redirect:/";
         } else {
+            project = projectService.getSingleProject(project.getProjectid());
             int projectTotalTimeConsumtion = project.calProjectTotalTime();
             int workHoursPerDay = project.calWorkHoursPerDay();
 

@@ -3,7 +3,7 @@ package demo.model;
 import java.util.List;
 import java.util.Objects;
 
-public class SubProject {
+public class SubProject implements Comparable<SubProject>{
     private String subProjectName;
     private int subProjectID;
     private List<Task> tasks;
@@ -70,5 +70,18 @@ public class SubProject {
                 ", subProjectID=" + subProjectID +
                 ", tasks=" + tasks +
                 '}';
+    }
+
+    @Override
+    public int compareTo(SubProject o) {
+        if(o == null){
+            return 1;
+        } if(this.subProjectID > o.subProjectID){
+            return 1;
+        } else if(this.subProjectID < o.subProjectID){
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

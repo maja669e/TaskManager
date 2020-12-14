@@ -7,7 +7,7 @@ public interface DataFacade {
     public void addProject(Project project, int userid) throws ProjectManagerException;
     public User Login(String userName, String password) throws ProjectManagerException;
     public List<Project> getProjects(int userid) throws ProjectManagerException ;
-    public Project getSingleProject(int projectid) throws ProjectManagerException;
+    public Project getProject(int projectid) throws ProjectManagerException;
     public void addSubProject(Project project, List<Task> tasks) throws ProjectManagerException;
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException;
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException;

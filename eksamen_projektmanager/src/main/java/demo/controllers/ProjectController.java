@@ -28,7 +28,7 @@ public class ProjectController {
             //Get all projects
             List<Project> projects = projectService.getProjects(user.getUserid());
             for (Project project: projects) {
-                Project projectObj = projectService.getSingleProject(project.getProjectid());
+                Project projectObj = projectService.getProject(project.getProjectid());
                 project.setSubProjects(projectObj.getSubProjects());
             }
             
@@ -61,7 +61,7 @@ public class ProjectController {
     public String getProject(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
         int projectid = Integer.parseInt(request.getParameter("projectid"));
-        Project project = projectService.getSingleProject(projectid);
+        Project project = projectService.getProject(projectid);
         setSessionProject(request, project);
 
         return "redirect:/projekt";
@@ -94,7 +94,7 @@ public class ProjectController {
         if (user == null || project == null) {
             return "redirect:/";
         } else {
-            project = projectService.getSingleProject(project.getProjectid());
+            project = projectService.getProject(project.getProjectid());
             setSessionProject(request,project);
 
             model.addAttribute("team", team);

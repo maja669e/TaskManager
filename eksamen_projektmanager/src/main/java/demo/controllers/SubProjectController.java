@@ -3,14 +3,10 @@ package demo.controllers;
 import demo.data.DataFacadeImpl;
 import demo.model.Project;
 import demo.model.ProjectManagerException;
-import demo.model.Task;
 import demo.service.SubProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class SubProjectController {
@@ -28,11 +24,10 @@ public class SubProjectController {
 
     @PostMapping("addSubProject")
     public String addSubProject(WebRequest request) throws ProjectManagerException {
+        // Retrieve object from web request (session scope)
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
-        List<Task> tasks = new ArrayList<>(); //TODO: fejl?
-        //Retrieve values from HTML form via WebRequest
 
-        subProjectService.addSubProject(project, tasks);
+        subProjectService.addSubProject(project);
 
         return "redirect:/projekt";
     }

@@ -8,9 +8,8 @@ public class SubProject implements Comparable<SubProject>{
     private int subProjectID;
     private List<Task> tasks;
 
-    public SubProject(String subProjectName, List<Task> tasks) {
+    public SubProject(String subProjectName) {
         this.subProjectName = subProjectName;
-        this.tasks = tasks;
     }
 
     public List<Task> getTasks() {
@@ -29,10 +28,6 @@ public class SubProject implements Comparable<SubProject>{
         this.subProjectID = subProjectID;
     }
 
-    public SubProject(String subProjectName) {
-        this.subProjectName = subProjectName;
-    }
-
     public String getSubProjectName() {
         return subProjectName;
     }
@@ -41,6 +36,7 @@ public class SubProject implements Comparable<SubProject>{
         this.subProjectName = subProjectName;
     }
 
+    //Calculate total time for subproject
     public int calSubProjectTotalTime() {
         int totalTime = 0;
         for (int i = 0; i < tasks.size(); i++) {

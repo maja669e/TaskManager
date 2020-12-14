@@ -9,15 +9,12 @@ public class Task {
     private int timeEstimation;
     private String taskName;
     private int taskId;
-    private int taskStatus = 2; //Default set to task not started
+    private int taskStatus = 2; //Default set to task not started, 1 is started and 0 is finished
     private List<User> taskMembers;
 
     public Task(LocalDate deadLine, int timeEstimation, String taskName) {
         this.deadLine = deadLine;
         this.timeEstimation = timeEstimation;
-        this.taskName = taskName;
-    }
-    public Task(String taskName) {
         this.taskName = taskName;
     }
 

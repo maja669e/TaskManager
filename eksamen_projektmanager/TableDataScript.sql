@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `projektello`.`tasks` (
   `subprojectid` INT NOT NULL,
   `taskname` VARCHAR(100) NOT NULL DEFAULT 'ny opgave',
   `timeestimate` INT NULL DEFAULT NULL DEFAULT '0',
-  `deadline` DATE NULL DEFAULT NULL DEFAULT '2020-01-01',
+  `deadline` DATE NULL DEFAULT NULL,
   `taskstatus` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`taskid`),
   INDEX `projectid_idx` (`projectid` ASC) VISIBLE,

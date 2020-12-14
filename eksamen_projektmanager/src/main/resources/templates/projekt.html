@@ -152,7 +152,7 @@
 
             <td>
 
-                <form name="addMemberToTask" action="/addMemberToTask" method="post">
+                <form name="addTaskUser" action="/addTaskUser" method="post">
 
                     <div class="clearfix">
                         <select name="username">
@@ -171,7 +171,7 @@
                     </div>
                 </form>
 
-                <form name="deleteTaskMemberFromTask" action="/deleteTaskMemberFromTask" method="post">
+                <form name="deleteTaskUser" action="/deleteTaskUser" method="post">
                     <div class="clearfix">
                         <select name="userid">
                             <option th:name="userid"
@@ -240,8 +240,8 @@
                                     <input type="number" name="timeEstimate" th:value="${task.timeEstimation}">
                                     <br>
                                     <label><b>Deadline</b></label>
-                                    <input id="deadline" type="date" th:value="${task.deadLine}"
-                                           th:min="${#temporals.format(currentDate, 'yyyy-MM-dd')}"
+                                    <input id="deadline" type="date" th:value="${#temporals.format(currentDate, 'yyyy-MM-dd')}"
+                                           th:min="${#temporals.format(project.getExpStartDate(), 'yyyy-MM-dd')}"
                                            th:max="${#temporals.format(project.getExpEndDate(), 'yyyy-MM-dd')}"
                                            name="deadline">
                                     <div class="clearfix">

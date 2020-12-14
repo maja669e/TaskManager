@@ -32,16 +32,19 @@ public class UserController {
         //Retrieve values from HTML form via WebRequest
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
+
         User user = userService.Login(userName, password);
         int userTeamId = userService.getUserTeamId(user.getUserid());
         Team team = userService.getTeam(userTeamId);
+
         setSessionTeam(request, team);
         setSessionUser(request, user);
         return "redirect:/projekt_oversigt";
     }
 
     @GetMapping("/hold")
-    public String hold(WebRequest request, Model model) throws ProjectManagerException {
+    public String teamOverview(WebRequest request, Model model) {
+        // Retrieve object from web request (session scope)
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Team team = (Team) request.getAttribute("team", WebRequest.SCOPE_SESSION);
         if (user == null) {
@@ -55,7 +58,7 @@ public class UserController {
     }
 
     @GetMapping("/tidsforbrug")
-    public String tidsforbrug(WebRequest request, Model model) throws ProjectManagerException {
+    public String timeSpendOverview(WebRequest request, Model model) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         List<Project> projects = (List<Project>) request.getAttribute("projects", WebRequest.SCOPE_SESSION);
         //Checks if user is logged in
@@ -73,7 +76,6 @@ public class UserController {
     private void setSessionUser(WebRequest request, User user) {
         request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
     }
-
 
     private void setSessionTeam(WebRequest request, Team team) {
         request.setAttribute("team", team, WebRequest.SCOPE_SESSION);

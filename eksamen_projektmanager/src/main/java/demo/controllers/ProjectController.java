@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -20,6 +19,7 @@ public class ProjectController {
 
     @GetMapping("/projekt_oversigt")
     public String displayProjects(WebRequest request, Model model) throws ProjectManagerException {
+        // Retrieve object from web request (session scope)
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         //Checks if user is logged in
         if (user == null) {
@@ -40,6 +40,7 @@ public class ProjectController {
 
     @PostMapping("addProject")
     public String addProject(WebRequest request) throws ProjectManagerException {
+        // Retrieve object from web request (session scope)
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
         Project project = projectService.addProject(user.getUserid());
@@ -69,6 +70,7 @@ public class ProjectController {
 
     @PostMapping("editProject")
     public String editProject(WebRequest request) throws ProjectManagerException {
+        // Retrieve object from web request (session scope)
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
 
         //Retrieve values from HTML form via WebRequest
@@ -77,6 +79,7 @@ public class ProjectController {
 
         project.setProjectName(newProjectName);
 
+        //Format from string to localDate
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate enddate = LocalDate.parse(enddateTemp, formatter);
         project.setExpEndDate(enddate);
@@ -88,9 +91,11 @@ public class ProjectController {
 
     @GetMapping("/projekt")
     public String project(WebRequest request, Model model) throws ProjectManagerException {
+        // Retrieve object from web request (session scope)
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
         Team team = (Team) request.getAttribute("team", WebRequest.SCOPE_SESSION);
+
         if (user == null || project == null) {
             return "redirect:/";
         } else {

@@ -4,20 +4,19 @@ import demo.data.DataFacadeImpl;
 import demo.model.*;
 import demo.service.TaskService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
-
 import java.util.HashMap;
-import java.util.List;
+
 
 @Controller
 public class TaskController {
 
     private TaskService taskService = new TaskService(new DataFacadeImpl());
 
-    @PostMapping("addMemberToTask")
-    public String addMemberToTask(WebRequest request) throws ProjectManagerException {
+    @PostMapping("addTaskUser")
+    public String addTaskUser(WebRequest request) throws ProjectManagerException {
+        // Retrieve object from web request (session scope)
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
         if (user == null) {
@@ -38,7 +37,7 @@ public class TaskController {
                     hashMap.put(task.getTaskMembers().get(i).getUserName(), task.getTaskMembers().get(i));
                 }
 
-
+                //Cant have two of the same users on a task
                 if (!hashMap.containsKey(userName)) {
                     taskService.addMemberToTask(taskid, taskUser.getUserid());
                 }
@@ -48,8 +47,8 @@ public class TaskController {
         }
     }
 
-    @PostMapping("deleteTaskMemberFromTask")
-    public String deleteTaskMemberFromTask(WebRequest request) throws ProjectManagerException {
+    @PostMapping("deleteTaskUser")
+    public String deleteTaskUser(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
         int userid = Integer.parseInt(request.getParameter("userid"));
         int taskid = Integer.parseInt(request.getParameter("taskid"));
@@ -63,7 +62,10 @@ public class TaskController {
 
     @PostMapping("addTask")
     public String addTask(WebRequest request) throws ProjectManagerException {
+        // Retrieve object from web request (session scope)
         Project project = (Project) request.getAttribute("project", WebRequest.SCOPE_SESSION);
+
+        //Retrieve values from HTML form via WebRequest
         String taskName = request.getParameter("taskname");
         int subprojectid = Integer.parseInt(request.getParameter("subprojectid"));
 
@@ -74,6 +76,7 @@ public class TaskController {
 
     @PostMapping("deleteTask")
     public String deleteTask(WebRequest request) throws ProjectManagerException {
+        //Retrieve values from HTML form via WebRequest
         int taskid = Integer.parseInt(request.getParameter("taskid"));
         taskService.deleteTask(taskid);
 

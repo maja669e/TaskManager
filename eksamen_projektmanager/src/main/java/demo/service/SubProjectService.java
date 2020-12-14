@@ -12,11 +12,11 @@ public class SubProjectService {
         this.facade = facade;
     }
 
-    public void addSubProject(Project project, List<Task> tasks) throws ProjectManagerException {
+    public void addSubProject(Project project) throws ProjectManagerException {
         String subProjectName = "nyt delprojekt";
-        SubProject subProject = new SubProject(subProjectName, tasks);
+        SubProject subProject = new SubProject(subProjectName);
         project.getSubProjects().add(subProject);
-        facade.addSubProject(project, tasks);
+        facade.addSubProject(project);
     }
 
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {

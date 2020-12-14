@@ -24,10 +24,8 @@ public class TaskService {
         facade.deleteMemberFromTask(taskid, userid);
     }
 
-    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
-        Task task = new Task(taskName);
-        subProject.getTasks().add(task);
-        facade.addTask(project, subProject, taskName);
+    public void addTask(Project project, int subprojectid, String taskName) throws ProjectManagerException {
+        facade.addTask(project, subprojectid, taskName);
     }
     
     public void deleteTask(int taskid) throws ProjectManagerException {

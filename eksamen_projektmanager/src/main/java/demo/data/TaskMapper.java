@@ -73,13 +73,13 @@ public class TaskMapper {
         }
     }
 
-    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
+    public void addTask(Project project, int subprojectid, String taskName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO tasks (projectid, subprojectid, taskname, taskstatus) VALUES (?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL,  Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, project.getProjectid());
-            ps.setInt(2, subProject.getSubProjectID());
+            ps.setInt(2, subprojectid);
             ps.setString(3, taskName);
             ps.setString(4, String.valueOf(2));
             ps.executeUpdate();

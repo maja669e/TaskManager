@@ -40,8 +40,8 @@ public class DataFacadeImpl implements DataFacade {
         subProjectMapper.changeSubProjectName(subProjectid, newSubProjectName);
     }
 
-    public void addTask(Project project, SubProject subProject, String taskName) throws ProjectManagerException {
-        taskMapper.addTask(project, subProject, taskName);
+    public void addTask(Project project, int subprojectid, String taskName) throws ProjectManagerException {
+        taskMapper.addTask(project, subprojectid, taskName);
     }
 
     public void deleteSubproject(int subprojectid) throws ProjectManagerException {

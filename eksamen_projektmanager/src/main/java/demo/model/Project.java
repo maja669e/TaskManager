@@ -92,12 +92,12 @@ public class Project {
         return totalTime;
     }
 
-    public int calUserWorkHoursOnProject (User user){
+    public int calUserWorkHoursOnProject (int userid){
         int sum =0;
         for (int i = 0; i < subProjects.size(); i++) {
             for (int j = 0; j < subProjects.get(i).getTasks().size(); j++) {
                 for (int k = 0; k < subProjects.get(i).getTasks().get(j).getTaskMembers().size(); k++) {
-                    if(subProjects.get(i).getTasks().get(j).getTaskMembers().get(k).getUserid() == user.getUserid()){
+                    if(subProjects.get(i).getTasks().get(j).getTaskMembers().get(k).getUserid() == userid){
                         sum += subProjects.get(i).getTasks().get(j).getTimeEstimation();
                     }
                 }

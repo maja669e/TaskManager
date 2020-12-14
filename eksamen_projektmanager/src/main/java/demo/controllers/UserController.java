@@ -63,28 +63,7 @@ public class UserController {
             return "redirect:/";
         } else {
 
-            int projectTimeUser;
-            List<Integer> timeSpendOnProjects = new ArrayList<>();
-            for (Project project: projects) {
-                System.out.println("test");
-                projectTimeUser= project.calUserWorkHoursOnProject(user);
-                System.out.println("test loop for time and time on project= " + projectTimeUser);
-                timeSpendOnProjects.add(projectTimeUser);
-            }
-
-            Map<String, Integer> otherMap = new HashMap<>();
-
-            for (int i = 0; i < projects.size(); i++) {
-                otherMap.put(projects.get(i).getProjectName(), timeSpendOnProjects.get(i));
-            }
-
-            List<String> keys = new ArrayList<>();
-            for (int i = 0; i < projects.size(); i++) {
-                keys.add((projects.get(i).getProjectName()));
-            }
-
-            model.addAttribute("map", keys);
-            model.addAttribute("otherMap", otherMap);
+            model.addAttribute("userid", user.getUserid());
             model.addAttribute("projects", projects);
 
             return "tidsforbrug";

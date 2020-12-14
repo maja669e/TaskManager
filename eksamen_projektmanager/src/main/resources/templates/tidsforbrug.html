@@ -37,14 +37,18 @@
 <table style="width:80%">
     <tr>
         <th>Projekt navn</th>
-        <th>Antal timer brugt</th>
+        <th>Egne antal timer brugt</th>
+        <th>Total antal timer brugt</th>
     </tr>
-    <tr th:each="key:${map}">
+    <tr th:each="project:${projects}">
         <td>
-            <p th:text="${key}"></p>
+            <p th:text="${project.projectName}"></p>
         </td>
         <td>
-            <p th:text="${otherMap.get(key)}"></p>
+            <p th:text="${project.calUserWorkHoursOnProject(userid)}"></p>
+        </td>
+        <td>
+            <p th:text="${project.calProjectTotalTime()}"></p>
         </td>
     </tr>
 </table>

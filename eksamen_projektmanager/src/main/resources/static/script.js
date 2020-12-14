@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", burgerMenu);
 var burger = document.getElementById("myTopnav");
-// Get the modal
-var modal = document.getElementById('id01');
-var modal = document.getElementById('id02');
-var modal = document.getElementById('id03');
-var modal = document.getElementById('id04');
-var modal = document.getElementById('id05');
 
 function burgerMenu() {
     if (burger.className === "topnav") {
@@ -15,10 +9,16 @@ function burgerMenu() {
     }
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function close(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+function subProjectAdd() {
+    alert("Dit nye delprojekt er nu tilføjet. \r\nTryk OK for at opdatere.");
 }
 
+function taskAdd() {
+    alert("Din nye opgave er nu tilføjet. \r\nTryk OK for at opdatere.");
+}
+
+var x = document.getElementById("subtext").value;
+
+function subProjectDelete() {
+    alert("Delprojekt " + x + " er nu slettet. \r\nTryk OK for at opdatere.");
+}

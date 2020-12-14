@@ -26,7 +26,7 @@
 <div th:replace="fragments/header.html :: header"></div>
 
 <div th:object="${project}">
-    <div class="overskrift">
+    <div id="overskrift">
         <div class="element1">
             <h1 th:text="*{projectName}"></h1>
         </div>
@@ -83,7 +83,7 @@
 
 <form th:action="@{/addSubProject}" method="post">
     <div class="clearfix">
-        <button class="editbtn" type="submit">Tilføj delprojekt</button>
+        <button onclick="subProjectAdd()" class="editbtn" type="submit">Tilføj delprojekt</button>
     </div>
 </form>
 <div class="center">
@@ -106,7 +106,7 @@
                     </div>
                     <div class="element2">
                         <button th:name="subprojectid" th:value="${subProject.subProjectID}" class="editbtn1"
-                                type="submit">Skift
+                                type="submit">Rediger navn
                         </button>
                     </div>
                 </div>
@@ -267,7 +267,7 @@
             <form th:action="@{/addTask}" method="post">
                 <div class="addTask">
                     <input class="opgavenavn" name="taskname" type="text" placeholder="Opgavenavn" required>
-                    <button id="addTaskbtn" name="subprojectid" th:value="${subProject.subProjectID}" type="submit">
+                    <button onclick="taskAdd()" id="addTaskbtn" name="subprojectid" th:value="${subProject.subProjectID}" type="submit">
                         Tilføj opgave
                     </button>
                 </div>
@@ -285,7 +285,7 @@
     </table>
     <div id="delete_subproject">
         <form th:action="@{/deleteSubProject}" method="post">
-            <button class="delete_subproject" th:name="subprojectid" th:value="${subProject.subProjectID}"
+            <button onclick="subProjectDelete()" class="delete_subproject" th:name="subprojectid" th:value="${subProject.subProjectID}"
                     type="submit">Slet
             </button>
         </form>

@@ -319,11 +319,14 @@ button:hover {
 
 /*-------Rediger knap-------*/
 
-.overskrift {
+.overskrift, #overskrift {
     display: block;
     text-align: center;
 }
 
+#overskrift .btnopret {
+    margin-left: 1vw;
+}
 .btnopret {
     background-image: url("/images/edit_button_picture.png");
     background-size: cover;
@@ -476,7 +479,7 @@ select {
 .delete_subproject {
     padding: 8px 15px;
     background-color: #b75851;
-    margin: 2vw;
+    margin-bottom: 4vw;
     cursor: pointer;
     width: 6%;
     border: none;
@@ -498,7 +501,7 @@ select {
     margin-left: 5px;
 }
 .opgavenavn {
-    border: none;
+    border: 1.5px solid #5193af;
     padding: 4px 8px;
 }
 
@@ -696,6 +699,9 @@ a.fa-twitter:before {
     .opret_projekt {
         height: 35vw;
         width: 100%;
+    }
+    .delete_subproject {
+      width: 15%;
     }
 
 }

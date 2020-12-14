@@ -79,7 +79,7 @@ public class ProjectMapper {
         return projects;
     }
 
-    public Project getSingleProject(int projectid) throws ProjectManagerException {
+    public Project getProject(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
         List<User> tempUserList = new ArrayList<>();
         try {

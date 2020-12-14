@@ -22,8 +22,8 @@ public class ProjectService {
         return facade.getProjects(userid);
     }
 
-    public Project getSingleProject(int projectid) throws ProjectManagerException {
-        return facade.getSingleProject(projectid);
+    public Project getProject(int projectid) throws ProjectManagerException {
+        return facade.getProject(projectid);
     }
 
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {

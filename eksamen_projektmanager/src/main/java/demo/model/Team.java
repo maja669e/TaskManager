@@ -6,11 +6,6 @@ public class Team {
     private String teamName;
     private List<User> team;
 
-    public Team(String teamName, List<User> team) {
-        this.teamName = teamName;
-        this.team = team;
-    }
-
     public Team() {
     }
 
@@ -28,13 +23,5 @@ public class Team {
 
     public void setTeam(List<User> team) {
         this.team = team;
-    }
-
-    @Override
-    public String toString() {
-        return "Team{" +
-                "teamName='" + teamName + '\'' +
-                ", team=" + team +
-                '}';
     }
 }

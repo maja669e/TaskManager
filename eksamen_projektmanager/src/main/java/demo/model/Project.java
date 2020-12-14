@@ -63,12 +63,12 @@ public class Project {
 
     public double calWorkHoursPerDay () {
 
-        int totalProjectHours = calProjectTotalTime();
+        double totalProjectHours = calProjectTotalTime();
 
         int dif = (int) ChronoUnit.DAYS.between(expStartDate,expEndDate);
         dif = Math.abs(dif);
 
-        int workHoursPerDay;
+        double workHoursPerDay;
 
         if(dif == 0){
             workHoursPerDay = totalProjectHours;

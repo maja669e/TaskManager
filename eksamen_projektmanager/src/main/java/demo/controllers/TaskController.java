@@ -27,18 +27,21 @@ public class TaskController {
             String userName = request.getParameter("username");
             int taskid = Integer.parseInt(request.getParameter("taskid"));
 
-            Task task = taskService.getTask(taskid);
-            task.setTaskMembers(taskService.getTaskMembers(taskid));
-            User taskUser = taskService.getTaskUser(userName);
+            if (!userName.equals("placeholder")) {
+                Task task = taskService.getTask(taskid);
+                task.setTaskMembers(taskService.getTaskMembers(taskid));
 
-            HashMap<String, User> hashMap = new HashMap<>();
+                User taskUser = taskService.getTaskUser(userName);
+                HashMap<String, User> hashMap = new HashMap<>();
 
-            for (int i = 0; i < task.getTaskMembers().size(); i++) {
-                hashMap.put(task.getTaskMembers().get(i).getUserName(), task.getTaskMembers().get(i));
-            }
+                for (int i = 0; i < task.getTaskMembers().size(); i++) {
+                    hashMap.put(task.getTaskMembers().get(i).getUserName(), task.getTaskMembers().get(i));
+                }
 
-            if(!hashMap.containsKey(userName)){
-                taskService.addMemberToTask(taskid, taskUser.getUserid());
+
+                if (!hashMap.containsKey(userName)) {
+                    taskService.addMemberToTask(taskid, taskUser.getUserid());
+                }
             }
 
             return "redirect:/projekt";
@@ -51,7 +54,9 @@ public class TaskController {
         int userid = Integer.parseInt(request.getParameter("userid"));
         int taskid = Integer.parseInt(request.getParameter("taskid"));
 
-        taskService.deleteMemberFromTask(taskid,userid);
+        if(userid != 0){
+            taskService.deleteMemberFromTask(taskid, userid);
+        }
 
         return "redirect:/projekt";
     }
@@ -90,9 +95,9 @@ public class TaskController {
 
         Task task = taskService.getTask(taskid);
 
-        if(task.getTaskStatus() == 2){
+        if (task.getTaskStatus() == 2) {
             task.setTaskStatus(1);
-        } else if(task.getTaskStatus() == 1){
+        } else if (task.getTaskStatus() == 1) {
             task.setTaskStatus(0);
         } else {
             task.setTaskStatus(2);
@@ -110,7 +115,7 @@ public class TaskController {
         String deadline = request.getParameter("deadline");
         int taskid = Integer.parseInt(request.getParameter("taskid"));
 
-        taskService.editTask(taskid, taskName,timeEstimate,deadline);
+        taskService.editTask(taskid, taskName, timeEstimate, deadline);
 
         return "redirect:/projekt";
     }

@@ -153,7 +153,8 @@
 
                     <div class="clearfix">
                         <select name="username">
-                            <option value="default">Tilføj medlem</option>
+                            <option th:name="userName"
+                            th:value="placeholder" value="default">Tilføj medlem</option>
                             <option th:each="teamUser:${team.getTeam()}" th:name="userName"
                                     th:value="${teamUser.userName}"
                                     th:text="${teamUser.userName} + ' (' + ${teamUser.name} +') '"/>
@@ -170,7 +171,8 @@
                 <form name="deleteTaskMemberFromTask" action="/deleteTaskMemberFromTask" method="post">
                     <div class="clearfix">
                         <select name="userid">
-                            <option value="default">Fjern medlem</option>
+                            <option th:name="userid"
+                                    th:value="0" value="default">Fjern medlem</option>
                             <option th:each="taskUser:${task.taskMembers}" th:name="userid"
                                     th:value="${taskUser.userid}"
                                     th:text="${taskUser.userName} + ' (' + ${taskUser.name} +') '"/>
@@ -264,7 +266,7 @@
         <th>
             <form th:action="@{/addTask}" method="post">
                 <div class="addTask">
-                    <input class="opgavenavn" name="taskname" type="text" placeholder="Opgavenavn">
+                    <input class="opgavenavn" name="taskname" type="text" placeholder="Opgavenavn" required>
                     <button id="addTaskbtn" name="subprojectid" th:value="${subProject.subProjectID}" type="submit">
                         Tilføj opgave
                     </button>

@@ -74,8 +74,11 @@
         <tr>
             <td th:text="${project.expStartDate}"></td>
             <td th:text="${project.expEndDate}"></td>
-            <td th:text="${workHoursPerDay}"></td>
-            <td th:text="${projectTime}"></td>
+            <td>
+               <span th:text="${project.ConvertProjectHoursPerDayToAbs()}"></span>
+                <span th:text="${project.ConvertProjectHoursToMinutesPerDay()}"></span>
+            </td>
+            <td th:text="${project.calProjectTotalTime()}"></td>
         </tr>
     </table>
 </div>

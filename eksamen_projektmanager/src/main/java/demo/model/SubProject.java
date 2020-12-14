@@ -64,15 +64,6 @@ public class SubProject implements Comparable<SubProject>{
     }
 
     @Override
-    public String toString() {
-        return "SubProject{" +
-                "subProjectName='" + subProjectName + '\'' +
-                ", subProjectID=" + subProjectID +
-                ", tasks=" + tasks +
-                '}';
-    }
-
-    @Override
     public int compareTo(SubProject o) {
         if(o == null){
             return 1;

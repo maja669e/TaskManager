@@ -19,7 +19,6 @@ public class Project {
     }
 
     public Project() {
-
     }
 
     public void setProjectName(String projectName) {
@@ -62,7 +61,7 @@ public class Project {
         this.expEndDate = expEndDate;
     }
 
-    public int calWorkHoursPerDay () {
+    public double calWorkHoursPerDay () {
 
         int totalProjectHours = calProjectTotalTime();
 
@@ -78,6 +77,17 @@ public class Project {
         }
 
         return workHoursPerDay;
+    }
+
+    public int ConvertProjectHoursPerDayToAbs(){
+        int hours = (int) calWorkHoursPerDay();
+        return Math.abs(hours);
+    }
+
+    public int ConvertProjectHoursToMinutesPerDay(){
+        double res = calWorkHoursPerDay() % 1;
+        int minutes = (int) (res * 60);
+        return minutes;
     }
 
     public int calProjectTotalTime() {
@@ -107,12 +117,4 @@ public class Project {
         return sum;
     }
 
-    @Override
-    public String toString() {
-        return "Project{" +
-                "projectName='" + projectName + '\'' +
-                ", projectid=" + projectid +
-                ", subProjects=" + subProjects +
-                '}';
-    }
 }

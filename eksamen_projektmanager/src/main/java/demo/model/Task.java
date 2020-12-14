@@ -1,7 +1,6 @@
 package demo.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -83,15 +82,4 @@ public class Task {
         return Objects.hash(taskId);
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "deadLine=" + deadLine +
-                ", timeEstimation=" + timeEstimation +
-                ", taskName='" + taskName + '\'' +
-                ", taskId=" + taskId +
-                ", taskStatus=" + taskStatus +
-                ", taskMembers=" + taskMembers +
-                '}';
-    }
 }

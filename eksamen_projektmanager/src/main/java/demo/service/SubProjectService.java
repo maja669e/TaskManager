@@ -27,5 +27,4 @@ public class SubProjectService {
         facade.deleteSubproject(subprojectid);
     }
 
-
 }

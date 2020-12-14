@@ -96,14 +96,11 @@ public class ProjectController {
         } else {
             project = projectService.getSingleProject(project.getProjectid());
             setSessionProject(request,project);
-            int projectTotalTimeConsumtion = project.calProjectTotalTime();
-            int workHoursPerDay = project.calWorkHoursPerDay();
 
             model.addAttribute("team", team);
-            model.addAttribute("workHoursPerDay", workHoursPerDay);
             model.addAttribute("currentDate", LocalDate.now());
-            model.addAttribute("projectTime", projectTotalTimeConsumtion);
             model.addAttribute("project", project);
+
             return "projekt";
         }
     }

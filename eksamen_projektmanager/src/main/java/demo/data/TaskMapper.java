@@ -19,7 +19,6 @@ public class TaskMapper {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int id = rs.getInt("subprojectid");
 
                 String temp = rs.getString("deadline");
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -76,12 +75,13 @@ public class TaskMapper {
     public void addTask(Project project, int subprojectid, String taskName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "INSERT INTO tasks (projectid, subprojectid, taskname, taskstatus) VALUES (?,?,?,?)";
+            String SQL = "INSERT INTO tasks (projectid, subprojectid, taskname, taskstatus, deadline) VALUES (?,?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(SQL,  Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, project.getProjectid());
             ps.setInt(2, subprojectid);
             ps.setString(3, taskName);
             ps.setString(4, String.valueOf(2));
+            ps.setString(5, String.valueOf(LocalDate.now()));
             ps.executeUpdate();
 
             ResultSet taskids = ps.getGeneratedKeys();
@@ -189,7 +189,7 @@ public class TaskMapper {
 
                 return user;
             } else {
-                throw new ProjectManagerException("kunne ikke finde bruger");
+                throw new ProjectManagerException("Kunne ikke finde bruger");
             }
         } catch (SQLException | ProjectManagerException ex) {
             throw new ProjectManagerException(ex.getMessage());

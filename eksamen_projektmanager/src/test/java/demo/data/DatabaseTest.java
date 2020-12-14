@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DatabaseTest {
+public class DatabaseTest {
 
     JdbcTestFixture fixture;
 

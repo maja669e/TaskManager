@@ -17,7 +17,7 @@ function taskAdd() {
     alert("Din nye opgave er nu tilføjet. \r\nTryk OK for at opdatere.");
 }
 
-var x = document.querySelector(".subtext").value;
+//var x = document.querySelector("#subtext").value;
 
 function subProjectDelete() {
     alert("Dette delprojekt er nu slettet. \r\nTryk OK for at opdatere.");

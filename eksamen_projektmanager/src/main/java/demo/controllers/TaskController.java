@@ -14,6 +14,9 @@ public class TaskController {
 
     private TaskService taskService = new TaskService(new DataFacadeImpl());
 
+    /**
+     * @author Nicolai Okkels
+     */
     @PostMapping("addTaskUser")
     public String addTaskUser(WebRequest request) throws ProjectManagerException {
         // Retrieve object from web request (session scope)
@@ -47,6 +50,9 @@ public class TaskController {
         }
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     @PostMapping("deleteTaskUser")
     public String deleteTaskUser(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -60,6 +66,9 @@ public class TaskController {
         return "redirect:/projekt";
     }
 
+    /**
+     * @author Maja Bijedic
+     */
     @PostMapping("addTask")
     public String addTask(WebRequest request) throws ProjectManagerException {
         // Retrieve object from web request (session scope)
@@ -74,6 +83,9 @@ public class TaskController {
         return "redirect:/projekt";
     }
 
+    /**
+     * @author Maja Bijedic
+     */
     @PostMapping("deleteTask")
     public String deleteTask(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -83,6 +95,9 @@ public class TaskController {
         return "redirect:/projekt";
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     @PostMapping("setTaskstatus")
     public String setTaskstatus(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -102,6 +117,10 @@ public class TaskController {
         return "redirect:/projekt";
     }
 
+
+    /**
+     * @author Maja Bijedic
+     */
     @PostMapping("editTask")
     public String editTask(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest

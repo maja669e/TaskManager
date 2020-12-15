@@ -9,6 +9,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * @author Maja Bijedic
+ */
 class ProjectTest {
 
     private LocalDate expStartDate = LocalDate.of(2020, 02, 02);

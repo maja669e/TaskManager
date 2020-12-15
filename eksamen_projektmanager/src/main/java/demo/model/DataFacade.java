@@ -2,6 +2,12 @@ package demo.model;
 
 import java.util.List;
 
+
+/**
+ * @author Nicolai Okkels
+ * @author Phuc Nguyen
+ * @author Maja Bijedic
+ */
 public interface DataFacade {
 
     public void addProject(Project project, int userid) throws ProjectManagerException;

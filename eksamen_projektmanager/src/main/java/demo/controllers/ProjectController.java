@@ -17,6 +17,10 @@ public class ProjectController {
 
     private ProjectService projectService = new ProjectService(new DataFacadeImpl());
 
+
+    /**
+     * @author Maja Bijedic
+     */
     @GetMapping("/projekt_oversigt")
     public String displayProjects(WebRequest request, Model model) throws ProjectManagerException {
         // Retrieve object from web request (session scope)
@@ -38,6 +42,10 @@ public class ProjectController {
         }
     }
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     @PostMapping("addProject")
     public String addProject(WebRequest request) throws ProjectManagerException {
         // Retrieve object from web request (session scope)
@@ -49,6 +57,10 @@ public class ProjectController {
         return "redirect:/projekt";
     }
 
+
+    /**
+     * @author Maja Bijedic
+     */
     @PostMapping("deleteProject")
     public String deleteProject(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -58,6 +70,10 @@ public class ProjectController {
         return "redirect:/projekt_oversigt";
     }
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     @PostMapping("getProject")
     public String getProject(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -68,6 +84,9 @@ public class ProjectController {
         return "redirect:/projekt";
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     @PostMapping("editProject")
     public String editProject(WebRequest request) throws ProjectManagerException {
         // Retrieve object from web request (session scope)
@@ -89,6 +108,10 @@ public class ProjectController {
         return "redirect:/projekt";
     }
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     @GetMapping("/projekt")
     public String project(WebRequest request, Model model) throws ProjectManagerException {
         // Retrieve object from web request (session scope)

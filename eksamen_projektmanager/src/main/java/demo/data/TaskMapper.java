@@ -10,6 +10,10 @@ import java.util.List;
 
 public class TaskMapper {
 
+
+    /**
+     * @author Maja Bijedic
+     */
     public Task getTask(int taskid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -42,6 +46,9 @@ public class TaskMapper {
         }
     }
 
+    /**
+     * @author Maja Bijedic
+     */
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -58,6 +65,9 @@ public class TaskMapper {
         }
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     public void setTaskstatus(int taskid, int taskstatus) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -72,6 +82,9 @@ public class TaskMapper {
         }
     }
 
+    /**
+     * @author Maja Bijedic
+     */
     public void addTask(Project project, int subprojectid, String taskName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -92,6 +105,9 @@ public class TaskMapper {
         }
     }
 
+    /**
+     * @author Maja Bijedic
+     */
     public void deleteTask(int taskid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -111,6 +127,10 @@ public class TaskMapper {
         }
     }
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     public void addMemberToTask(int taskid, int userid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -128,6 +148,9 @@ public class TaskMapper {
         }
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     public List<User> getTaskMembers(int taskid) throws ProjectManagerException{
         List<User> taskMembers = new ArrayList<>();
         try {
@@ -157,6 +180,9 @@ public class TaskMapper {
         return taskMembers;
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     public void deleteMemberFromTask(int taskid, int userid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -172,6 +198,9 @@ public class TaskMapper {
         }
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     public User getTaskUser(String userName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();

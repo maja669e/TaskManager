@@ -2,6 +2,12 @@ package demo.model;
 
 import java.util.Objects;
 
+
+/**
+ * @author Nicolai Okkels
+ * @author Phuc Nguyen
+ * @author Maja Bijedic
+ */
 public class User {
     private String userName;
     private String password;

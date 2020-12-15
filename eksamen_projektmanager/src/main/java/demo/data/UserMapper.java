@@ -11,6 +11,9 @@ import java.util.List;
 
 public class UserMapper {
 
+    /**
+     * @author Maja Bijedic
+     */
     public User Login(String userName, String password) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -36,6 +39,9 @@ public class UserMapper {
         }
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     public Team getTeam(int teamid) throws ProjectManagerException {
         List<User> teamUsers = new ArrayList<>();
         Team team = new Team();
@@ -68,6 +74,10 @@ public class UserMapper {
         return team;
     }
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     public int getUserTeamId(int userid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();

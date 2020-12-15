@@ -4,6 +4,11 @@ import demo.model.*;
 
 import java.util.List;
 
+/**
+ * @author Nicolai Okkels
+ * @author Phuc Nguyen
+ * @author Maja Bijedic
+ */
 public class DataFacadeImpl implements DataFacade {
 
     private UserMapper userMapper = new UserMapper();

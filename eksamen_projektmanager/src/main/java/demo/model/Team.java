@@ -2,6 +2,10 @@ package demo.model;
 
 import java.util.List;
 
+
+/**
+ * @author Nicolai Okkels
+ */
 public class Team {
     private String teamName;
     private List<User> team;

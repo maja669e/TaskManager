@@ -11,6 +11,10 @@ import java.util.List;
 
 public class ProjectMapper {
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     public void addProject(Project project, int userid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -41,6 +45,9 @@ public class ProjectMapper {
         }
     }
 
+    /**
+     * @author Maja Bijedic
+     */
     public List<Project> getProjects(int userid) throws ProjectManagerException {
         List<Project> projects = new ArrayList<>();
         List<SubProject> subProjects = new ArrayList<>();
@@ -79,6 +86,9 @@ public class ProjectMapper {
         return projects;
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     public Project getProject(int projectid) throws ProjectManagerException {
         List<SubProject> subProjects = new ArrayList<>();
         List<User> tempUserList = new ArrayList<>();
@@ -230,6 +240,9 @@ public class ProjectMapper {
 
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     public void editProject(int projectid, String newProjectName, String enddate) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -245,6 +258,10 @@ public class ProjectMapper {
         }
     }
 
+
+    /**
+     * @author Maja Bijedic
+     */
     public void deleteProject(int projectid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();

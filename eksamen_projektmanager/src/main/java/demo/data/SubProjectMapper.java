@@ -7,6 +7,9 @@ import java.sql.*;
 
 public class SubProjectMapper {
 
+    /**
+     * @author Phuc Nguyen
+     */
     public void addSubProject(Project project) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -23,6 +26,9 @@ public class SubProjectMapper {
         }
     }
 
+    /**
+     * @author Phuc Nguyen
+     */
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();
@@ -36,6 +42,9 @@ public class SubProjectMapper {
         }
     }
 
+    /**
+     * @author Phuc Nguyen
+     */
     public void deleteSubproject(int subprojectid) throws ProjectManagerException {
         try {
             Connection con = DBManager.getConnection();

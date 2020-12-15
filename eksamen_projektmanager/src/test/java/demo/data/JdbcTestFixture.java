@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
+
 public class JdbcTestFixture {
 
     static final String USER = "root";
@@ -17,6 +19,11 @@ public class JdbcTestFixture {
     static final String URL = "jdbc:mysql://localhost/projektellotest?serverTimezone=UTC"; //needs to make schema in workbench named projektellotest
     Connection connection;
 
+
+
+    /**
+     * @author Nicolai Okkels
+     */
     public void setUp() throws SQLException {
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);
@@ -134,6 +141,11 @@ public class JdbcTestFixture {
         connection.close();
     }
 
+
+
+    /**
+     * @author Nicolai Okkels
+     */
     public void addProject() throws SQLException {
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);
@@ -158,6 +170,10 @@ public class JdbcTestFixture {
         }
     }
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     public Project getProject(int projectid) throws SQLException {
         List<SubProject> subProjects = new ArrayList<>();
         List<User> tempUserList = new ArrayList<>();
@@ -318,6 +334,10 @@ public class JdbcTestFixture {
         return project;
     }
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     public void editProject(int projectid, String newProjectName, String enddate) throws SQLException{
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);
@@ -342,6 +362,11 @@ public class JdbcTestFixture {
         }
     }
 
+
+
+    /**
+     * @author Nicolai Okkels
+     */
     public void deleteProject(int projectid) throws SQLException{
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);
@@ -385,6 +410,11 @@ public class JdbcTestFixture {
         }
     }
 
+
+
+    /**
+     * @author Nicolai Okkels
+     */
     public List<Project> getProjects() throws SQLException {
         List<Project> projects = new ArrayList<>();
         List<SubProject> subProjects = new ArrayList<>();
@@ -426,6 +456,10 @@ public class JdbcTestFixture {
     }
 
 
+
+    /**
+     * @author Nicolai Okkels
+     */
     public Team getTeam(int teamid) throws SQLException {
         List<User> teamUsers = new ArrayList<>();
         Team team = new Team();
@@ -473,6 +507,11 @@ public class JdbcTestFixture {
         return team;
     }
 
+
+
+    /**
+     * @author Nicolai Okkels
+     */
     public int getUserTeamId(int userid) throws SQLException{
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);

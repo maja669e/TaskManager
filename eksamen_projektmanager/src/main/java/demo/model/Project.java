@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+
+/**
+ * @author Nicolai Okkels
+ * @author Phuc Nguyen
+ * @author Maja Bijedic
+ */
 public class Project {
     private String projectName;
     private int projectid;

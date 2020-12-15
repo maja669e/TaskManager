@@ -8,6 +8,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+
+/**
+ * @author Nicolai Okkels
+ * @author Phuc Nguyen
+ * @author Maja Bijedic
+ */
 public class DBManager {
 
     private static String user;

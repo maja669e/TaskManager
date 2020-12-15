@@ -9,6 +9,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+
+/**
+ * @author Nicolai Okkels
+ */
 public class ProjectDatabaseTest {
 
     JdbcTestFixture fixture;

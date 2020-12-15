@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+
+/**
+ * @author Nicolai Okkels
+ * @author Phuc Nguyen
+ * @author Maja Bijedic
+ */
 public class Task {
     private LocalDate deadLine;
     private int timeEstimation;

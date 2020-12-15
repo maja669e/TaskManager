@@ -27,6 +27,9 @@ public class UserController {
         return "index";
     }
 
+    /**
+     * @author Maja Bijedic
+     */
     @PostMapping("/login")
     public String loginUser(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -42,6 +45,9 @@ public class UserController {
         return "redirect:/projekt_oversigt";
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     @GetMapping("/hold")
     public String teamOverview(WebRequest request, Model model) {
         // Retrieve object from web request (session scope)
@@ -57,6 +63,9 @@ public class UserController {
         }
     }
 
+    /**
+     * @author Nicolai Okkels
+     */
     @GetMapping("/tidsforbrug")
     public String timeSpendOverview(WebRequest request, Model model) {
         User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);

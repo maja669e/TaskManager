@@ -3,6 +3,12 @@ package demo.model;
 import java.util.List;
 import java.util.Objects;
 
+
+/**
+ * @author Nicolai Okkels
+ * @author Phuc Nguyen
+ * @author Maja Bijedic
+ */
 public class SubProject implements Comparable<SubProject>{
     private String subProjectName;
     private int subProjectID;

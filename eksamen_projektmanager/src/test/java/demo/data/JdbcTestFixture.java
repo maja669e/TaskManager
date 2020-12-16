@@ -541,4 +541,52 @@ public class JdbcTestFixture {
         return 0;
     }
 
+
+
+    public void addSubProject(Project project) throws SQLException {
+        try {
+            connection = DriverManager.getConnection(URL, USER, PWD);
+            Statement st = connection.createStatement();
+
+            connection.setAutoCommit(false);
+
+            st.addBatch("INSERT INTO subprojects VALUES (4, 1, 'subprojekt 4')");
+
+            int[] updateCounts = st.executeBatch();
+
+            connection.commit();
+
+        } catch (Exception e) {
+            System.out.println("Failed to add subproject to db");
+            System.out.println(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    }
+
+
+
+
+    public void changeSubProjectName(int subProjectid, String newSubProjectName) throws SQLException {
+        try {
+            connection = DriverManager.getConnection(URL, USER, PWD);
+
+            connection.setAutoCommit(false);
+
+            String SQL = "UPDATE subprojects set subprojectname = ? WHERE subprojectid = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ps.setString(1, newSubProjectName);
+            ps.setInt(2, subProjectid);
+            ps.executeUpdate();
+
+            connection.commit();
+
+        } catch (Exception e) {
+            System.out.println("Failed to change subproject name in db");
+            System.out.println(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    }
+
 }

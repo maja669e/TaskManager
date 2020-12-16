@@ -1,10 +1,10 @@
-package demo.service;
+package demo.data;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TaskServiceTest {
+class TaskDatabaseTest {
 
     @Test
     void editTask() {

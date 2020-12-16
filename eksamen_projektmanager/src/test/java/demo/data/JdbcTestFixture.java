@@ -589,4 +589,29 @@ public class JdbcTestFixture {
         }
     }
 
+
+    public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws SQLException {
+        try {
+            connection = DriverManager.getConnection(URL, USER, PWD);
+
+            connection.setAutoCommit(false);
+
+            String SQL = "UPDATE tasks set taskname = ?, timeestimate = ?, deadline= ? WHERE taskid = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ps.setString(1, taskName);
+            ps.setInt(2, timeEstimate);
+            ps.setString(3, deadline);
+            ps.setInt(4, taskid);
+            ps.executeUpdate();
+
+            connection.commit();
+
+        } catch (Exception e) {
+            System.out.println("Failed to change subproject name in db");
+            System.out.println(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    }
+
 }

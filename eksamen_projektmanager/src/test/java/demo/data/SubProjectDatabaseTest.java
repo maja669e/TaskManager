@@ -8,6 +8,10 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+/**
+ * @author Phuc Nguyen
+ */
 class SubProjectDatabaseTest {
 
     JdbcTestFixture fixture;

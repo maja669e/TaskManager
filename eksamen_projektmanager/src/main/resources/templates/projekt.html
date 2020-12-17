@@ -237,7 +237,7 @@
                                     <input type="text" th:value="${task.taskName}" name="taskName">
                                     <br>
                                     <label><b>Tidsestimering (i antal timer)</b></label>
-                                    <input type="number" name="timeEstimate" th:value="${task.timeEstimation}">
+                                    <input type="number" name="timeEstimate" th:value="${task.timeEstimation}" min="0">
                                     <br>
                                     <label><b>Deadline</b></label>
                                     <input id="deadline" type="date" th:value="${#temporals.format(currentDate, 'yyyy-MM-dd')}"

@@ -1,7 +1,6 @@
 package demo.data;
 
 import demo.model.*;
-import org.junit.jupiter.api.Test;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -542,7 +541,9 @@ public class JdbcTestFixture {
     }
 
 
-
+    /**
+     * @author Phuc Nguyen
+     */
     public void addSubProject(Project project) throws SQLException {
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);
@@ -565,8 +566,9 @@ public class JdbcTestFixture {
     }
 
 
-
-
+    /**
+     * @author Phuc Nguyen
+     */
     public void changeSubProjectName(int subProjectid, String newSubProjectName) throws SQLException {
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);
@@ -590,6 +592,9 @@ public class JdbcTestFixture {
     }
 
 
+    /**
+     * @author Phuc Nguyen
+     */
     public void editTask(int taskid, String taskName, int timeEstimate, String deadline) throws SQLException {
         try {
             connection = DriverManager.getConnection(URL, USER, PWD);
@@ -605,6 +610,58 @@ public class JdbcTestFixture {
             ps.executeUpdate();
 
             connection.commit();
+
+        } catch (Exception e) {
+            System.out.println("Failed to change subproject name in db");
+            System.out.println(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    }
+
+
+    /**
+     * @author Phuc Nguyen
+     */
+    public void addTask() throws SQLException {
+        try {
+            connection = DriverManager.getConnection(URL, USER, PWD);
+            Statement st = connection.createStatement();
+
+            connection.setAutoCommit(false);
+
+            st.addBatch("INSERT INTO tasks VALUES (7, 1, 1, 'opgave 7', 35, '2020-03-02', 1)");
+
+            int[] updateCounts = st.executeBatch();
+
+            connection.commit();
+
+        } catch (Exception e) {
+            System.out.println("Failed to change subproject name in db");
+            System.out.println(e.getMessage());
+        } finally {
+            connection.close();
+        }
+    }
+
+
+    /**
+     * @author Phuc Nguyen
+     */
+    public void deleteTask(int taskid) throws SQLException {
+        try {
+            connection = DriverManager.getConnection(URL, USER, PWD);
+            connection.setAutoCommit(false);
+
+            String SQL = "DELETE FROM taskrelations WHERE taskid = ?";
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ps.setInt(1, taskid);
+            ps.executeUpdate();
+
+            String SQL2 = "DELETE FROM tasks WHERE taskid = ?";
+            PreparedStatement ps2 = connection.prepareStatement(SQL2);
+            ps2.setInt(1, taskid);
+            ps2.executeUpdate();
 
         } catch (Exception e) {
             System.out.println("Failed to change subproject name in db");

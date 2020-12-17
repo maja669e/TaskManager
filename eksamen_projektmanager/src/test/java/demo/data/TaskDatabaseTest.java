@@ -35,7 +35,7 @@ class TaskDatabaseTest {
         //assert
         assertEquals(expTaskid, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getTaskId());
         assertEquals(expTaskName, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getTaskName());
-        assertEquals(expDeadline, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getDeadLine());
+        assertEquals(expDeadline, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getDeadLine().toString());
         assertEquals(expTimeEstimate, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getTimeEstimation());
 
     }

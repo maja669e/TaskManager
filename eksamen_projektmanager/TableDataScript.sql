@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `projektello`.`subprojects` (
   `subprojectid` INT NOT NULL AUTO_INCREMENT,
   `projectid` INT NOT NULL,
   `subprojectname` VARCHAR(100) NOT NULL DEFAULT 'nyt delprojekt',
-  PRIMARY KEY (`subprojectid`, `projectid`),
+  PRIMARY KEY (`subprojectid`),
   INDEX `projectid_idx` (`projectid` ASC) VISIBLE,
   CONSTRAINT `projectid`
     FOREIGN KEY (`projectid`)

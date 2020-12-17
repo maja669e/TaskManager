@@ -26,6 +26,12 @@ public class TaskService {
     }
 
     public void addTask(Project project, int subprojectid, String taskName) throws ProjectManagerException {
+        Task task = new Task(LocalDate.now(), 0, taskName);
+        for (SubProject subProject: project.getSubProjects()) {
+            if(subProject.getSubProjectID() == subprojectid){
+               subProject.getTasks().add(task);
+            }
+        }
         facade.addTask(project, subprojectid, taskName);
     }
     

@@ -25,27 +25,51 @@ class TaskDatabaseTest {
     }
 
     @Test
-    void editTask() throws SQLException {
+    void editTaskName() throws SQLException {
         //arrange
         Project project = fixture.getProject(1);
         fixture.addSubProject(project);
 
         //act
         String expTaskName = "opgave 6";
-        int expTimeEstimate = 25;
-        String expDeadline = "2021-03-03";
-        int expTaskid = 1;
 
         fixture.editTask(1, "opgave 6", 25, "2021-03-03");
 
         //assert
-        assertEquals(expTaskid, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getTaskId());
         assertEquals(expTaskName, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getTaskName());
-        assertEquals(expDeadline, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getDeadLine().toString());
+    }
+
+    @Test
+    void editTaskTimeEstimate() throws SQLException {
+        //arrange
+        Project project = fixture.getProject(1);
+        fixture.addSubProject(project);
+
+        //act
+        int expTimeEstimate = 25;
+
+        fixture.editTask(1, "opgave 6", 25, "2021-03-03");
+
+        //assert
         assertEquals(expTimeEstimate, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getTimeEstimation());
 
     }
 
+    @Test
+    void editTaskDeadline() throws SQLException {
+        //arrange
+        Project project = fixture.getProject(1);
+        fixture.addSubProject(project);
+
+        //act
+        String expDeadline = "2021-03-03";
+
+        fixture.editTask(1, "opgave 6", 25, "2021-03-03");
+
+        //assert
+        assertEquals(expDeadline, fixture.getProject(1).getSubProjects().get(1).getTasks().get(0).getDeadLine().toString());
+
+    }
     @Test
     void addTask() throws SQLException {
         //arrange

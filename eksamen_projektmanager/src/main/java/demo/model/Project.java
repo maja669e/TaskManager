@@ -86,13 +86,13 @@ public class Project {
     }
 
     //convert project hours per day to an integer
-    public int ConvertProjectHoursPerDayToAbs(){
+    public int convertProjectHoursPerDayToAbs(){
         int hours = (int) calWorkHoursPerDay();
         return Math.abs(hours);
     }
 
     //convert the remaining time to minutes
-    public int ConvertProjectHoursToMinutesPerDay(){
+    public int convertProjectHoursToMinutesPerDay(){
         double res = calWorkHoursPerDay() % 1;
         int minutes = (int) (res * 60);
         return minutes;

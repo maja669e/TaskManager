@@ -38,20 +38,60 @@ public class ProjectDatabaseTest {
     }
 
     @Test
-    void editProject() throws SQLException {
+    void editProjectDeadline() throws SQLException {
+        //arrange
+        fixture.addProject();
+        //act
+        String expDate = "2030-01-01";
+        fixture.editProject(3, "nyt test projekt", expDate);
+
+        Project project = fixture.getProject(3);
+
+        //assert
+        assertEquals(expDate, project.getExpEndDate().toString());
+    }
+
+    @Test
+    void getProjectDeadline() throws SQLException {
+        //arrange
+        fixture.addProject();
+        //act
+        String expDate = "2020-01-01";
+
+        Project project = fixture.getProject(3);
+
+        //assert
+        assertEquals(expDate, project.getExpEndDate().toString());
+    }
+
+    @Test
+    void getProjectName() throws SQLException {
+        //arrange
+        fixture.addProject();
+        //act
+        String expProjectName = "projekt 3";
+
+        Project project = fixture.getProject(3);
+
+        //assert
+        assertEquals(expProjectName, project.getProjectName());
+    }
+
+
+
+    @Test
+    void editProjectName() throws SQLException {
         //arrange
         fixture.addProject();
 
         //act
         String expName = "nyt test projekt";
-        String expDate = "2030-01-01";
-        fixture.editProject(3, expName, expDate);
+        fixture.editProject(3, expName, "2030-01-01");
 
         Project project = fixture.getProject(3);
 
         //assert
         assertEquals(expName, project.getProjectName());
-        assertEquals(expDate, project.getExpEndDate().toString());
     }
 
     @Test

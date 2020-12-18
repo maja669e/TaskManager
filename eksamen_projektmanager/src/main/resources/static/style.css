@@ -97,16 +97,7 @@ header {
 .topnav .icon {
     display: none;
 }
-#logout {
-    position: fixed;
-    left: 0;
-    top: 0;
-    margin: 0;
-    margin-left: 5px;
-    padding: 0;
-    padding-top: 5px;
-    border: none;
-}
+
 /*-------Navigation slut-------*/
 
 /*-------Table-----*/
@@ -762,5 +753,15 @@ a.fa-twitter:before {
 
     footer p {
         font-size: 12px;
+    }
+    #logout {
+        position: fixed;
+        left: 0;
+        top: 0;
+        margin: 0;
+        margin-left: 5px;
+        padding: 0;
+        padding-top: 5px;
+        border: none;
     }
 }

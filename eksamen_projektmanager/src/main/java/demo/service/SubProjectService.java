@@ -2,8 +2,6 @@ package demo.service;
 
 import demo.model.*;
 
-import java.util.List;
-
 public class SubProjectService {
 
     private DataFacade facade = null;

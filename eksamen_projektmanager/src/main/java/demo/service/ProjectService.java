@@ -1,6 +1,5 @@
 package demo.service;
 
-import demo.model.DataFacade;
 import demo.model.Project;
 import demo.model.ProjectManagerException;
 import demo.model.SubProject;

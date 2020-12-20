@@ -315,6 +315,9 @@ button:hover {
     cursor: pointer;
     margin: 0.2vw;
 }
+#delete_project button:hover {
+    color: black;
+}
 
 /*-------Rediger knap-------*/
 

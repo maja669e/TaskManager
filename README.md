@@ -1,4 +1,4 @@
-# Projekt Manager
+# Projektmanager
 Eksamensopgave 2. semester - Gruppe 7, Nicolai, Phuc og Maja
 ## Kørselsvejledning
 For at køre dette program, skal databasen først oprettes. SQL scripts kan findes i roden af vores GitHub repository: projekt_manager  → SQL scripts.

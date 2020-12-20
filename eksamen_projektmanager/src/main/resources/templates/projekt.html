@@ -46,7 +46,7 @@
                     <h2>Rediger projekt</h2>
 
                     <label><b>Projektnavn</b></label>
-                    <input type="text" placeholder="Indtast nyt projektnavn" name="projectName"
+                    <input maxlength="100" type="text" placeholder="Indtast nyt projektnavn" name="projectName"
                            th:value="${project.projectName}">
                     <br>
                     <label><b>Slut dato</b></label>
@@ -105,7 +105,7 @@
                         <h2>Delprojekt: </h2>
                     </div>
                     <div class="element2">
-                        <input id="subtext" type="text" th:value="${subProject.subProjectName}" name="subProjectName">
+                        <input maxlength="100" id="subtext" type="text" th:value="${subProject.subProjectName}" name="subProjectName">
                     </div>
                     <div class="element2">
                         <button th:name="subprojectid" th:value="${subProject.subProjectID}" class="editbtn1"
@@ -234,7 +234,7 @@
                                     <h2>Rediger opgave</h2>
 
                                     <label><b>Opgavenavn</b></label>
-                                    <input type="text" th:value="${task.taskName}" name="taskName">
+                                    <input maxlength="100" type="text" th:value="${task.taskName}" name="taskName">
                                     <br>
                                     <label><b>Tidsestimering (i antal timer)</b></label>
                                     <input type="number" name="timeEstimate" th:value="${task.timeEstimation}" min="0">

@@ -69,8 +69,7 @@ class ProjectTest {
     void calProjectTotalTime() {
 
         //Arrange
-        List<SubProject> subProjects = new ArrayList<>();
-        SubProject subProject;
+        SubProject subProject = new SubProject("test");
 
         Task task = new Task(LocalDate.of(2020, 04, 05), 4, "Test");
         Task task2 = new Task(LocalDate.of(2020, 04, 05), 5, "Test2");
@@ -78,21 +77,17 @@ class ProjectTest {
         tasks.add(task);
         tasks.add(task2);
 
+        subProject.setTasks(tasks);
+        List<SubProject> subProjects = new ArrayList<>();
+        Project project = new Project();
+        project.setSubProjects(subProjects);
+        project.getSubProjects().add(subProject);
 
-        //Act
-        int totalTime = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            totalTime += tasks.get(i).getTimeEstimation();
-            for (int j = 0; j < subProjects.size(); j++) {
-                subProject = subProjects.get(j);
-                totalTime += subProject.calSubProjectTotalTime();
-            }
-        }
 
         int expTotalTime = 9;
 
         //Assert
-        assertEquals(expTotalTime, totalTime);
+        assertEquals(expTotalTime, project.calProjectTotalTime());
     }
 
 

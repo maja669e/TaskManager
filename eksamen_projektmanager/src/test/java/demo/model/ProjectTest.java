@@ -16,53 +16,89 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProjectTest {
 
     private LocalDate expStartDate = LocalDate.of(2020, 02, 02);
-    private LocalDate expEndDate = LocalDate.of(2020, 3, 12);
+    private LocalDate expEndDate = LocalDate.of(2020, 02, 12);
 
     @Test
     void calWorkHoursPerDay() {
         //Arrange
-        double totalProjectHours = 53;
 
+        SubProject subProject = new SubProject("test");
+
+        Task task = new Task(LocalDate.of(2020, 04, 05), 4, "Test");
+        Task task2 = new Task(LocalDate.of(2020, 04, 05), 8, "Test2");
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(task);
+        tasks.add(task2);
+
+        subProject.setTasks(tasks);
+        List<SubProject> subProjects = new ArrayList<>();
+        Project project = new Project();
+        project.setSubProjects(subProjects);
+        project.getSubProjects().add(subProject);
+
+        project.setExpEndDate(expEndDate);
+        project.setExpStartDate(expStartDate);
         //Act
-        int dif = (int) ChronoUnit.DAYS.between(expStartDate, expEndDate);
-        dif = Math.abs(dif);
-
-        double workHoursPerDay;
-
-        if (dif == 0) {
-            workHoursPerDay = totalProjectHours;
-        } else {
-            workHoursPerDay = totalProjectHours / dif;
-        }
-        double expWorkHoursPerDay = 1.358974358974359;
-
+        double actSum = project.calWorkHoursPerDay();
+        double expWorkHoursPerDay = 1.2;
         //Assert
-        assertEquals(expWorkHoursPerDay, workHoursPerDay);
+        assertEquals(expWorkHoursPerDay, actSum);
     }
+
 
     @Test
     void convertProjectHoursPerDayToAbs() {
         //Arrange
-        int hours = (int) 1.358974358974359;
 
-        //Act
-        Math.abs(hours);
+        SubProject subProject = new SubProject("test");
 
-        int expHours = 1;
+        Task task = new Task(LocalDate.of(2020, 04, 05), 4, "Test");
+        Task task2 = new Task(LocalDate.of(2020, 04, 05), 8, "Test2");
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(task);
+        tasks.add(task2);
+
+        subProject.setTasks(tasks);
+        List<SubProject> subProjects = new ArrayList<>();
+        Project project = new Project();
+        project.setSubProjects(subProjects);
+        project.getSubProjects().add(subProject);
+
+        project.setExpEndDate(expEndDate);
+        project.setExpStartDate(expStartDate);
+
+        //act
+        int actSum = project.convertProjectHoursPerDayToAbs();
+        int expSum = 1;
         //Assert
-        assertEquals(expHours, hours);
+        assertEquals(expSum, actSum);
     }
 
     @Test
     void convertProjectHoursToMinutesPerDay() {
         //convert the remaining time to minutes
         //Arrange
-        double res = 1.358974358974359 % 1;
+        SubProject subProject = new SubProject("test");
+
+        Task task = new Task(LocalDate.of(2020, 04, 05), 4, "Test");
+        Task task2 = new Task(LocalDate.of(2020, 04, 05), 8, "Test2");
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(task);
+        tasks.add(task2);
+
+        subProject.setTasks(tasks);
+        List<SubProject> subProjects = new ArrayList<>();
+        Project project = new Project();
+        project.setSubProjects(subProjects);
+        project.getSubProjects().add(subProject);
+
+        project.setExpEndDate(expEndDate);
+        project.setExpStartDate(expStartDate);
         //Act
-        int minutes = (int) (res * 60);
-        int expMinutes = 21;
+        int actSum = project.convertProjectHoursToMinutesPerDay();
+        int expSum = 11;
         //Assert
-        assertEquals(expMinutes, minutes);
+        assertEquals(expSum, actSum);
     }
 
     @Test
@@ -83,19 +119,17 @@ class ProjectTest {
         project.setSubProjects(subProjects);
         project.getSubProjects().add(subProject);
 
-
+        int actTotalTime = project.calProjectTotalTime();
         int expTotalTime = 9;
 
         //Assert
-        assertEquals(expTotalTime, project.calProjectTotalTime());
+        assertEquals(expTotalTime, actTotalTime);
     }
 
 
     @Test
     void calUserWorkHoursOnProject() {
         //Arrange
-
-        int userid = 0;
 
         List<SubProject> subProjects = new ArrayList<>();
         List<User> users = new ArrayList<>();
@@ -105,7 +139,6 @@ class ProjectTest {
         tasks.add(task);
 
         User user = new User("test", "1", 1, "Test");
-        user.setUserid(userid);
         users.add(user);
         task.setTaskMembers(users);
 
@@ -113,22 +146,14 @@ class ProjectTest {
         subProjects.add(subProject);
         subProject.setTasks(tasks);
 
+        Project project = new Project();
+        project.setSubProjects(subProjects);
 
-        int sum = 0;
 
         //Act
-        for (int i = 0; i < subProjects.size(); i++) {
-            for (int j = 0; j < subProjects.get(i).getTasks().size(); j++) {
-                for (int k = 0; k < subProjects.get(i).getTasks().get(j).getTaskMembers().size(); k++) {
-                    if (subProjects.get(i).getTasks().get(j).getTaskMembers().get(k).getUserid() == userid) {
-                        sum += subProjects.get(i).getTasks().get(j).getTimeEstimation();
-                    }
-                }
-            }
-        }
-
+        int actSum = project.calUserWorkHoursOnProject(1);
         int expSum = 7;
         //Assert
-        assertEquals(expSum, sum);
+        assertEquals(expSum, actSum);
     }
 }

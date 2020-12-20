@@ -22,15 +22,13 @@ class SubProjectTest {
         List<Task> tasks = new ArrayList<>();
         Task task = new Task(LocalDate.of(2020, 06, 06), 7, "Test");
         tasks.add(task);
-
+        SubProject subProject = new SubProject("test");
+        subProject.setTasks(tasks);
         //Act
-        int totalTime = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            totalTime += tasks.get(i).getTimeEstimation();
-        }
+        int actTotalTime = subProject.calSubProjectTotalTime();
         int expTotalTime = 7;
         //Assert
-        assertEquals(expTotalTime, totalTime);
+        assertEquals(expTotalTime, actTotalTime);
 
     }
 }

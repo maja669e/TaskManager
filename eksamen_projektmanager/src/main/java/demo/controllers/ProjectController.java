@@ -20,6 +20,7 @@ public class ProjectController {
 
     /**
      * @author Maja Bijedic
+     * return a list of projects and makes a session of all projects on the logged in user
      */
     @GetMapping("/projekt_oversigt")
     public String displayProjects(WebRequest request, Model model) throws ProjectManagerException {
@@ -45,6 +46,7 @@ public class ProjectController {
 
     /**
      * @author Nicolai Okkels
+     * add a project and make of session the project, to be used later in our get mappers
      */
     @PostMapping("addProject")
     public String addProject(WebRequest request) throws ProjectManagerException {
@@ -60,6 +62,7 @@ public class ProjectController {
 
     /**
      * @author Maja Bijedic
+     * get projectid and delete the project
      */
     @PostMapping("deleteProject")
     public String deleteProject(WebRequest request) throws ProjectManagerException {
@@ -73,6 +76,7 @@ public class ProjectController {
 
     /**
      * @author Nicolai Okkels
+     * get projectid and return the project
      */
     @PostMapping("getProject")
     public String getProject(WebRequest request) throws ProjectManagerException {
@@ -86,6 +90,7 @@ public class ProjectController {
 
     /**
      * @author Nicolai Okkels
+     * Uses project session to edit, project
      */
     @PostMapping("editProject")
     public String editProject(WebRequest request) throws ProjectManagerException {
@@ -111,6 +116,8 @@ public class ProjectController {
 
     /**
      * @author Nicolai Okkels
+     * Uses the user session to check if the user is logged in, the project session to get the correct project and team, so it gets the team the user is on
+     * It also makes a new session of project, to keep the project updated
      */
     @GetMapping("/projekt")
     public String project(WebRequest request, Model model) throws ProjectManagerException {
@@ -133,10 +140,15 @@ public class ProjectController {
         }
     }
 
+    /**
+     * make session of project
+     */
     private void setSessionProject(WebRequest request, Project project) {
         request.setAttribute("project", project, WebRequest.SCOPE_SESSION);
     }
-
+    /**
+     * make session of all projects
+     */
     private void setSessionProjects(WebRequest request, List<Project> projects){
         request.setAttribute("projects", projects, WebRequest.SCOPE_SESSION);
     }

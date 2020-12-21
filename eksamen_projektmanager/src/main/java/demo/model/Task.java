@@ -72,6 +72,9 @@ public class Task {
         this.taskMembers = taskMembers;
     }
 
+    /**
+     * uses taskid to check if equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

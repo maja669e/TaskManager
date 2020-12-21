@@ -17,6 +17,9 @@ public class SubProjectController {
 
     private SubProjectService subProjectService = new SubProjectService(new DataFacadeImpl());
 
+    /**
+     * gets a new subproject name and subproject id and edit it
+     */
     @PostMapping("changeSubProjectName")
     public String changeSubProjectName(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest
@@ -26,6 +29,9 @@ public class SubProjectController {
         return "redirect:/projekt";
     }
 
+    /**
+     * takes the project in session and add a subproject
+     */
     @PostMapping("addSubProject")
     public String addSubProject(WebRequest request) throws ProjectManagerException {
         // Retrieve object from web request (session scope)
@@ -36,6 +42,9 @@ public class SubProjectController {
         return "redirect:/projekt";
     }
 
+    /**
+     * delete a subproject depending on the id
+     */
     @PostMapping("deleteSubProject")
     public String deleteSubProject(WebRequest request) throws ProjectManagerException {
         //Retrieve values from HTML form via WebRequest

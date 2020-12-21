@@ -58,6 +58,9 @@ public class User {
         this.name = name;
     }
 
+    /**
+     * uses userid to check if equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

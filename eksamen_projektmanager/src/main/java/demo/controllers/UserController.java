@@ -26,6 +26,7 @@ public class UserController {
 
     /**
      * @author Maja Bijedic
+     * return a user and team and set session, where user is used to check i user i logged in
      */
     @PostMapping("/login")
     public String loginUser(WebRequest request) throws ProjectManagerException {
@@ -44,6 +45,7 @@ public class UserController {
 
     /**
      * @author Nicolai Okkels
+     * checks if user i logged in and get team in session to show users on a team
      */
     @GetMapping("/hold")
     public String teamOverview(WebRequest request, Model model) {
@@ -62,6 +64,7 @@ public class UserController {
 
     /**
      * @author Nicolai Okkels
+     * check if user is logged in and get timespendOverview
      */
     @GetMapping("/tidsforbrug")
     public String timeSpendOverview(WebRequest request, Model model) {

@@ -6,6 +6,7 @@ import demo.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
+
 import java.util.HashMap;
 
 
@@ -16,42 +17,38 @@ public class TaskController {
 
     /**
      * @author Nicolai Okkels
+     * makes a hashmap to check if the key (taskUser) is in the list, so that the same user cannot be added twice
      */
     @PostMapping("addTaskUser")
     public String addTaskUser(WebRequest request) throws ProjectManagerException {
-        // Retrieve object from web request (session scope)
-        User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+        //Retrieve values from HTML form via WebRequest
+        String userName = request.getParameter("username");
+        int taskid = Integer.parseInt(request.getParameter("taskid"));
 
-        if (user == null) {
-            return "redirect:/";
-        } else {
-            //Retrieve values from HTML form via WebRequest
-            String userName = request.getParameter("username");
-            int taskid = Integer.parseInt(request.getParameter("taskid"));
+        if (!userName.equals("placeholder")) {
+            Task task = taskService.getTask(taskid);
+            task.setTaskMembers(taskService.getTaskMembers(taskid));
 
-            if (!userName.equals("placeholder")) {
-                Task task = taskService.getTask(taskid);
-                task.setTaskMembers(taskService.getTaskMembers(taskid));
+            User taskUser = taskService.getTaskUser(userName);
+            HashMap<String, User> hashMap = new HashMap<>();
 
-                User taskUser = taskService.getTaskUser(userName);
-                HashMap<String, User> hashMap = new HashMap<>();
-
-                for (int i = 0; i < task.getTaskMembers().size(); i++) {
-                    hashMap.put(task.getTaskMembers().get(i).getUserName(), task.getTaskMembers().get(i));
-                }
-
-                //Cant have two of the same users on a task
-                if (!hashMap.containsKey(userName)) {
-                    taskService.addMemberToTask(taskid, taskUser.getUserid());
-                }
+            for (int i = 0; i < task.getTaskMembers().size(); i++) {
+                hashMap.put(task.getTaskMembers().get(i).getUserName(), task.getTaskMembers().get(i));
             }
 
-            return "redirect:/projekt";
+            //Cant have two of the same users on a task
+            if (!hashMap.containsKey(userName)) {
+                taskService.addMemberToTask(taskid, taskUser.getUserid());
+            }
         }
+
+        return "redirect:/projekt";
+
     }
 
     /**
      * @author Nicolai Okkels
+     * gets userid and taskid and delete task
      */
     @PostMapping("deleteTaskUser")
     public String deleteTaskUser(WebRequest request) throws ProjectManagerException {
@@ -59,7 +56,7 @@ public class TaskController {
         int userid = Integer.parseInt(request.getParameter("userid"));
         int taskid = Integer.parseInt(request.getParameter("taskid"));
 
-        if(userid != 0){
+        if (userid != 0) {
             taskService.deleteMemberFromTask(taskid, userid);
         }
 
@@ -68,6 +65,7 @@ public class TaskController {
 
     /**
      * @author Maja Bijedic
+     *  Get subprojectid to add task with taskname to the correct project in session
      */
     @PostMapping("addTask")
     public String addTask(WebRequest request) throws ProjectManagerException {
@@ -85,6 +83,7 @@ public class TaskController {
 
     /**
      * @author Maja Bijedic
+     * get taskid and delete it
      */
     @PostMapping("deleteTask")
     public String deleteTask(WebRequest request) throws ProjectManagerException {
@@ -97,6 +96,7 @@ public class TaskController {
 
     /**
      * @author Nicolai Okkels
+     * set taskstatus depending on the current taskstatus, 0 = is finished, 1 is started and 2 is not started
      */
     @PostMapping("setTaskstatus")
     public String setTaskstatus(WebRequest request) throws ProjectManagerException {
@@ -120,6 +120,7 @@ public class TaskController {
 
     /**
      * @author Maja Bijedic
+     * get taskid and edit the task
      */
     @PostMapping("editTask")
     public String editTask(WebRequest request) throws ProjectManagerException {

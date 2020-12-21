@@ -85,20 +85,29 @@ public class Project {
         return workHoursPerDay;
     }
 
-    //convert project hours per day to an integer
+    /**
+     * convert project hours per day to an integer
+     * @return hour in integer
+     */
     public int convertProjectHoursPerDayToAbs(){
         int hours = (int) calWorkHoursPerDay();
         return Math.abs(hours);
     }
 
-    //convert the remaining time to minutes
+    /**
+     * convert the remaining time to minutes
+     * @return project minutes remaining
+     */
     public int convertProjectHoursToMinutesPerDay(){
         double res = calWorkHoursPerDay() % 1;
         int minutes = (int) (res * 60);
         return minutes;
     }
 
-    //Calculate the total time estimated on a project
+    /**
+     * Calculate the total time estimated on a project
+     * @return total time
+     */
     public int calProjectTotalTime() {
 
         int totalTime = 0;
@@ -111,7 +120,10 @@ public class Project {
         return totalTime;
     }
 
-    //Calculate the total hours the logged in user used on a project
+    /**
+     * calculate the total hours the logged in user used on a project
+     * @return user work hours on project
+     */
     public int calUserWorkHoursOnProject (int userid){
         int sum =0;
         for (int i = 0; i < subProjects.size(); i++) {

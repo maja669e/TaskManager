@@ -42,7 +42,10 @@ public class SubProject implements Comparable<SubProject>{
         this.subProjectName = subProjectName;
     }
 
-    //Calculate total time for subproject
+    /**
+     * Calculate total time for subproject
+     * @return total subproject time
+     */
     public int calSubProjectTotalTime() {
         int totalTime = 0;
         for (int i = 0; i < tasks.size(); i++) {
@@ -52,6 +55,9 @@ public class SubProject implements Comparable<SubProject>{
         return totalTime;
     }
 
+    /**
+     * uses subprojectid to check if equal
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
